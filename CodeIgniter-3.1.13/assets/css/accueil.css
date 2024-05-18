@@ -1,66 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #640875;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1, h2, h3 {
+    color: #444;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            color: #640875;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #444;
-        }
+.hero h1 {
+    color: #9f23b5;
+}        
 
-        .hero h1 {
-            color: #9f23b5;
-        }        
+.hero {
+    background-color: #333333;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
 
-        .hero {
-            background-color: #333333;
-            color: #fff;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        .features, .testimonials, .gallery, .contact {
-            margin: 20px 0;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .features h2, .testimonials h2, .gallery h2, .contact h2 {
-            margin-top: 0;
-        }
-        .features .feature, .testimonials .testimonial {
-            margin: 10px 0;
-        }
+.hero button {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background-color: #640875;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .gallery {
-            display: flex;
-            justify-content: space-around;
-        }
+.hero button:hover {
+    background-color: #9f23b5;
+}
 
-        .gallery img {
-            width: 50%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .contact form input, .contact form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .contact form button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+
+.features, .testimonials, .gallery, .contact {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.features h2, .testimonials h2, .gallery h2, .contact h2 {
+    margin-top: 0;
+}
+.features .feature, .testimonials .testimonial {
+    margin: 10px 0;
+}
+
+.gallery {
+    margin-top: 40px; /* Ajoute de l'espace avant la galerie */
+    text-align: center;
+}
+
+.gallery h2 {
+    text-align: center;
+    margin-bottom: 20px; /* Espace sous le titre */
+}
+
+.gallery {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* Aligne les images au centre verticalement */
+}
+
+.gallery img {
+    width: 30%; /* Ajustez ce pourcentage pour que les images tiennent sur une ligne sur les grands écrans */
+    height: auto;
+    border-radius: 8px;
+    margin: 10px; /* Espace autour des images */
+}
+
+/* Media queries pour les petits écrans */
+@media (max-width: 768px) {
+    .gallery img {
+        width: 45%; /* Les images prennent 45% de la largeur sur les écrans moyens */
+    }
+
+    .gallery {
+        flex-wrap: wrap; /* Permet de passer les images à la ligne sur les petits écrans */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery img {
+        width: 90%; /* Les images prennent 90% de la largeur sur les petits écrans */
+    }
+
+    .gallery {
+        flex-wrap: wrap; /* Permet de passer les images à la ligne sur les petits écrans */
+    }
+}
+
+.contact form input, .contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.contact form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

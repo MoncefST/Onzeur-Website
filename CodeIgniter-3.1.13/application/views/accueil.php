@@ -11,6 +11,7 @@
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
         <p>Le service de streaming musical numéro 1 en France.</p>
+        <button type="button">Accéder à la musique</button>
     </div>
 
     <div class="container">
@@ -31,7 +32,7 @@
         </div>
 
         <div class="testimonials">
-            <h2>Commentaires</h2>
+            <h2>Avis</h2>
             <div class="testimonial">
                 <p>"Ce site est incroyable! Depuis que j'utilise Onzeur ma vie as changé ! Je suis devenu riche et célèbre ! Je recommande 🤩"</p>
                 <p>- Mike</p>
