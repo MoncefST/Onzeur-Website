@@ -1,10 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Home extends CI_Controller {
-    
-    public function index() {
-        // Charger la vue de la page d'accueil
-        $this->load->view('accueil');
-    }
+
+public function index() {
+    // Charger le modèle
+    $this->load->model('Cover_model');
+
+    // Appeler la fonction pour récupérer les couvertures d'albums
+    $data['covers'] = $this->Cover_model->get_covers();
+
+    // Charger la vue avec les données récupérées
+    $this->load->view('accueil', $data);
 }
+
+}
+?>

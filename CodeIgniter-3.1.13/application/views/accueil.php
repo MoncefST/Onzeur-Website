@@ -49,9 +49,14 @@
 
         <div class="gallery">
             <h2>Ils nous ont fait confiance</h2>
-            <img src="assets/img/gallerie/pnl.png" alt="PNL">
-            <img src="assets/img/gallerie/booba.png" alt="BOOBA">
-            <img src="assets/img/gallerie/niska.png" alt="NISKA">
+            <?php if (!empty($covers)): ?>
+                <?php foreach ($covers as $cover): ?>
+                    <?php 
+                        $imageData = base64_encode($cover['jpeg']); // Convertir les données binaires en base64
+                    ?>
+                    <img src="data:image/jpeg;base64,<?= $imageData ?>" alt="Image de couverture d'album">
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
         <div class="contact">
