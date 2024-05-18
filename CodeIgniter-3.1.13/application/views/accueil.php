@@ -31,7 +31,7 @@
         </div>
 
         <div class="testimonials">
-            <h2>Témoignages</h2>
+            <h2>Commentaires</h2>
             <div class="testimonial">
                 <p>"Ce site est incroyable! Depuis que j'utilise Onzeur ma vie as changé ! Je suis devenu riche et célèbre ! Je recommande 🤩"</p>
                 <p>- Mike</p>

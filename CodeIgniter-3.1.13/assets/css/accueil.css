@@ -16,7 +16,7 @@
         }
 
         .hero h1 {
-            color: #640875;
+            color: #9f23b5;
         }        
 
         .hero {
@@ -41,7 +41,6 @@
 
         .gallery {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-around;
         }
 
