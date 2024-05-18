@@ -1,0 +1,44 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Afficher les éléments en colonne */
+    align-items: center; /* Centrer horizontalement */
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px; /* Ajouter un espace entre les logos et le texte */
+}
+
+.social-icon img {
+    height: 30px;
+}
+
+.legal {
+    font-size: 14px;
+    display: flex;
+    align-items: center; /* Centrer verticalement */
+}
+
+.legal span {
+    margin: 0 10px;
+}
+
+.legal-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.legal-link:hover {
+    color: rgb(181, 15, 232);
+}

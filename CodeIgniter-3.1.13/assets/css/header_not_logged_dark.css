@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: black;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.logo img {
+    height: 50px;
+}
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+.nav-buttons a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.btn-connexion {
+    background-color: transparent;
+    border: 2px solid white;
+}
+.btn-inscription {
+    background-color: rgb(181, 15, 232);
+}
+.nav-buttons a:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* menu burger */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+}
+.nav-buttons.active {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: black;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+.nav-buttons.active a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-buttons {
+        display: none;
+    }
+    /* Affichage du menu burger sur les appareils mobiles */
+    .menu-toggle {
+        display: flex;
+    }
+}
