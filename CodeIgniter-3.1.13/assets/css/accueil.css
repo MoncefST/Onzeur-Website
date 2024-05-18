@@ -36,6 +36,8 @@
         .gallery img {
             width: 100%;
             height: auto;
+            max-height: 300px;
+            object-fit: cover; 
             border-radius: 8px;
         }
         .contact form input, .contact form textarea {

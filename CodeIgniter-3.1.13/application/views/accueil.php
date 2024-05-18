@@ -33,21 +33,21 @@
         <div class="testimonials">
             <h2>Témoignages</h2>
             <div class="testimonial">
-                <p>"Ce site est incroyable! J'ai pu accomplir tant de choses grâce à lui."</p>
+                <p>"Ce site est incroyable! Depuis que j'utilise Onzeur ma vie as changé ! Je suis devenu riche et célèbre ! Je recommande 🤩"</p>
                 <p>- Mike</p>
             </div>
             <div class="testimonial">
-                <p>"Une expérience utilisateur fantastique. Je recommande vivement."</p>
+                <p>"Une expérience utilisateur fantastique. Je recommande vivement 🤌."</p>
                 <p>- Laura</p>
             </div>
             <div class="testimonial">
-                <p>"Service client exceptionnel et fonctionnalités géniales."</p>
+                <p>"Service client exceptionnel et fonctionnalités géniales. La fonctionnalité de playlist est vraiment top ! 👍"</p>
                 <p>- Joe</p>
             </div>
         </div>
 
         <div class="gallery">
-            <h2>Ils nous font confiance :</h2>
+            <h2>Ils nous ont fait confiance</h2>
             <img src="assets/img/gallerie/pnl.png" alt="PNL">
             <img src="assets/img/gallerie/booba.png" alt="BOOBA">
             <img src="assets/img/gallerie/niska.png" alt="NISKA">
