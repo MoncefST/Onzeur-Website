@@ -4,7 +4,7 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #640875;
         }
         .container {
             width: 80%;
@@ -34,10 +34,8 @@
             margin: 10px 0;
         }
         .gallery img {
-            width: 100%;
+            width: 50%;
             height: auto;
-            max-height: 300px;
-            object-fit: cover; 
             border-radius: 8px;
         }
         .contact form input, .contact form textarea {
