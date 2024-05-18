@@ -35,4 +35,4 @@ Ce projet est une application web permettant aux utilisateurs de consulter une b
 La date maximale est le 17 juin 2024.
 
 ## Contact
-Pour toute question ou commentaire, veuillez contacter Moncef STITI à cette adresse mail : [moncef.stiti@etu.u-pec.fr].
+Pour toute question ou commentaire, veuillez contacter Moncef STITI à cette adresse mail : [moncef.stiti@etu.u-pec.fr](moncef.stiti@etu.u-pec.fr).
