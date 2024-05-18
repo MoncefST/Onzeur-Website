@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../assets/css/header_not_logged_dark.css">
-    <link rel="icon" type="image/x-icon" href="../../../assets/img/Logo_ONZEUR.png">
+    <link rel="stylesheet" href="assets/css/header_not_logged_dark.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/Logo_ONZEUR.png">
     <title>Onzeur</title>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="../../../assets/img/Logo_ONZEUR_DARK.png" alt="Logo de ONZEUR">
+                <img src="assets/img/Logo_ONZEUR_DARK.png" alt="Logo de ONZEUR">
             </div>
             <nav class="nav">
                 <div class="nav-buttons">
