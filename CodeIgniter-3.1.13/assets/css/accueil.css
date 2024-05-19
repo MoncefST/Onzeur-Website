@@ -60,6 +60,13 @@ h1, h2, h3 {
     text-align: center;
 }
 
+.feature img {
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 .gallery h2 {
     text-align: center;
     margin-bottom: 20px; /* Espace sous le titre */
@@ -72,16 +79,20 @@ h1, h2, h3 {
 }
 
 .gallery img {
-    width: 30%; /* Ajustez ce pourcentage pour que les images tiennent sur une ligne sur les grands écrans */
+    width: 30%; 
     height: auto;
     border-radius: 8px;
-    margin: 10px; /* Espace autour des images */
+    margin: 10px; 
 }
 
 /* Media queries pour les petits écrans */
 @media (max-width: 768px) {
     .gallery img {
         width: 45%; /* Les images prennent 45% de la largeur sur les écrans moyens */
+    }
+
+    .feature img {
+        width: 100%; /* Les images prennent 100% de la largeur sur les écrans moyens */
     }
 
     .gallery {

@@ -1,0 +1,111 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    color: #6a0dad; 
+    text-align: center;
+    margin-top: 20px;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.list > div {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les articles */
+article {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+article:hover {
+    transform: translateY(-5px);
+}
+
+header.short-text,
+footer.short-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 10px;
+}
+
+header.short-text {
+    background-color: #6a0dad;
+    color: #fff;
+}
+
+footer.short-text {
+    background-color: #f0f0f0;
+}
+
+/* Styles pour les liens hypertexte */
+header.short-text a {
+    color: #fff; /* Blanc pour les liens */
+    text-decoration: none; /* Supprimer le soulignement */
+}
+
+/* Image styles */
+.list img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .list > div {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .list > div {
+        width: 100%;
+    }
+}
+
+/* Styles pour les boutons de pagination */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    background-color: #6a0dad;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #4a0772;
+}
+
+.pagination .active {
+    background-color: #29043e;
+}
