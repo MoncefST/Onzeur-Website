@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<?php include 'layout/header_not_logged_dark.php'; ?>
 <head>
     <link rel="stylesheet" href="assets/css/accueil.css">
     <link rel="icon" type="image/x-icon" href="assets/img/Logo_ONZEUR.png">
@@ -11,7 +10,7 @@
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
         <p>Le service de streaming musical numéro 1 en France.</p>
-        <button type="button">Accéder à la musique</button>
+        <a href="<?php echo base_url('albums'); ?>"><button type="button">Accéder à la musique</button></a>
     </div>
 
     <div class="container">
@@ -73,6 +72,5 @@
             </form>
         </div>
     </div>
-    <?php include 'layout/footer_dark.php'; ?>
 </body>
 </html>

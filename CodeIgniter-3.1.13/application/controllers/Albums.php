@@ -9,16 +9,16 @@ class Albums extends CI_Controller {
         // Load the URL Helper
         $this->load->helper('url');
     }
-    public function index($page = 1){
+    public function index(){
+        $page = 1;
         $limit = 21;
         $offset = ($page - 1) * $limit;
         $albums = $this->model_music->getAlbums($limit, $offset);
     
-        // Pass pagination information to view
         $total_albums = $this->model_music->get_total_albums();
         $data['total_pages'] = ceil($total_albums / $limit);
         $data['current_page'] = $page;
-        $data['albums'] = $albums; // Pass albums data to view
+        $data['albums'] = $albums;
     
         $this->load->view('layout/header_not_logged_dark');
         $this->load->view('albums_list', $data);
