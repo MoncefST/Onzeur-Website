@@ -1,4 +1,3 @@
-<!-- application/views/albums_list.php -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,17 +24,18 @@
     </section>
 
     <div class="pagination">
-        <?php if ($current_page > 1): ?>
-            <a href="<?php echo base_url('index.php/albums/index/'.($current_page-1)); ?>">Précédent</a>
-        <?php endif; ?>
+    <?php if ($current_page > 1): ?>
+        <a class="fleche" href="<?php echo base_url('index.php/albums/index/'.($current_page-1)); ?>"><</a>
+    <?php endif; ?>
 
-        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <a href="<?php echo base_url('index.php/albums/index/'.$i); ?>" <?php echo ($i == $current_page) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
-        <?php endfor; ?>
 
-        <?php if ($current_page < $total_pages): ?>
-            <a href="<?php echo base_url('index.php/albums/index/'.($current_page+1)); ?>">Suivant</a>
-        <?php endif; ?>
-    </div>
+    <?php for ($i = max(1, $current_page - 2); $i <= min($total_pages, $current_page + 2); $i++): ?>
+        <a href="<?php echo base_url('index.php/albums/index/'.$i); ?>" <?php echo ($i == $current_page) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
+    <?php endfor; ?>
+
+    <?php if ($current_page < $total_pages): ?>
+        <a class="fleche" href="<?php echo base_url('index.php/albums/index/'.($current_page+1)); ?>">></a>
+    <?php endif; ?>
+</div>
 </body>
 </html>
