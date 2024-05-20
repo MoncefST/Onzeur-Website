@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/accueil.css'); ?>">
-    <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/Logo_ONZEUR.png'); ?>">
-    <title>Page d'accueil</title>
-    
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/accueil'); ?>">
+    <title>Accueil - Onzeur</title>
 </head>
 <body>
     <div class="hero">
