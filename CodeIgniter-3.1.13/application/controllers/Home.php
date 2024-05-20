@@ -15,6 +15,5 @@ public function index() {
     $this->load->view('accueil', $data);
     $this->load->view('layout/footer_dark');
 }
-
 }
 ?>

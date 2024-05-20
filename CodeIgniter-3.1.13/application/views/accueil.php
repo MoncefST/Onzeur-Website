@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="assets/css/accueil.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/Logo_ONZEUR.png">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/accueil.css'); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/Logo_ONZEUR.png'); ?>">
     <title>Page d'accueil</title>
     
 </head>
@@ -10,7 +10,7 @@
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
         <p>Le service de streaming musical numéro 1 en France.</p>
-        <a href="<?php echo base_url('albums'); ?>"><button type="button">Accéder à la musique</button></a>
+        <a href="<?php echo site_url('albums'); ?>"><button type="button">Accéder à la musique</button></a>
     </div>
 
     <div class="container">
@@ -19,17 +19,17 @@
             <div class="feature">
                 <h3>Création de playlist</h3>
                 <p>Avec Onzeur, vous pouvez créer des playlists personnalisées en quelques clics. Rassemblez vos morceaux préférés, organisez-les par artiste, album ou genre, et créez des listes de lecture adaptées à toutes les occasions. Ajoutez et supprimez des chansons selon vos envies, et gardez votre musique à portée de main, prête à être écoutée à tout moment</p>
-                <img src="assets/img/gallerie/img1.jpg" alt="Image pour la fonctionnalité 'Création de playlist'">
+                <img src="<?php echo base_url('assets/img/gallerie/img1.jpg'); ?>" alt="Image pour la fonctionnalité 'Création de playlist'">
             </div>
             <div class="feature">
                 <h3>Consultation des morceaux</h3>
                 <p>Explorez une vaste bibliothèque de morceaux de musique avec Onzeur. Parcourez les listes d'artistes, découvrez des albums et explorez des genres musicaux variés. Trouvez rapidement les chansons que vous recherchez en naviguant facilement entre les différentes vues. Que vous soyez à la recherche de nouveautés ou de classiques, cette fonctionnalité vous permettra de découvrir et d'apprécier une large sélection de musique.</p>
-                <img src="assets/img/gallerie/img2.jpg" alt="Image pour la fonctionnalité 'Consultation des morceaux'">
+                <img src="<?php echo base_url('assets/img/gallerie/img2.jpg'); ?>" alt="Image pour la fonctionnalité 'Consultation des morceaux'">
             </div>
             <div class="feature">
                 <h3>Gestion des comptes utilisateurs</h3>
                 <p>Profitez pleinement de toutes les fonctionnalités de l'application en créant votre propre compte utilisateur. Une fois connecté, vous aurez accès à des fonctionnalités avancées telles que la création et la gestion de playlists personnalisées. Ajoutez des chansons à vos favoris, synchronisez votre bibliothèque musicale sur plusieurs appareils et bénéficiez d'une expérience musicale personnalisée.</p>
-                <img src="assets/img/gallerie/img3.jpg" alt="Image pour la fonctionnalité 'Gestion des comptes utilisateurs'">
+                <img src="<?php echo base_url('assets/img/gallerie/img3.jpg'); ?>" alt="Image pour la fonctionnalité 'Gestion des comptes utilisateurs'">
             </div>
         </div>
 

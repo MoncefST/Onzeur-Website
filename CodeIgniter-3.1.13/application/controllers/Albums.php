@@ -6,11 +6,9 @@ class Albums extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('model_music');
-        // Load the URL Helper
         $this->load->helper('url');
     }
-    public function index(){
-        $page = 1;
+    public function index($page = 1){
         $limit = 21;
         $offset = ($page - 1) * $limit;
         $albums = $this->model_music->getAlbums($limit, $offset);
@@ -24,7 +22,4 @@ class Albums extends CI_Controller {
         $this->load->view('albums_list', $data);
         $this->load->view('layout/footer_dark');
     }
-    
-    
-
 }

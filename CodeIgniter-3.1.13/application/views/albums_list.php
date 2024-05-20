@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/Logo_ONZEUR.png">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/Logo_ONZEUR.png'); ?>">
     <title>Page d'accueil</title>
 </head>
 
@@ -21,14 +21,14 @@ foreach($albums as $album){
 
 <div class="pagination">
     <?php if ($current_page > 1): ?>
-        <a href="<?php echo base_url('albums/index/'.($current_page-1)); ?>">Previous</a>
+        <a href="<?php echo base_url('index.php/albums/index/'.($current_page-1)); ?>">Précédent</a>
     <?php endif; ?>
     
     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-        <a href="<?php echo base_url('albums/index/'.$i); ?>" <?php echo ($i == $current_page) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
+        <a href="<?php echo base_url('index.php/albums/index/'.$i); ?>" <?php echo ($i == $current_page) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
     <?php endfor; ?>
     
     <?php if ($current_page < $total_pages): ?>
-        <a href="<?php echo base_url('albums/index/'.($current_page+1)); ?>">Suivant</a>
+        <a href="<?php echo base_url('index.php/albums/index/'.($current_page+1)); ?>">Suivant</a>
     <?php endif; ?>
 </div>
