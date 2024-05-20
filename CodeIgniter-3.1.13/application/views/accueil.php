@@ -8,7 +8,7 @@
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
         <p>Le service de streaming musical numéro 1 en France.</p>
-        <a href="<?php echo site_url('albums'); ?>"><button type="button">Accéder à la musique</button></a>
+        <a href="<?php echo site_url('musiques'); ?>"><button type="button">Accéder à la musique</button></a>
     </div>
 
     <div class="container">

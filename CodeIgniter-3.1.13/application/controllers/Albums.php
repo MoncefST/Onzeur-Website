@@ -32,5 +32,6 @@ class Albums extends CI_Controller {
         $this->load->view('album_view', $data);
         $this->load->view('layout/footer_dark');
     }
+    
 }
 ?>

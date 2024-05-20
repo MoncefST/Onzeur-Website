@@ -50,5 +50,25 @@ class Model_music extends CI_Model {
 
         return $album;
     }
+    
+    public function getMusiques($limit, $offset) {
+        $query = $this->db->query(
+            "SELECT song.id, song.name, artist.name as artistName, album.name as album_name, track.albumid as album_id, cover.jpeg as cover
+             FROM song
+             JOIN track ON song.id = track.songid
+             JOIN album ON track.albumid = album.id
+             JOIN artist ON album.artistid = artist.id
+             JOIN cover ON album.coverid = cover.id
+             LIMIT $limit OFFSET $offset"
+        );        
+        return $query->result();
+    }
+    
+    public function get_total_musiques(){
+        $query = $this->db->query("SELECT COUNT(*) as total_musiques FROM song");
+        $result = $query->row();
+        return $result->total_musiques;
+    } 
+    
 }
 ?>
