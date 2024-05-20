@@ -10,6 +10,7 @@
 <body>
     <div class="album-details">
         <h1><?php echo $album->name; ?></h1>
+        
         <p><strong>Artiste :</strong> <?php echo $album->artistName; ?></p>
         <p><strong>Année :</strong> <?php echo $album->year; ?></p>
         <p><strong>Genre :</strong> <?php echo $album->genreName; ?></p>

@@ -54,5 +54,6 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['albums'] = 'albums/index';
 $route['musiques'] = 'Musiques/index';
+$route['artiste/(:num)'] = 'artiste/index/$1';
 
 

@@ -12,7 +12,7 @@
         <?php foreach($musiques as $musique): ?>
             <li>
                 <strong>Titre:</strong> <?php echo $musique->name; ?> <br>
-                <strong>Artiste:</strong> <?php echo $musique->artistName; ?> <br>
+                <strong>Artiste :</strong> <a href="<?php echo site_url('artiste/'.$musique->artist_id); ?>"><?php echo $musique->artistName; ?></a> <br>
                 <strong>Album:</strong> <a href="<?php echo base_url('index.php/albums/view/'.$musique->album_id); ?>"><?php echo $musique->album_name; ?></a> <br>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($musique->cover); ?>" alt="Couverture d'album"> <br>
             </li>

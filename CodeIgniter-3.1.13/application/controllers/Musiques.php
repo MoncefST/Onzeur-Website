@@ -11,7 +11,7 @@ class Musiques extends CI_Controller {
     }
 
     public function index($page = 1){
-        $limit = 100; // Nombre de musiques par page
+        $limit = 30; // Nombre de musiques par page
         $offset = ($page - 1) * $limit;
         
         $musiques = $this->Model_music->getMusiques($limit, $offset);
@@ -22,12 +22,13 @@ class Musiques extends CI_Controller {
         
         // Données à passer à la vue
         $data['musiques'] = $musiques;
-        
+    
         // Charger la vue
         $this->load->view('layout/header_not_logged_dark');
         $this->load->view('musiques_list', $data);
         $this->load->view('layout/footer_dark');
     }
+    
       
 }
 ?>

@@ -1,0 +1,47 @@
+/* Styles pour la mise en page générale */
+.artist-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Styles pour le titre principal */
+.artist-details h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Styles pour la liste des albums */
+.albums-list {
+    list-style: none;
+    padding: 0;
+}
+
+.albums-list li {
+    margin-bottom: 30px;
+}
+
+.album-details {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.album-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.album-details p {
+    margin: 5px 0;
+}
+
+.album-details img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.album-details .no-cover {
+    font-style: italic;
+    color: #888;
+}
