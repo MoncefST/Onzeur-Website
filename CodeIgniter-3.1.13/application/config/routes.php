@@ -55,5 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['albums'] = 'albums/index';
 $route['musiques'] = 'Musiques/index';
 $route['artiste/(:num)'] = 'artiste/index/$1';
+$route['search'] = 'search/index';
+$route['mentions-legals'] = 'MentionsLegales/index';
+
 
 

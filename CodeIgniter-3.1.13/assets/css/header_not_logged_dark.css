@@ -81,3 +81,28 @@ body {
         display: flex;
     }
 }
+
+.search-form {
+    margin-right: 20px; /* Espace entre la barre de recherche et les boutons de navigation */
+    display: flex; /* Permet d'aligner les éléments horizontalement */
+    align-items: center; /* Alignement vertical */
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 2px solid white; /* Bordure blanche */
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+    color: white; /* Couleur du texte */
+    border-radius: 5px; /* Coins arrondis */
+    vertical-align: middle; /* Alignement vertical */
+}
+
+.search-form button[type="submit"] {
+    padding: 10px;
+    background-color: transparent; /* Fond transparent */
+    border: 2px solid white; /* Bordure blanche */
+    color: white; /* Couleur du texte */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer;
+    vertical-align: middle; /* Alignement vertical */
+}

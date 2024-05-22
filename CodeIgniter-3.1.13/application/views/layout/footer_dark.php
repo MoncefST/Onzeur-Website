@@ -15,7 +15,7 @@
                 <a href="https://www.youtube.com" class="social-icon"><img src="<?php echo base_url('assets/img/reseaux_sociaux/youtube.png'); ?>" alt="Youtube"></a>
             </div>
             <div class="legal">
-                <a href="#" class="legal-link">Mentions légales</a>
+                <a href="<?php echo site_url('MentionsLegales'); ?>" class="legal-link">Mentions légales</a>
                 <span>|</span>
                 <span>© 2024 Onzeur</span>
                 <span>|</span>
