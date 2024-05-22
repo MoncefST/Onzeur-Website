@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-.artist-list-container {
+.album-details {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
@@ -14,57 +14,33 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.artist-list-container h1 {
+.album-details h1 {
     font-size: 2em;
     margin-bottom: 10px;
-    text-align: center;
-    color: #800080; /* Couleur violette */
 }
 
-.artist-list {
+.album-details p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.album-details img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.album-details h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.album-details ul {
     list-style-type: none;
     padding: 0;
 }
 
-.artist-list li {
-    display: flex;
-    align-items: center;
+.album-details ul li {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
-}
-
-.artist-list li:last-child {
-    border-bottom: none;
-}
-
-.artist-list img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
-.artist-list .artist-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.artist-list .artist-details h2 {
-    font-size: 1.2em;
-    margin: 0;
-}
-
-.artist-list .artist-details p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #666;
-}
-
-.artist-list .artist-details a {
-    text-decoration: none;
-    color: #9500ff;
-}
-
-.artist-list .artist-details a:hover {
-    text-decoration: underline;
 }

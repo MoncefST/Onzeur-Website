@@ -110,3 +110,29 @@ header.short-text a {
     background-color: #29043e;
 }
 
+.filters {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.filters select {
+    margin-right: 10px;
+}
+
+.filters button {
+    background-color: #8c00ff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #6a0080;
+}
+
