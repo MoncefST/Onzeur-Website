@@ -10,7 +10,7 @@ class Albums extends CI_Controller {
     }
 
     public function index($page = 1){
-        $limit = 21;
+        $limit = 21; // Nombre d'albums max par page
         $offset = ($page - 1) * $limit;
         $albums = $this->model_music->getAlbums($limit, $offset);
 

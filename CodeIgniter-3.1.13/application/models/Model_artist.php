@@ -11,5 +11,9 @@ class Model_artist extends CI_Model {
         return $query->row();
     }
 
+    public function getArtists($order = 'ASC'){
+        $query = $this->db->query("SELECT * FROM artist ORDER BY name " . $order);
+        return $query->result();
+    }
 }
 ?>
