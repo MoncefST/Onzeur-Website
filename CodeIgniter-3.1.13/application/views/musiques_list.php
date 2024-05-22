@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/Logo_ONZEUR.png'); ?>">
     <title>Musiques - Onzeur</title>
 </head>
@@ -32,7 +32,12 @@
                     </header>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($musique->cover); ?>" alt="Couverture de l'album">
                     <footer class="short-text">
-                        <?php echo $musique->artistName; ?> - <?php echo $musique->album_name; ?>
+                        <a href="<?php echo base_url('index.php/artiste/index/'.$musique->artist_id); ?>">
+                            <?php echo $musique->artistName; ?>
+                        </a> - 
+                        <a href="<?php echo base_url('index.php/albums/view/'.$musique->album_id); ?>">
+                            <?php echo $musique->album_name; ?>
+                        </a>
                     </footer>
                 </article>
             </div>
