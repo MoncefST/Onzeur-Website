@@ -62,7 +62,6 @@ footer.short-text {
 /* Styles pour les liens hypertexte */
 header.short-text a {
     color: #fff; /* Blanc pour les liens */
-    text-decoration: none; /* Supprimer le soulignement */
 }
 
 /* Image styles */

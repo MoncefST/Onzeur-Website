@@ -11,17 +11,29 @@ class Musiques extends CI_Controller {
     }
 
     public function index($page = 1){
-        $limit = 30; // Nombre de musiques par page
+        // Nombre de musiques par page
+        $limit = 30; 
+        // Calcul de l'offset pour la pagination
         $offset = ($page - 1) * $limit;
         
-        $musiques = $this->Model_music->getMusiques($limit, $offset);
+        // Récupérer la valeur de tri depuis la requête GET
+        $sort = $this->input->get('sort');
+    
+        // Récupérer les musiques triées
+        $musiques = $this->Model_music->getMusiques($limit, $offset, $sort);
         
+        // Récupérer le nombre total de musiques pour la pagination
         $total_musiques = $this->Model_music->get_total_musiques();
-        $data['total_pages'] = ceil($total_musiques / $limit); // Calcul du nombre total de pages
-        $data['current_page'] = $page; // Définition de la variable $current_page
-        
+        // Calculer le nombre total de pages
+        $total_pages = ceil($total_musiques / $limit); 
+        // Définition de la variable $current_page
+        $current_page = $page; 
+    
         // Données à passer à la vue
         $data['musiques'] = $musiques;
+        $data['total_pages'] = $total_pages;
+        $data['current_page'] = $current_page;
+        $data['sort'] = $sort; // Passer la valeur de tri à la vue
     
         // Charger la vue
         $this->load->view('layout/header_not_logged_dark');
@@ -29,6 +41,4 @@ class Musiques extends CI_Controller {
         $this->load->view('layout/footer_dark');
     }
     
-      
 }
-?>

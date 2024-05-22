@@ -97,7 +97,23 @@ class Model_music extends CI_Model {
         return $album;
     }
 
-    public function getMusiques($limit, $offset) {
+    public function getMusiques($limit, $offset, $order_by = 'title', $order_direction = 'ASC') {
+        $order_column = '';
+        switch ($order_by) {
+            case 'artist':
+                $order_column = 'artist.name';
+                break;
+            case 'album':
+                $order_column = 'album.name';
+                break;
+            case 'title':
+                $order_column = 'song.name';
+                break;
+            default:
+                $order_column = 'song.name';
+                break;
+        }
+        
         $query = $this->db->query(
             "SELECT song.id, song.name, artist.id as artist_id, artist.name as artistName, album.name as album_name, track.albumid as album_id, cover.jpeg as cover
              FROM song
@@ -105,11 +121,12 @@ class Model_music extends CI_Model {
              JOIN album ON track.albumid = album.id
              JOIN artist ON album.artistid = artist.id
              JOIN cover ON album.coverid = cover.id
+             ORDER BY $order_column $order_direction
              LIMIT $limit OFFSET $offset"
         );        
         return $query->result();
     }
-
+    
     
     public function get_total_musiques(){
         $query = $this->db->query("SELECT COUNT(*) as total_musiques FROM song");
@@ -119,14 +136,60 @@ class Model_music extends CI_Model {
 
     public function getAlbumsByArtiste($artiste_id){
         $query = $this->db->query("
-            SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg
+            SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg,
+                   track.id as track_id, track.diskNumber, track.number, track.duration, song.name as songName
             FROM album
             JOIN artist ON album.artistid = artist.id
             JOIN genre ON album.genreid = genre.id
             JOIN cover ON album.coverid = cover.id
+            JOIN track ON track.albumid = album.id
+            JOIN song ON track.songid = song.id
             WHERE artist.id = ?
+            ORDER BY album.id, track.diskNumber, track.number
         ", array($artiste_id));
-        return $query->result();
+        $result = $query->result();
+    
+        // Organiser les résultats par album
+        $albums = array();
+        foreach ($result as $row) {
+            $album_id = $row->id;
+            if (!isset($albums[$album_id])) {
+                $albums[$album_id] = (object)array(
+                    'id' => $row->id,
+                    'name' => $row->name,
+                    'year' => $row->year,
+                    'artistName' => $row->artistName,
+                    'genreName' => $row->genreName,
+                    'jpeg' => $row->jpeg,
+                    'tracks' => array() // Initialiser un tableau pour les pistes de l'album
+                );
+            }
+            // Ajouter la piste à l'album correspondant
+            $albums[$album_id]->tracks[] = (object)array(
+                'id' => $row->track_id,
+                'diskNumber' => $row->diskNumber,
+                'number' => $row->number,
+                'duration' => $row->duration,
+                'songName' => $row->songName
+            );
+        }
+    
+        return array_values($albums); // Réorganiser les albums en utilisant des index numériques
+    }   
+    
+
+    public function getMostUsedGenreByArtist($artist_id) {
+        $query = $this->db->query("
+            SELECT genre.name as genreName, COUNT(*) as genreCount
+            FROM album
+            JOIN genre ON album.genreid = genre.id
+            WHERE album.artistid = ?
+            GROUP BY genre.name
+            ORDER BY genreCount DESC
+            LIMIT 1
+        ", array($artist_id));
+    
+        return $query->row();
     }
+    
 }
-?>

@@ -14,4 +14,3 @@ class Cover_model extends CI_Model {
         return $result->result_array();
     }    
 }
-?>
