@@ -1,0 +1,7 @@
+<?php
+
+// ####### Temporaire ########
+
+$logged = false;
+
+?>

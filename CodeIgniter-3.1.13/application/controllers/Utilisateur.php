@@ -21,6 +21,7 @@ class Utilisateur extends CI_Controller {
     
         if ($this->form_validation->run() == FALSE) {
             // Charger la vue avec les erreurs
+            $this->load->view('layout/header_dark');
             $this->load->view('layout/header_not_logged_dark');
             $this->load->view('inscription');
             $this->load->view('layout/footer_dark');
@@ -40,6 +41,7 @@ class Utilisateur extends CI_Controller {
                 redirect('utilisateur/connexion');
             } else {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
+                $this->load->view('layout/header_dark');
                 $this->load->view('layout/header_not_logged_dark');
                 $this->load->view('inscription', $data);
                 $this->load->view('layout/footer_dark');
@@ -54,6 +56,7 @@ class Utilisateur extends CI_Controller {
     
         if ($this->form_validation->run() == FALSE) {
             // Charger la vue avec les erreurs
+            $this->load->view('layout/header_dark');
             $this->load->view('layout/header_not_logged_dark');
             $this->load->view('connexion');
             $this->load->view('layout/footer_dark');
@@ -71,6 +74,7 @@ class Utilisateur extends CI_Controller {
                 redirect('dashboard');
             } else {
                 $data['error'] = 'Email ou mot de passe incorrect.';
+                $this->load->view('layout/header_dark');
                 $this->load->view('layout/header_not_logged_dark');
                 $this->load->view('connexion', $data);
                 $this->load->view('layout/footer_dark');

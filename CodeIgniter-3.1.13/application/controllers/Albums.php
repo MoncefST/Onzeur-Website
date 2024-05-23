@@ -32,19 +32,38 @@ class Albums extends CI_Controller {
         // Récupérer les genres et les artistes pour les filtres
         $data['genres'] = $this->model_music->getGenres();
         $data['artists'] = $this->model_music->getArtists();
-
-        $this->load->view('layout/header_not_logged_dark');
-        $this->load->view('albums_list', $data);
-        $this->load->view('layout/footer_dark');
+        
+        include 'temporaire.php';
+        if($logged == true){
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_logged_dark');
+            $this->load->view('albums_list', $data);
+            $this->load->view('layout/footer_dark');
+        } else {
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_not_logged_dark');
+            $this->load->view('albums_list', $data);
+            $this->load->view('layout/footer_dark');
+        }
     }
 
     public function view($id){
         $album = $this->model_music->get_album_by_id($id);
         $data['album'] = $album;
 
-        $this->load->view('layout/header_not_logged_dark');
-        $this->load->view('album_view', $data);
-        $this->load->view('layout/footer_dark');
+        include 'temporaire.php';
+        if($logged == true){
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_logged_dark');
+            $this->load->view('album_view', $data);
+            $this->load->view('layout/footer_dark');
+        } else {
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_not_logged_dark');
+            $this->load->view('album_view', $data);
+            $this->load->view('layout/footer_dark');
+        }
     }
+
 }
 ?>

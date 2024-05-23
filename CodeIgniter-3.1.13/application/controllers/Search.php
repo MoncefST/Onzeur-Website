@@ -13,6 +13,7 @@ class Search extends CI_Controller {
     public function index(){
         // Récupérer la requête de recherche depuis la barre de recherche
         $query = $this->input->get('query');
+        include 'temporaire.php';
 
         // Vérifier que la requête de recherche n'est pas vide
         if (empty($query)) {
@@ -24,9 +25,18 @@ class Search extends CI_Controller {
             $data['artistes'] = [];
             $data['error'] = "La requête de recherche ne peut pas être vide.";
 
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('search_results', $data); 
-            $this->load->view('layout/footer_dark');
+            
+            if($logged == true){
+                $this->load->view('layout/header_dark');
+                $this->load->view('layout/header_logged_dark');
+                $this->load->view('search_results', $data); 
+                $this->load->view('layout/footer_dark');
+            } else {
+                $this->load->view('layout/header_dark');
+                $this->load->view('layout/header_not_logged_dark');
+                $this->load->view('search_results', $data); 
+                $this->load->view('layout/footer_dark');
+            }
             return;
         }
 
@@ -42,9 +52,17 @@ class Search extends CI_Controller {
         $data['albums'] = $albums;
         $data['genres'] = $genres;
         $data['artistes'] = $artistes;
-
-        $this->load->view('layout/header_not_logged_dark');
-        $this->load->view('search_results', $data); 
-        $this->load->view('layout/footer_dark');
+        
+        if($logged == true){
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_logged_dark');
+            $this->load->view('search_results', $data); 
+            $this->load->view('layout/footer_dark');
+        } else {
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_not_logged_dark');
+            $this->load->view('search_results', $data); 
+            $this->load->view('layout/footer_dark');
+        }
     }
 }

@@ -24,9 +24,20 @@ class Artiste extends CI_Controller {
             $data['artiste'] = $artiste;
             $data['albums'] = $albums;
             $data['mostUsedGenre'] = $mostUsedGenre; // Passer $mostUsedGenre à la vue
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('artiste_details', $data);
-            $this->load->view('layout/footer_dark');
+            
+            include 'temporaire.php';
+            if($logged == true){
+                $this->load->view('layout/header_dark');
+                $this->load->view('layout/header_logged_dark');
+                $this->load->view('artists_list', $data);
+                $this->load->view('layout/footer_dark');
+            } else {
+                $this->load->view('layout/header_dark');
+                $this->load->view('layout/header_not_logged_dark');
+                $this->load->view('artists_list', $data);
+                $this->load->view('layout/footer_dark');
+            }
+            
         } else {
             // Gérer le cas où l'artiste n'est pas trouvé == afficher un error 404
             show_404();
@@ -44,9 +55,19 @@ class Artiste extends CI_Controller {
         // Charger la vue avec la liste des artistes
         $data['artists'] = $artists;
         $data['current_order'] = $order;
-        $this->load->view('layout/header_not_logged_dark');
-        $this->load->view('artists_list', $data);
-        $this->load->view('layout/footer_dark');
+        
+        include 'temporaire.php';
+        if($logged == true){
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_logged_dark');
+            $this->load->view('artists_list', $data);
+            $this->load->view('layout/footer_dark');
+        } else {
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_not_logged_dark');
+            $this->load->view('artists_list', $data);
+            $this->load->view('layout/footer_dark');
+        }
     }
 }
 ?>
