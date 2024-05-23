@@ -16,7 +16,12 @@
         <h3>Musiques</h3>
         <ul>
             <?php foreach($musiques as $musique): ?>
-                <li><?php echo htmlspecialchars($musique->name, ENT_QUOTES, 'UTF-8'); ?> - <?php echo htmlspecialchars($musique->artistName, ENT_QUOTES, 'UTF-8'); ?></li>
+                <li>
+                    <?php echo htmlspecialchars($musique->name, ENT_QUOTES, 'UTF-8'); ?> - 
+                    <a href="<?php echo site_url('artiste/'.$musique->artist_id); ?>">
+                        <?php echo htmlspecialchars($musique->artistName, ENT_QUOTES, 'UTF-8'); ?>
+                    </a>
+                </li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
@@ -25,7 +30,15 @@
         <h3>Albums</h3>
         <ul>
             <?php foreach($albums as $album): ?>
-                <li><?php echo htmlspecialchars($album->name, ENT_QUOTES, 'UTF-8'); ?> by <?php echo htmlspecialchars($album->artistName, ENT_QUOTES, 'UTF-8'); ?></li>
+                <li>
+                    <a href="<?php echo site_url('albums/view/'.$album->id); ?>">
+                        <?php echo htmlspecialchars($album->name, ENT_QUOTES, 'UTF-8'); ?>
+                    </a> 
+                    - 
+                    <a href="<?php echo site_url('artiste/'.$musique->artist_id); ?>">
+                        <?php echo htmlspecialchars($musique->artistName, ENT_QUOTES, 'UTF-8'); ?>
+                    </a>
+                </li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
@@ -43,7 +56,11 @@
         <h3>Artistes</h3>
         <ul>
             <?php foreach($artistes as $artiste): ?>
-                <li><?php echo htmlspecialchars($artiste->name, ENT_QUOTES, 'UTF-8'); ?></li>
+                <li>
+                    <a href="<?php echo site_url('artiste/'.$artiste->id); ?>">
+                        <?php echo htmlspecialchars($artiste->name, ENT_QUOTES, 'UTF-8'); ?>
+                    </a>
+                </li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
