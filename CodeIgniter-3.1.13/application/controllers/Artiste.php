@@ -13,7 +13,7 @@ class Artiste extends CI_Controller {
     public function index($artiste_id){
         // Récupérer les détails de l'artiste
         $artiste = $this->Model_artist->getArtisteById($artiste_id);
-        $mostUsedGenre = $this->Model_music->getMostUsedGenreByArtist($artiste_id); // Correction ici
+        $mostUsedGenre = $this->Model_music->getMostUsedGenreByArtist($artiste_id);
     
         if($artiste){
             // Récupérer tous les albums de l'artiste

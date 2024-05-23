@@ -1,24 +1,21 @@
+/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    background-color: #f8f8f8;
 }
 
 .artist-list-container {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .artist-list-container h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+    color: #6a0dad; 
     text-align: center;
-    color: #800080; /* Couleur violette */
+    margin-top: 20px;
 }
 
 .sort-options {
@@ -27,53 +24,68 @@ body {
 }
 
 .sort-options a {
+    color: #6a0dad;
     text-decoration: none;
-    color: #8c00ff;
     margin: 0 10px;
+    transition: color 0.3s ease;
 }
 
 .sort-options a:hover {
-    text-decoration: underline;
+    color: #4a0772;
 }
 
 .artist-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     list-style-type: none;
     padding: 0;
 }
 
 .artist-list li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    width: 30%;
+    margin-bottom: 20px;
 }
 
-.artist-list li:last-child {
-    border-bottom: none;
+.artist-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    padding: 10px;
+    text-align: center;
 }
 
-.artist-list .artist-details {
-    display: flex;
-    flex-direction: column;
+.artist-details:hover {
+    transform: translateY(-5px);
 }
 
-.artist-list .artist-details h2 {
-    font-size: 1.2em;
-    margin: 0;
+.artist-details h2 {
+    color: #6a0dad;
+    font-size: 1.5em;
+    margin: 10px 0;
 }
 
-.artist-list .artist-details p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #666;
-}
-
-.artist-list .artist-details a {
+.artist-details a {
+    color: #6a0dad;
     text-decoration: none;
-    color: #8c00ff;
+    transition: color 0.3s ease;
 }
 
-.artist-list .artist-details a:hover {
-    text-decoration: underline;
+.artist-details a:hover {
+    color: #4a0772;
 }
 
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .artist-list li {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .artist-list li {
+        width: 100%;
+    }
+}

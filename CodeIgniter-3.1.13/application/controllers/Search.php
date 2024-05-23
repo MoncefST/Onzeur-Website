@@ -13,6 +13,22 @@ class Search extends CI_Controller {
         // Récupérer la requête de recherche depuis la barre de recherche
         $query = $this->input->get('query');
 
+        // Vérifier que la requête de recherche n'est pas vide
+        if (empty($query)) {
+            // Charger la vue avec un message d'erreur
+            $data['query'] = $query;
+            $data['musiques'] = [];
+            $data['albums'] = [];
+            $data['genres'] = [];
+            $data['artistes'] = [];
+            $data['error'] = "La requête de recherche ne peut pas être vide.";
+
+            $this->load->view('layout/header_not_logged_dark');
+            $this->load->view('search_results', $data); 
+            $this->load->view('layout/footer_dark');
+            return;
+        }
+
         // Faire une recherche dans les musiques, les albums, les genres et les artistes
         $musiques = $this->Search_model->searchMusiques($query); 
         $albums = $this->Search_model->searchAlbums($query); 

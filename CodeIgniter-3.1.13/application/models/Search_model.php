@@ -15,10 +15,9 @@ class Search_model extends CI_Model {
                 JOIN album ON track.albumid = album.id
                 JOIN artist ON album.artistid = artist.id
                 JOIN cover ON album.coverid = cover.id
-                WHERE song.name LIKE '%$query%'
+                WHERE song.name LIKE ? 
                 ORDER BY song.name ASC";
-
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql, array('%' . $query . '%'));
         return $query->result();
     }
 
@@ -28,22 +27,21 @@ class Search_model extends CI_Model {
                 JOIN artist ON album.artistid = artist.id
                 JOIN genre ON album.genreid = genre.id
                 JOIN cover ON album.coverid = cover.id
-                WHERE album.name LIKE '%$query%'
+                WHERE album.name LIKE ? 
                 ORDER BY album.name ASC";
-
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql, array('%' . $query . '%'));
         return $query->result();
     }
 
     public function searchGenres($query){
-        $sql = "SELECT id, name FROM genre WHERE name LIKE '%$query%' ORDER BY name ASC";
-        $query = $this->db->query($sql);
+        $sql = "SELECT id, name FROM genre WHERE name LIKE ? ORDER BY name ASC";
+        $query = $this->db->query($sql, array('%' . $query . '%'));
         return $query->result();
     }
 
     public function searchArtistes($query){
-        $sql = "SELECT id, name FROM artist WHERE name LIKE '%$query%' ORDER BY name ASC";
-        $query = $this->db->query($sql);
+        $sql = "SELECT id, name FROM artist WHERE name LIKE ? ORDER BY name ASC";
+        $query = $this->db->query($sql, array('%' . $query . '%'));
         return $query->result();
     }
 }
