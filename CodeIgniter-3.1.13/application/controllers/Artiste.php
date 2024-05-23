@@ -8,6 +8,7 @@ class Artiste extends CI_Controller {
         $this->load->model('Model_artist');
         $this->load->model('Model_music');
         $this->load->helper('url');
+        $this->load->helper('html');
     }
 
     public function index($artiste_id){

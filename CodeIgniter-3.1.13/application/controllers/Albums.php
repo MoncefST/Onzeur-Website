@@ -7,6 +7,7 @@ class Albums extends CI_Controller {
         parent::__construct();
         $this->load->model('model_music');
         $this->load->helper('url');
+        $this->load->helper('html');
     }
 
     public function index($page = 1){

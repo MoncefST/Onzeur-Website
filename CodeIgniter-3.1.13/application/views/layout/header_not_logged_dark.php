@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/header_not_logged_dark'); ?>">
-    <link rel="icon" type="image/x-icon" href="<?php echo base_url('assets/img/Logo_ONZEUR.png'); ?>">
+    <?=link_tag('assets/css/header_not_logged_dark')?>
+    <?=link_tag('assets/img/Logo_ONZEUR.png')?>
+    <?=link_tag('assets/css/footer_dark.css')?>
 </head>
-<body>
 <header class="header">
     <div class="header-content">
         <div class="logo">
             <a href="<?php echo site_url('home'); ?>">
-                <img src="<?php echo base_url('assets/img/Logo_ONZEUR_DARK.png'); ?>" alt="Logo de ONZEUR">
+            <?=img('assets/img/Logo_ONZEUR_DARK.png');?>
             </a>
         </div>
         <nav class="nav">
@@ -46,5 +46,4 @@
             document.querySelector('.nav-buttons').classList.toggle('active');
         });
     </script>
-</body>
 </html>

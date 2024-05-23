@@ -8,6 +8,7 @@ class Utilisateur extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->library(array('form_validation', 'session'));
         $this->load->model('Utilisateur_model');
+        $this->load->helper('html');
     }
 
     public function inscription(){

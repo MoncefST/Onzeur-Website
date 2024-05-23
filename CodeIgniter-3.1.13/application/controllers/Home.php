@@ -7,6 +7,8 @@ public function index() {
 
     $this->load->helper('url');
 
+    $this->load->helper('html');
+
     // Appeler la fonction pour récupérer les couvertures d'albums
     $data['covers'] = $this->Cover_model->get_covers();
 

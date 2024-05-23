@@ -8,6 +8,7 @@ class Musiques extends CI_Controller {
         $this->load->model('Model_music');
         $this->load->library('pagination');
         $this->load->helper('url');
+        $this->load->helper('html');
     }
 
     public function index($page = 1){
