@@ -29,7 +29,7 @@
                 <a href="<?php echo site_url('artiste/list_artists'); ?>" class="btn-artistes">Artistes</a>
                 <a href="<?php echo site_url('musiques'); ?>" class="btn-musiques">Musiques</a>
                 <a href="#CONNEXIONBIENTOT" class="btn-connexion">Connexion</a>
-                <a href="#INSCRIPTIONBIENTOT" class="btn-inscription">Inscription</a>
+                <a href="<?php echo site_url('utilisateur/inscription'); ?>" class="btn-inscription">Inscription</a>
             </div>
         </nav>
         <div class="menu-toggle">
