@@ -27,12 +27,9 @@ label {
     font-weight: bold;
 }
 
-#email,
-#nom,
-#prenom,
-#telephone,
-#password,
-#confirm_password {
+input[type="email"],
+input[type="password"],
+button {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -41,18 +38,15 @@ label {
     box-sizing: border-box;
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 10px;
+button {
     background-color: #634caf;
     color: #fff;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.btn-submit:hover {
+button:hover {
     background-color: rgb(54, 16, 119);
 }
 

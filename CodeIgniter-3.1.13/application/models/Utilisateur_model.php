@@ -11,4 +11,10 @@ class Utilisateur_model extends CI_Model {
     public function insert_user($data){
         return $this->db->insert('utilisateur', $data);
     }
+
+    public function get_user($email) {
+        $query = $this->db->get_where('utilisateur', array('email' => $email));
+        return $query->row();
+    }
+    
 }

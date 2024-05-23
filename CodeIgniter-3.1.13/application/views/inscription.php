@@ -21,6 +21,20 @@
             <input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>" required>
             <?php echo form_error('email'); ?>
         </div>
+        
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password" required>
+            <?php echo form_error('password'); ?>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm_password">Confirmer le mot de passe :</label>
+            <input type="password" name="confirm_password" id="confirm_password" required>
+            <?php echo form_error('confirm_password'); ?>
+        </div>
+
+
 
         <div class="form-group">
             <label for="nom">Nom :</label>
