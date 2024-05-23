@@ -29,12 +29,12 @@ class Artiste extends CI_Controller {
             if($logged == true){
                 $this->load->view('layout/header_dark');
                 $this->load->view('layout/header_logged_dark');
-                $this->load->view('artists_list', $data);
+                $this->load->view('artiste_details', $data);
                 $this->load->view('layout/footer_dark');
             } else {
                 $this->load->view('layout/header_dark');
                 $this->load->view('layout/header_not_logged_dark');
-                $this->load->view('artists_list', $data);
+                $this->load->view('artiste_details', $data);
                 $this->load->view('layout/footer_dark');
             }
             
