@@ -90,6 +90,12 @@ label {
     font-size: 14px;
 }
 
+.success {
+    color: green;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
 .user-info {
     width: 100%;
     border-collapse: collapse;

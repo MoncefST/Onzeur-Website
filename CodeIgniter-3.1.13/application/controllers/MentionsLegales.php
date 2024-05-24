@@ -11,18 +11,9 @@ class MentionsLegales extends CI_Controller {
 
     public function index()
     {
-        include 'temporaire.php';
-        if($logged == true){
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_logged_dark');
-            $this->load->view('mentions-legals');
-            $this->load->view('layout/footer_dark');
-        } else {
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('mentions-legals');
-            $this->load->view('layout/footer_dark');
-        }
+        $this->load->view('layout/header_dark');
+        $this->load->view('mentions-legals');
+        $this->load->view('layout/footer_dark');
         
     }
 }

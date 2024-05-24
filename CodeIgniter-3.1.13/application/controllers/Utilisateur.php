@@ -5,11 +5,12 @@ class Utilisateur extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url', 'cookie'));
         $this->load->library(array('form_validation', 'session'));
         $this->load->model('Utilisateur_model');
         $this->load->helper('html');
     }
+    
 
     public function inscription(){
         // Définir les règles de validation
@@ -24,7 +25,6 @@ class Utilisateur extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             // Charger la vue avec les erreurs
             $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
             $this->load->view('inscription');
             $this->load->view('layout/footer_dark');
         } else {
@@ -43,7 +43,6 @@ class Utilisateur extends CI_Controller {
             } else {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
                 $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_not_logged_dark');
                 $this->load->view('inscription', $data);
                 $this->load->view('layout/footer_dark');
             }
@@ -58,7 +57,6 @@ class Utilisateur extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             // Charger la vue avec les erreurs
             $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
             $this->load->view('connexion');
             $this->load->view('layout/footer_dark');
         } else {
@@ -72,16 +70,36 @@ class Utilisateur extends CI_Controller {
             if ($user && password_verify($password, $user->password)) {
                 // Connexion réussie, enregistrer l'utilisateur dans la session
                 $this->session->set_userdata('user_id', $user->id);
+                // Définir un cookie pour indiquer que l'utilisateur est connecté
+                $cookie = array(
+                    'name'   => 'user_logged_in',
+                    'value'  => '1',
+                    'expire' => '86500', // durée de vie du cookie (1 jour)
+                    'secure' => TRUE
+                );
+                $this->input->set_cookie($cookie);
                 redirect('utilisateur/dashboard');
             } else {
                 $data['error'] = 'Email ou mot de passe incorrect.';
                 $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_logged_dark');
                 $this->load->view('connexion', $data);
                 $this->load->view('layout/footer_dark');
             }
         }
     }
+
+    public function deconnexion(){
+        // Détruire la session de l'utilisateur
+        $this->session->unset_userdata('user_id');
+        $this->session->sess_destroy();
+        
+        // Supprimer le cookie
+        delete_cookie('user_logged_in');
+        
+        // Rediriger vers la page de connexion
+        redirect('utilisateur/connexion');
+    }    
+    
     public function dashboard(){
         if(!$this->session->userdata('user_id')){
             redirect('utilisateur/connexion');
@@ -93,11 +111,9 @@ class Utilisateur extends CI_Controller {
     
         // Charger les vues
         $this->load->view('layout/header_dark');
-        $this->load->view('layout/header_logged_dark');
         $this->load->view('dashboard', $data);
         $this->load->view('layout/footer_dark');
     }
-    
     
     public function modifier(){
         if(!$this->session->userdata('user_id')){
@@ -127,10 +143,8 @@ class Utilisateur extends CI_Controller {
     
             $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
             $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_logged_dark');
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
     }
-       
 }

@@ -37,18 +37,9 @@ class Musiques extends CI_Controller {
         $data['sort'] = $sort; // Passer la valeur de tri à la vue
     
         // Charger la vue
-        include 'temporaire.php';
-        if($logged == true){
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_logged_dark');
-            $this->load->view('musiques_list', $data);
-            $this->load->view('layout/footer_dark');
-        } else {
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('musiques_list', $data);
-            $this->load->view('layout/footer_dark');
-        }
+        $this->load->view('layout/header_dark');
+        $this->load->view('musiques_list', $data);
+        $this->load->view('layout/footer_dark');
     }
     
 }

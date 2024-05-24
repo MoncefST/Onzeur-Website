@@ -25,18 +25,9 @@ class Artiste extends CI_Controller {
             $data['albums'] = $albums;
             $data['mostUsedGenre'] = $mostUsedGenre; // Passer $mostUsedGenre à la vue
             
-            include 'temporaire.php';
-            if($logged == true){
-                $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_logged_dark');
-                $this->load->view('artiste_details', $data);
-                $this->load->view('layout/footer_dark');
-            } else {
-                $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_not_logged_dark');
-                $this->load->view('artiste_details', $data);
-                $this->load->view('layout/footer_dark');
-            }
+            $this->load->view('layout/header_dark');
+            $this->load->view('artiste_details', $data);
+            $this->load->view('layout/footer_dark');
             
         } else {
             // Gérer le cas où l'artiste n'est pas trouvé == afficher un error 404
@@ -56,18 +47,9 @@ class Artiste extends CI_Controller {
         $data['artists'] = $artists;
         $data['current_order'] = $order;
         
-        include 'temporaire.php';
-        if($logged == true){
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_logged_dark');
-            $this->load->view('artists_list', $data);
-            $this->load->view('layout/footer_dark');
-        } else {
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('artists_list', $data);
-            $this->load->view('layout/footer_dark');
-        }
+        $this->load->view('layout/header_dark');
+        $this->load->view('artists_list', $data);
+        $this->load->view('layout/footer_dark');
     }
 }
 ?>

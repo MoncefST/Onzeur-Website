@@ -25,19 +25,9 @@ class Search extends CI_Controller {
             $data['artistes'] = [];
             $data['error'] = "La requête de recherche ne peut pas être vide.";
 
-            
-            if($logged == true){
-                $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_logged_dark');
-                $this->load->view('search_results', $data); 
-                $this->load->view('layout/footer_dark');
-            } else {
-                $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_not_logged_dark');
-                $this->load->view('search_results', $data); 
-                $this->load->view('layout/footer_dark');
-            }
-            return;
+            $this->load->view('layout/header_dark');
+            $this->load->view('search_results', $data); 
+            $this->load->view('layout/footer_dark');
         }
 
         // Faire une recherche dans les musiques, les albums, les genres et les artistes
@@ -53,16 +43,8 @@ class Search extends CI_Controller {
         $data['genres'] = $genres;
         $data['artistes'] = $artistes;
         
-        if($logged == true){
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_logged_dark');
-            $this->load->view('search_results', $data); 
-            $this->load->view('layout/footer_dark');
-        } else {
-            $this->load->view('layout/header_dark');
-            $this->load->view('layout/header_not_logged_dark');
-            $this->load->view('search_results', $data); 
-            $this->load->view('layout/footer_dark');
-        }
+        $this->load->view('layout/header_dark');
+        $this->load->view('search_results', $data); 
+        $this->load->view('layout/footer_dark');
     }
 }
