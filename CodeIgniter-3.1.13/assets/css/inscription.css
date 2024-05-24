@@ -89,3 +89,14 @@ label {
     margin-top: 5px;
     font-size: 14px;
 }
+
+.user-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.user-info th, .user-info td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}

@@ -72,14 +72,65 @@ class Utilisateur extends CI_Controller {
             if ($user && password_verify($password, $user->password)) {
                 // Connexion réussie, enregistrer l'utilisateur dans la session
                 $this->session->set_userdata('user_id', $user->id);
-                redirect('dashboard');
+                redirect('utilisateur/dashboard');
             } else {
                 $data['error'] = 'Email ou mot de passe incorrect.';
                 $this->load->view('layout/header_dark');
-                $this->load->view('layout/header_not_logged_dark');
+                $this->load->view('layout/header_logged_dark');
                 $this->load->view('connexion', $data);
                 $this->load->view('layout/footer_dark');
             }
         }
-    }    
+    }
+    public function dashboard(){
+        if(!$this->session->userdata('user_id')){
+            redirect('utilisateur/connexion');
+        }
+    
+        // Fetch les informations des utilisateurs
+        $user_id = $this->session->userdata('user_id');
+        $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
+    
+        // Charger les vues
+        $this->load->view('layout/header_dark');
+        $this->load->view('layout/header_logged_dark');
+        $this->load->view('dashboard', $data);
+        $this->load->view('layout/footer_dark');
+    }
+    
+    
+    public function modifier(){
+        if(!$this->session->userdata('user_id')){
+            redirect('utilisateur/connexion');
+        }
+    
+        // Definition des règles
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('nom', 'Nom', 'required');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required');
+    
+        if ($this->form_validation->run() == FALSE) {
+            $this->dashboard();
+        } else {
+            $user_id = $this->session->userdata('user_id');
+            $data = array(
+                'email' => $this->input->post('email'),
+                'nom' => $this->input->post('nom'),
+                'prenom' => $this->input->post('prenom')
+            );
+    
+            if ($this->Utilisateur_model->update_user($user_id, $data)) {
+                $data['success'] = 'Informations mises à jour avec succès.';
+            } else {
+                $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
+            }
+    
+            $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
+            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_logged_dark');
+            $this->load->view('dashboard', $data);
+            $this->load->view('layout/footer_dark');
+        }
+    }
+       
 }

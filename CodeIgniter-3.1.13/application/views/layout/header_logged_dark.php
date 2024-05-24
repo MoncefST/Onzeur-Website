@@ -20,7 +20,7 @@
                 <a href="<?php echo site_url('artiste/list_artists'); ?>" class="btn-artistes">Artistes</a>
                 <a href="<?php echo site_url('musiques'); ?>" class="btn-musiques">Musiques</a>
                 <a href="#PlaylistBIENTOT" class="btn-playlist">Mes Playlists</a>
-                <a href="#CompteBIENTOT" class="btn-MonCompte">Mon compte</a>
+                <a href="<?php echo site_url('utilisateur/dashboard'); ?>" class="btn-MonCompte">Mon compte</a>
             </div>
         </nav>
         <div class="menu-toggle">
