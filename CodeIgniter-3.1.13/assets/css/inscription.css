@@ -30,7 +30,6 @@ label {
 #email,
 #nom,
 #prenom,
-#telephone,
 #password,
 #confirm_password {
     width: 100%;
@@ -39,6 +38,35 @@ label {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    flex: 1;
+    padding-right: 80px;
+}
+
+.password-wrapper button {
+    position: absolute;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #634caf;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.password-wrapper button:hover {
+    background-color: rgb(54, 16, 119);
 }
 
 .btn-submit {

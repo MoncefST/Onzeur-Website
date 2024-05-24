@@ -16,8 +16,10 @@ class Utilisateur extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilisateur.email]');
         $this->form_validation->set_rules('nom', 'Nom', 'required');
         $this->form_validation->set_rules('prenom', 'Prénom', 'required');
-        $this->form_validation->set_rules('telephone', 'Téléphone', 'max_length[20]');
-        $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[6]');
+        $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[8]|max_length[64]', array(
+            'min_length' => 'Le {field} doit contenir au moins {param} caractères.',
+            'max_length' => 'Le {field} ne doit pas dépasser {param} caractères.'
+        ));
     
         if ($this->form_validation->run() == FALSE) {
             // Charger la vue avec les erreurs
@@ -31,7 +33,6 @@ class Utilisateur extends CI_Controller {
                 'email' => $this->input->post('email'),
                 'nom' => $this->input->post('nom'),
                 'prenom' => $this->input->post('prenom'),
-                'telephone' => $this->input->post('telephone'),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT) // Hasher le mot de passe
             );
     
