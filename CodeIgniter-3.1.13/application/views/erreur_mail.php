@@ -14,7 +14,7 @@
         <div class="error">
             <h2>Votre message n'a pas pu être envoyé.</h2>
             <p>Veuillez réessayer ultérieurement ou nous contacter directement à l'adresse suivante : onzeur.contact@gmail.com</p>
-            <a href="<?php echo site_url('accueil'); ?>"><button>Retour à l'accueil</button></a>
+            <a href="<?php echo site_url('home'); ?>"><button>Retour à l'accueil</button></a>
         </div>
     </div>
 </body>

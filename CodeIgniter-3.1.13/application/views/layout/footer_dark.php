@@ -11,7 +11,7 @@
             <span>|</span>
             <span>© 2024 Onzeur</span>
             <span>|</span>
-            <a href="#" class="legal-link">Nous contacter</a>
+            <a href="<?php echo site_url('contact/index'); ?>" class="legal-link">Nous contacter</a>
         </div>
     </div>
 </footer>
