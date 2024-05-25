@@ -71,8 +71,6 @@ class Playlists extends CI_Controller {
         }
     }
     
-    
-    
     public function add_song($playlist_id) {
         if ($this->input->post()) {
             $data = array(
@@ -174,6 +172,20 @@ class Playlists extends CI_Controller {
             $this->load->view('layout/footer_dark');
         }
     }
+    
+    public function view($playlist_id) {
+        // Charger les détails de la playlist spécifique en fonction de son ID
+        $data['playlist'] = $this->Model_playlist->get_playlist_by_id($playlist_id);
+        
+        // Charger les chansons de la playlist spécifique
+        $data['songs'] = $this->Model_playlist->get_songs_by_playlist($playlist_id);
+        
+        // Charger la vue pour afficher les détails de la playlist
+        $this->load->view('layout/header_dark');
+        $this->load->view('playlist_view', $data);
+        $this->load->view('layout/footer_dark');
+    }
+    
     
     
 }
