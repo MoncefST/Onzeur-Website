@@ -84,6 +84,21 @@ class Model_playlist extends CI_Model {
         // Si aucune chanson de l'artiste n'est trouvée dans la playlist, retourner false
         return false;
     }
+
+    public function album_songs_exist_in_playlist($playlist_id, $album_id) {
+        $album_songs = $this->Model_music->get_songs_by_album($album_id);
+        
+        foreach ($album_songs as $song) {
+            $this->db->where('playlist_id', $playlist_id);
+            $this->db->where('song_id', $song->id);
+            $query = $this->db->get('playlist_song');
+            if ($query->num_rows() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     
     // Supprimer une chanson d'une playlist
     public function remove_song_from_playlist($playlist_id, $song_id) {

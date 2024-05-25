@@ -227,6 +227,4 @@ class Model_music extends CI_Model {
         $this->db->where('album.artistid', $artist_id);
         return $this->db->get()->result();
     }
-    
-    
 }
