@@ -31,21 +31,46 @@
             </div>
         </div>
 
-
         <div class="testimonials">
             <h2>Avis</h2>
-            <div class="testimonial">
-                <p>"Ce site est incroyable! Depuis que j'utilise Onzeur ma vie as changé ! Je suis devenu riche et célèbre ! Je recommande 🤩"</p>
-                <p>- Mike</p>
-            </div>
-            <div class="testimonial">
-                <p>"Une expérience utilisateur fantastique. Je recommande vivement 🤌."</p>
-                <p>- Laura</p>
-            </div>
-            <div class="testimonial">
-                <p>"Service client exceptionnel et fonctionnalités géniales. La fonctionnalité de playlist est vraiment top ! 👍"</p>
-                <p>- Joe</p>
-            </div>
+            <?php if (!empty($avis)): ?>
+                <?php foreach ($avis as $a): ?>
+                    <div class="testimonial">
+                        <p>"<?= htmlspecialchars($a->commentaire) ?>"</p>
+                        <p>- <?= htmlspecialchars($a->prenom) ?> <?= htmlspecialchars($a->nom) ?></p>
+                        <!-- Ajout de la notation -->
+                        <div class="rating">
+                            <?php for ($i = 0; $i < $a->notation; $i++): ?>
+                                <span class="star">&#9733;</span>
+                            <?php endfor; ?>
+                        </div>
+                        <!-- Ajout du lien de suppression (sous condition d'être l'utilisateur connecté) -->
+                        <?php if ($this->session->userdata('user_id') && $this->session->userdata('user_id') == $a->utilisateur_id): ?>
+                            <a href="<?php echo site_url('utilisateur/supprimer_avis/' . $a->id); ?>">Supprimer</a>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+
+        <div class="comment-form">
+            <?php if ($this->session->userdata('user_id')): ?>
+                <h2>Ajouter un commentaire</h2>
+                <form action="<?php echo site_url('utilisateur/ajouter_avis'); ?>" method="post">
+                    <textarea name="commentaire" rows="3" placeholder="Écrivez votre commentaire ici..." required></textarea>
+                    <!-- Ajout des étoiles pour la notation -->
+                    <div class="rating">
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                    </div>
+                    <!-- Champ caché pour stocker la valeur de notation -->
+                    <input type="hidden" name="notation" id="notation">
+                    <button type="submit">Ajouter</button>
+                </form>
+            <?php endif; ?>
         </div>
 
         <div class="gallery">
@@ -71,4 +96,33 @@
         </div>
     </div>
 </body>
+<script>
+    // Sélectionnez tous les boutons radio d'étoiles
+    const stars = document.querySelectorAll('.rating input[type="radio"]');
+    // Sélectionnez le champ caché pour la notation
+    const notationInput = document.getElementById('notation');
+
+    // Parcourez tous les boutons radio d'étoiles
+    stars.forEach(star => {
+        // Ajoutez un écouteur d'événement pour le clic sur chaque étoile
+        star.addEventListener('click', function() {
+            // Obtenez le numéro de l'étoile sélectionnée
+            const selectedStar = parseInt(this.value);
+
+            // Mettez à jour la valeur du champ caché "notation" avec la valeur de l'étoile sélectionnée
+            notationInput.value = selectedStar;
+
+            // Parcourez toutes les étoiles
+            stars.forEach(star => {
+                // Si l'étoile est inférieure ou égale à l'étoile sélectionnée, colorez-la en jaune, sinon, laissez-la grise
+                if (parseInt(star.value) <= selectedStar) {
+                    star.nextElementSibling.style.color = '#FFD700'; // Colorez l'étoile en jaune
+                } else {
+                    star.nextElementSibling.style.color = '#ccc'; // Laissez l'étoile grise
+                }
+            });
+        });
+    });
+</script>
+
 </html>

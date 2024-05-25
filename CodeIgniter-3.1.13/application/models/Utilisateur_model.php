@@ -26,5 +26,33 @@ class Utilisateur_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('utilisateur', $data);
     }
+
+    
+    public function insert_avis($data) {
+        return $this->db->insert('avis', $data);
+    }
+
+    public function get_recent_avis($limit = 3) {
+        $this->db->select('avis.*, utilisateur.nom, utilisateur.prenom');
+        $this->db->from('avis');
+        $this->db->join('utilisateur', 'avis.utilisateur_id = utilisateur.id');
+        $this->db->order_by('date_creation', 'DESC');
+        $this->db->limit($limit);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_avis($utilisateur_id) {
+        $this->db->select('*');
+        $this->db->from('avis');
+        $this->db->where('utilisateur_id', $utilisateur_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function supprimer_avis($avis_id) {
+        return $this->db->delete('avis', array('id' => $avis_id));
+    }    
+    
 }
 ?>

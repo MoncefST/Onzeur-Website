@@ -49,6 +49,67 @@ class Utilisateur extends CI_Controller {
         }
     }
     
+    public function ajouter_avis() {
+        if(!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        $this->form_validation->set_rules('commentaire', 'Commentaire', 'required');
+        $this->form_validation->set_rules('notation', 'Notation', 'required'); // Ajouter une règle de validation pour la notation
+    
+        if ($this->form_validation->run() == FALSE) {
+            redirect('/');
+        } else {
+            $data = array(
+                'utilisateur_id' => $this->session->userdata('user_id'),
+                'commentaire' => $this->input->post('commentaire'),
+                'notation' => $this->input->post('notation') // Récupérer la valeur de notation depuis le champ caché
+            );
+    
+            if ($this->Utilisateur_model->insert_avis($data)) {
+                $this->session->set_flashdata('success', 'Avis ajouté avec succès.');
+            } else {
+                $this->session->set_flashdata('error', 'Une erreur est survenue. Veuillez réessayer.');
+            }
+    
+            redirect('/');
+        }
+    }
+    
+
+    public function supprimer_avis($avis_id) {
+        // Vérifiez d'abord si l'utilisateur est connecté
+        if (!$this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Vous devez être connecté pour supprimer un avis.');
+            redirect('utilisateur/connexion');
+        }
+    
+        // Vérifiez si l'avis existe
+        $avis = $this->Utilisateur_model->get_avis($avis_id);
+        if (!$avis) {
+            $this->session->set_flashdata('error', 'L\'avis que vous essayez de supprimer n\'existe pas.');
+            redirect('/');
+        }
+    
+        // Vérifiez si l'avis appartient à l'utilisateur connecté
+        if ($avis->utilisateur_id != $this->session->userdata('user_id')) {
+            $this->session->set_flashdata('error', 'Vous n\'êtes pas autorisé à supprimer cet avis.');
+            redirect('/');
+        }
+    
+        // Supprimez l'avis
+        if ($this->Utilisateur_model->supprimer_avis($avis_id)) {
+            $this->session->set_flashdata('success', 'Avis supprimé avec succès.');
+        } else {
+            $this->session->set_flashdata('error', 'Une erreur est survenue lors de la suppression de l\'avis.');
+        }
+    
+        redirect('/');
+    }
+    
+    
+    
+
     public function connexion(){
         // Définir les règles de validation
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');

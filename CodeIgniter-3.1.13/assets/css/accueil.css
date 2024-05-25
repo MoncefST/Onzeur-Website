@@ -25,6 +25,80 @@ h1, h2, h3 {
     text-align: center;
 }
 
+
+.testimonials {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.testimonials h2 {
+    margin-top: 0;
+}
+
+.testimonial {
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.testimonial p {
+    margin: 0;
+    font-style: italic;
+}
+
+.rating {
+    margin-top: 5px; 
+    display: inline-block;
+}
+
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating .star {
+    color: #FFD700; 
+    font-size: 20px;
+}
+
+.rating label {
+    font-size: 30px;
+    color: #ccc; 
+    cursor: pointer;
+}
+
+.comment-form {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.comment-form h2 {
+    margin-top: 0;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .hero button {
     padding: 15px 40px;
     font-size: 1.2rem;
