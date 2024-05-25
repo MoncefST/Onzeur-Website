@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des Playlists</title>
+    <title>Liste des Playlists - Onzeur</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/playlists_list'); ?>">
 </head>
 <body>

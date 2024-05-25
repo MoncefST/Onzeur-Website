@@ -24,13 +24,29 @@
 
         <div class="form-group">
             <label for="password">Mot de passe :</label>
-            <input type="password" name="password" id="password" required>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="password" required>
+                <button type="button" onclick="togglePasswordVisibility('password')">Afficher</button>
+            </div>
             <?php echo form_error('password'); ?>
         </div>
+
 
         <button type="submit" class="btn-submit">Connexion</button>
 
         <?php echo form_close(); ?>
     </div>
+
+    <script>
+        function togglePasswordVisibility(id) {
+            var passwordField = document.getElementById(id);
+            var passwordFieldType = passwordField.getAttribute('type');
+            if (passwordFieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+            } else {
+                passwordField.setAttribute('type', 'password');
+            }
+        }
+    </script>
 </body>
 </html>
