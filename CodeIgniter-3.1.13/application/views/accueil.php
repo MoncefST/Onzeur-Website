@@ -88,7 +88,7 @@
 
         <div class="contact">
             <h2>Contactez-nous</h2>
-            <form action="#" method="post">
+            <form action="<?php echo site_url('contact'); ?>" method="post">
                 <input type="text" name="name" placeholder="Votre nom" required>
                 <input type="email" name="email" placeholder="Votre email" required>
                 <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
