@@ -78,26 +78,6 @@ class Utilisateur extends CI_Controller {
     
 
     public function supprimer_avis($avis_id) {
-        // Vérifiez d'abord si l'utilisateur est connecté
-        if (!$this->session->userdata('user_id')) {
-            $this->session->set_flashdata('error', 'Vous devez être connecté pour supprimer un avis.');
-            redirect('utilisateur/connexion');
-        }
-    
-        // Vérifiez si l'avis existe
-        $avis = $this->Utilisateur_model->get_avis($avis_id);
-        if (!$avis) {
-            $this->session->set_flashdata('error', 'L\'avis que vous essayez de supprimer n\'existe pas.');
-            redirect('/');
-        }
-    
-        // Vérifiez si l'avis appartient à l'utilisateur connecté
-        if ($avis->utilisateur_id != $this->session->userdata('user_id')) {
-            $this->session->set_flashdata('error', 'Vous n\'êtes pas autorisé à supprimer cet avis.');
-            redirect('/');
-        }
-    
-        // Supprimez l'avis
         if ($this->Utilisateur_model->supprimer_avis($avis_id)) {
             $this->session->set_flashdata('success', 'Avis supprimé avec succès.');
         } else {
@@ -106,6 +86,7 @@ class Utilisateur extends CI_Controller {
     
         redirect('/');
     }
+    
     
     
     
