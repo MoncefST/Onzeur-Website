@@ -67,3 +67,51 @@ p {
     background-color: #545b62;
 }
 
+/* Style pour le conteneur principal */
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour le titre de la playlist */
+.container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+/* Style pour les labels */
+label {
+    font-weight: bold;
+}
+
+/* Style pour les champs de texte */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Style pour le bouton Enregistrer */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #7700ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Style pour le bouton Enregistrer au survol */
+.btn-primary:hover {
+    background-color: #3c0c72;
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Playlist</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view'); ?>">
 </head>
 <body>
     <div class="container">
@@ -48,7 +48,7 @@
 
         <a href="<?php echo site_url('playlists/add_song/' . $playlist->id); ?>" class="btn btn-primary">Ajouter une musique</a>
         <a href="<?php echo site_url('playlists/add_album/' . $playlist->id); ?>" class="btn btn-primary">Ajouter un album</a>
-        <a href="<?php echo site_url('playlists'); ?>" class="btn btn-secondary">Retour à la Liste des Playlists</a>
+        <a href="<?php echo site_url('playlists'); ?>" class="btn btn-secondary">Retour</a>
     </div>
 </body>
 </html>

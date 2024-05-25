@@ -124,10 +124,11 @@ class Playlists extends CI_Controller {
     }
 
     public function generate_random() {
-        $songs = $this->Model_music->get_random_songs(10); // 10 chansons aléatoires
+        $nbrMusiqueAleatoire = 10;
+        $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire); // 10 chansons aléatoires
         $new_playlist = array(
-            'name' => 'Random Playlist ' . date('Y-m-d H:i:s'),
-            'description' => 'A randomly generated playlist',
+            'name' => 'Playlist aléatoire du ' . date('Y-m-d H:i:s'),
+            'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires.',
             'utilisateur_id' => $this->session->userdata('user_id')
         );
 
