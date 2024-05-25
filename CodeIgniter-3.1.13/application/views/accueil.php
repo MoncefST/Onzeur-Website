@@ -53,26 +53,26 @@
             <?php endif; ?>
         </div>
 
-        <div class="comment-form">
             <?php if ($this->session->userdata('user_id')): ?>
-                <h2>Ajouter un commentaire</h2>
-                <form action="<?php echo site_url('utilisateur/ajouter_avis'); ?>" method="post">
-                    <textarea name="commentaire" rows="3" placeholder="Écrivez votre commentaire ici..." required></textarea>
-                    <!-- Ajout des étoiles pour la notation -->
-                    <h3>Note :</h3>
-                    <div class="rating">
-                        <input type="radio" id="star1" name="rating" value="1" checked><label for="star1">&#9733;</label>
-                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
-                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
-                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
-                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
-                    </div>
-                    <!-- Champ caché pour stocker la valeur de notation -->
-                    <input type="hidden" name="notation" id="notation">
-                    <button type="submit">Ajouter</button>
-                </form>
+                <div class="comment-form">
+                    <h2>Ajouter un commentaire</h2>
+                    <form action="<?php echo site_url('utilisateur/ajouter_avis'); ?>" method="post">
+                        <textarea name="commentaire" rows="3" placeholder="Écrivez votre commentaire ici..." required></textarea>
+                        <!-- Ajout des étoiles pour la notation -->
+                        <h3>Note :</h3>
+                        <div class="rating">
+                            <input type="radio" id="star1" name="rating" value="1" checked><label for="star1">&#9733;</label>
+                            <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                            <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                            <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                            <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                        </div>
+                        <!-- Champ caché pour stocker la valeur de notation -->
+                        <input type="hidden" name="notation" id="notation">
+                        <button type="submit">Ajouter</button>
+                    </form>
+                </div>
             <?php endif; ?>
-        </div>
 
         <div class="gallery">
             <h2>Ils nous ont fait confiance</h2>
