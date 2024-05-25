@@ -19,7 +19,7 @@
                 <a href="<?php echo site_url('albums'); ?>" class="btn-albums">Albums</a>
                 <a href="<?php echo site_url('artiste/list_artists'); ?>" class="btn-artistes">Artistes</a>
                 <a href="<?php echo site_url('musiques'); ?>" class="btn-musiques">Musiques</a>
-                <a href="#PlaylistBIENTOT" class="btn-playlist">Mes Playlists</a>
+                <a href="<?php echo site_url('playlists'); ?>" class="btn-playlist">Mes Playlists</a>
                 <a href="<?php echo site_url('utilisateur/dashboard'); ?>" class="btn-MonCompte">Mon compte</a>
                 <a href="<?php echo site_url('utilisateur/deconnexion'); ?>" class="btn-deconnexion">Déconnexion</a>
             </div>

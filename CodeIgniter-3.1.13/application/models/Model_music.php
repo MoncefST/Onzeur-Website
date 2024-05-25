@@ -127,7 +127,31 @@ class Model_music extends CI_Model {
         return $query->result();
     }
     
+
+    public function get_all_songs() {
+        return $this->db->get('song')->result();
+    }
+
+    public function get_all_albums() {
+        return $this->db->get('album')->result();
+    }
     
+    public function get_songs_by_album($album_id) {
+        $this->db->select('song.*');
+        $this->db->from('track');
+        $this->db->join('song', 'track.songid = song.id');
+        $this->db->where('track.albumid', $album_id);
+        return $this->db->get()->result();
+    }    
+
+
+    public function get_random_songs($limit) {
+        $this->db->order_by('RAND()');
+        $this->db->limit($limit);
+        return $this->db->get('song')->result();
+    }
+    
+
     public function get_total_musiques(){
         $query = $this->db->query("SELECT COUNT(*) as total_musiques FROM song");
         $result = $query->row();
