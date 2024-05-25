@@ -87,10 +87,6 @@ class Utilisateur extends CI_Controller {
         redirect('/');
     }
     
-    
-    
-    
-
     public function connexion(){
         // Définir les règles de validation
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');

@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Playlist</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view.css'); ?>">
 </head>
 <body>
     <div class="container">
+        <!-- Messages Flash -->
+        <?php if($this->session->flashdata('success')): ?>
+            <div class="alert alert-success mt-3">
+                <?php echo $this->session->flashdata('success'); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('error')): ?>
+            <div class="alert alert-danger mt-3">
+                <?php echo $this->session->flashdata('error'); ?>
+            </div>
+        <?php endif; ?>
+
         <h1><?php echo htmlspecialchars($playlist->name, ENT_QUOTES, 'UTF-8'); ?></h1>
         <form action="<?php echo site_url('playlists/update/' . $playlist->id); ?>" method="post">
             <div class="form-group">
@@ -48,6 +61,7 @@
 
         <a href="<?php echo site_url('playlists/add_song/' . $playlist->id); ?>" class="btn btn-primary">Ajouter une musique</a>
         <a href="<?php echo site_url('playlists/add_album/' . $playlist->id); ?>" class="btn btn-primary">Ajouter un album</a>
+        <a href="<?php echo site_url('playlists/add_artist/' . $playlist->id); ?>" class="btn btn-primary">Ajouter les musiques d'un artiste</a>
         <a href="<?php echo site_url('playlists'); ?>" class="btn btn-secondary">Retour</a>
     </div>
 </body>

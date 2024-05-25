@@ -77,7 +77,12 @@ class Playlists extends CI_Controller {
                 'playlist_id' => $playlist_id,
                 'song_id' => $this->input->post('song_id')
             );
-            $this->Model_playlist->add_song_to_playlist($data);
+            $result = $this->Model_playlist->add_song_to_playlist($data);
+            if ($result) {
+                $this->session->set_flashdata('success', 'La chanson a été ajoutée à la playlist.');
+            } else {
+                $this->session->set_flashdata('error', 'La chanson existe déjà dans la playlist.');
+            }
             redirect('playlists/view/' . $playlist_id);
         } else {
             // Récupérer toutes les musiques disponibles
@@ -87,7 +92,8 @@ class Playlists extends CI_Controller {
             $this->load->view('playlist_add_song', $data);
             $this->load->view('layout/footer_dark');
         }
-    }   
+    }
+     
 
     public function delete($playlist_id) {
         $this->Model_playlist->delete_playlist($playlist_id);
@@ -148,24 +154,27 @@ class Playlists extends CI_Controller {
 
     public function add_album($playlist_id) {
         if ($this->input->post()) {
-            // Récupérer l'ID de l'album à partir du formulaire
             $album_id = $this->input->post('album_id');
             
-            // Récupérer toutes les chansons de l'album
-            $songs = $this->Model_music->get_songs_by_album($album_id);
+            // Vérifier si les chansons de l'album existent déjà dans la playlist
+            if ($this->Model_playlist->album_songs_exist_in_playlist($playlist_id, $album_id)) {
+                $this->session->set_flashdata('error', 'Certaines chansons de cet album existent déjà dans la playlist.');
+            } else {
+                $songs = $this->Model_music->get_songs_by_album($album_id);
     
-            // Ajouter chaque chanson à la playlist
-            foreach ($songs as $song) {
-                $data = array(
-                    'playlist_id' => $playlist_id,
-                    'song_id' => $song->id
-                );
-                $this->Model_playlist->add_song_to_playlist($data);
+                foreach ($songs as $song) {
+                    $data = array(
+                        'playlist_id' => $playlist_id,
+                        'song_id' => $song->id
+                    );
+                    $this->Model_playlist->add_song_to_playlist($data);
+                }
+    
+                $this->session->set_flashdata('success', 'Album ajouté avec succès à la playlist.');
             }
-            
+    
             redirect('playlists/view/' . $playlist_id);
         } else {
-            // Récupérer tous les albums disponibles
             $data['albums'] = $this->Model_music->get_all_albums();
             $data['playlist_id'] = $playlist_id;
             $this->load->view('layout/header_dark');
@@ -173,6 +182,7 @@ class Playlists extends CI_Controller {
             $this->load->view('layout/footer_dark');
         }
     }
+    
     
     public function view($playlist_id) {
         // Charger les détails de la playlist spécifique en fonction de son ID
@@ -187,7 +197,39 @@ class Playlists extends CI_Controller {
         $this->load->view('layout/footer_dark');
     }
     
+    public function add_artist($playlist_id) {
+        if ($this->input->post()) {
+            // Récupérer l'ID de l'artiste à partir du formulaire
+            $artist_id = $this->input->post('artist_id');
+            
+            // Vérifier si les chansons de l'artiste existent déjà dans la playlist
+            if ($this->Model_playlist->artist_songs_exist_in_playlist($playlist_id, $artist_id)) {
+                $this->session->set_flashdata('error', 'Certaines chansons de cet artiste existent déjà dans la playlist.');
+            } else {
+                $songs = $this->Model_music->get_songs_by_artist($artist_id);
     
+                foreach ($songs as $song) {
+                    $data = array(
+                        'playlist_id' => $playlist_id,
+                        'song_id' => $song->id
+                    );
+                    $this->Model_playlist->add_song_to_playlist($data);
+                }
     
+                $this->session->set_flashdata('success', 'Toutes les chansons de l\'artiste ont été ajoutées avec succès à la playlist.');
+            }
+    
+            redirect('playlists/view/' . $playlist_id);
+        } else {
+            // Récupérer tous les artistes disponibles
+            $data['artists'] = $this->Model_music->get_all_artists();
+            $data['playlist_id'] = $playlist_id;
+            $this->load->view('layout/header_dark');
+            $this->load->view('playlist_add_artist', $data);
+            $this->load->view('layout/footer_dark');
+        }
+    }
+    
+
 }
 ?>

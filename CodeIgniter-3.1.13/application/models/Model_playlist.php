@@ -43,11 +43,48 @@ class Model_playlist extends CI_Model {
         return $this->db->delete('playlist');
     }
 
-    // Ajouter une chanson à une playlist
     public function add_song_to_playlist($data) {
+        // Vérifier si la combinaison playlist_id et song_id existe déjà
+        $this->db->where($data);
+        $existing_entry = $this->db->get('playlist_song')->row();
+
+        // Si la combinaison existe déjà, retourner false
+        if ($existing_entry) {
+            return false;
+        }
+
+        // Sinon, effectuer l'insertion
         return $this->db->insert('playlist_song', $data);
     }
 
+    public function song_exists_in_playlist($playlist_id, $song_id) {
+        $this->db->where('playlist_id', $playlist_id);
+        $this->db->where('song_id', $song_id);
+        $query = $this->db->get('playlist_song');
+        return $query->num_rows() > 0;
+    }
+
+    public function artist_songs_exist_in_playlist($playlist_id, $artist_id) {
+        // Récupérer les chansons de l'artiste spécifié
+        $artist_songs = $this->Model_music->get_songs_by_artist($artist_id);
+    
+        // Récupérer les chansons de la playlist
+        $playlist_songs = $this->get_songs_by_playlist($playlist_id);
+    
+        // Vérifier chaque chanson de l'artiste dans la playlist
+        foreach ($artist_songs as $artist_song) {
+            foreach ($playlist_songs as $playlist_song) {
+                // Si la chanson de l'artiste est déjà dans la playlist, retourner true
+                if ($artist_song->id == $playlist_song->id) {
+                    return true;
+                }
+            }
+        }
+    
+        // Si aucune chanson de l'artiste n'est trouvée dans la playlist, retourner false
+        return false;
+    }
+    
     // Supprimer une chanson d'une playlist
     public function remove_song_from_playlist($playlist_id, $song_id) {
         $this->db->where('playlist_id', $playlist_id);

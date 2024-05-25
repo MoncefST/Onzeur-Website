@@ -135,6 +135,10 @@ class Model_music extends CI_Model {
     public function get_all_albums() {
         return $this->db->get('album')->result();
     }
+
+    public function get_all_artists() {
+        return $this->db->get('artist')->result();
+    }    
     
     public function get_songs_by_album($album_id) {
         $this->db->select('song.*');
@@ -143,7 +147,6 @@ class Model_music extends CI_Model {
         $this->db->where('track.albumid', $album_id);
         return $this->db->get()->result();
     }    
-
 
     public function get_random_songs($limit) {
         $this->db->order_by('RAND()');
@@ -215,5 +218,15 @@ class Model_music extends CI_Model {
     
         return $query->row();
     }
+
+    public function get_songs_by_artist($artist_id) {
+        $this->db->select('song.*');
+        $this->db->from('track');
+        $this->db->join('song', 'track.songid = song.id');
+        $this->db->join('album', 'track.albumid = album.id');
+        $this->db->where('album.artistid', $artist_id);
+        return $this->db->get()->result();
+    }
+    
     
 }

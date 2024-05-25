@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un Album à la Playlist</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_add_song'); ?>">
 </head>
 <body>
     <div class="container">

@@ -57,6 +57,8 @@ $route['musiques'] = 'Musiques/index';
 $route['artiste/(:num)'] = 'artiste/index/$1';
 $route['search'] = 'search/index';
 $route['mentions-legals'] = 'MentionsLegales/index';
+$route['playlists/add_artist/(:num)'] = 'playlists/add_artist/$1';
+
 
 
 
