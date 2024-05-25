@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?=link_tag('assets/css/header_not_logged_dark.css')?>
+    <?=link_tag('assets/css/header_dark.css')?>
     <?=link_tag('assets/img/Logo_ONZEUR.png')?>
     <?=link_tag(array(
         'href'=>'assets/img/Logo_ONZEUR.png',

@@ -39,6 +39,11 @@ body {
 .btn-inscription {
     background-color: rgb(181, 15, 232);
 }
+
+.btn-deconnexion {
+    background-color: rgb(181, 15, 232);
+}
+
 .nav-buttons a:hover {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
