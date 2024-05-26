@@ -148,21 +148,36 @@ header.short-text a {
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
-.spotify {
-    background-color: #5bab15;
+
+.music-links a.spotify,
+.music-links a.deezer,
+.music-links a.youtube {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.youtube {
-    background-color: #c51414;
+.music-links a.spotify {
+    background-color: #1DB954; /* Vert Spotify */
 }
 
-.spotify:hover{
-    background-color: #3c6915;
+.music-links a.deezer {
+    background-color: #6E44FF; /* Violet Deezer */
 }
 
-.youtube:hover {
-    background-color: #7a1818;
+.music-links a.youtube {
+    background-color: #FF0000; /* Rouge YouTube */
 }
+
+.music-links a.spotify:hover,
+.music-links a.deezer:hover,
+.music-links a.youtube:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement plus clair au survol */
+}
+
 
 .artist-name,
 .album-name {

@@ -40,9 +40,11 @@
                         </a>
                         <div class="music-links">
                             <!-- Lien Spotify -->
-                            <a href="https://open.spotify.com/search/<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="spotify" target="_blank">Écouter sur Spotify</a>
+                            <a href="https://open.spotify.com/search/<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="spotify" target="_blank">Spotify</a> |
+                            <!-- Lien Deezer -->
+                            <a href="https://www.deezer.com/search/<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="deezer" target="_blank">Deezer</a> |
                             <!-- Lien YouTube  -->
-                            <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="youtube"  target="_blank">Regarder sur YouTube</a>
+                            <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="youtube"  target="_blank">YouTube</a>
                         </div>
                     </footer>
                 </article>

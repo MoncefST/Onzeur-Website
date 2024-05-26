@@ -89,3 +89,46 @@ body {
         width: 100%;
     }
 }
+
+.artist-details p {
+    margin-top: 10px;
+}
+
+.artist-details p a {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.artist-details p a img {
+    width: 30px;
+    height: auto;
+}
+
+.artist-details a.spotify,
+.artist-details a.deezer,
+.artist-details a.youtube {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.artist-details a.spotify {
+    background-color: #1DB954; /* Vert Spotify */
+}
+
+.artist-details a.deezer {
+    background-color: #8826df; /* Violet Deezer */
+}
+
+.artist-details a.youtube {
+    background-color: #FF0000; /* Rouge YouTube */
+}
+
+.artist-details a.spotify:hover,
+.artist-details a.deezer:hover,
+.artist-details a.youtube:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement plus clair au survol */
+}
