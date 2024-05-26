@@ -116,3 +116,26 @@ h1 {
 .closebtn:hover {
     color: black;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%; /* Réduire la largeur du conteneur */
+    }
+
+    h1 {
+        font-size: 24px; /* Réduire la taille du titre principal */
+    }
+
+    .btn {
+        padding: 8px 16px; /* Réduire la taille des boutons */
+        margin: 3px 0; /* Réduire la marge des boutons */
+    }
+
+    .table th, .table td {
+        padding: 8px 10px; /* Réduire le rembourrage des cellules de tableau */
+    }
+
+    .closebtn {
+        font-size: 18px; /* Réduire la taille du bouton de fermeture */
+    }
+}
