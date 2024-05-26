@@ -33,7 +33,6 @@ textarea {
 
 button[type="submit"] {
     display: block;
-    width: 100%;
     padding: 10px;
     background-color: #5c10d6;
     color: #fff;
