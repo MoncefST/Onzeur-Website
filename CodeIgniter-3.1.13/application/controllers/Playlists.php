@@ -27,8 +27,28 @@ class Playlists extends CI_Controller {
         }
     }
     
+    public function verify_playlist_ownership($playlist_id) {
+        // Vérifier si l'utilisateur est connecté
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        // Récupérer l'ID de l'utilisateur connecté
+        $user_id = $this->session->userdata('user_id');
+    
+        // Vérifier si l'utilisateur est le propriétaire de la playlist
+        $playlist = $this->Model_playlist->get_playlist_by_id($playlist_id);
+        if (!$playlist || $playlist->utilisateur_id !== $user_id) {
+            // Rediriger vers une page d'erreur ou une page appropriée
+            redirect('utilisateur/non_autorisee');
+        }
+    }
 
     public function create() {
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+        
         if ($this->input->post()) {
             // Récupérer l'ID de l'utilisateur depuis la session
             $user_id = $this->session->userdata('user_id');
@@ -58,6 +78,20 @@ class Playlists extends CI_Controller {
 
 
     public function update($playlist_id) {
+        // Vérifier si l'utilisateur est connecté
+        $this->verify_playlist_ownership($playlist_id);
+    
+        // Récupérer l'ID de l'utilisateur connecté
+        $user_id = $this->session->userdata('user_id');
+    
+        // Vérifier si l'utilisateur est le propriétaire de la playlist
+        $playlist = $this->Model_playlist->get_playlist_by_id($playlist_id);
+        if (!$playlist || $playlist->utilisateur_id !== $user_id) {
+            // Rediriger vers une page d'erreur ou une page appropriée
+            redirect('erreur/page_non_autorisee');
+        }
+    
+        // Si les vérifications sont réussies, procéder à la mise à jour de la playlist
         if ($this->input->post()) {
             $data = array(
                 'name' => $this->input->post('name'),
@@ -71,7 +105,10 @@ class Playlists extends CI_Controller {
         }
     }
     
+    
     public function add_song($playlist_id) {
+    $this->verify_playlist_ownership($playlist_id);
+
         if ($this->input->post()) {
             $data = array(
                 'playlist_id' => $playlist_id,
@@ -96,16 +133,22 @@ class Playlists extends CI_Controller {
      
 
     public function delete($playlist_id) {
+    $this->verify_playlist_ownership($playlist_id);
+
         $this->Model_playlist->delete_playlist($playlist_id);
         redirect('playlists');
     }
 
     public function remove_song($playlist_id, $song_id) {
+    $this->verify_playlist_ownership($playlist_id);
+
         $this->Model_playlist->remove_song_from_playlist($playlist_id, $song_id);
         redirect('playlists/view/' . $playlist_id);
     }
 
     public function duplicate($playlist_id) {
+    $this->verify_playlist_ownership($playlist_id);
+
         $playlist = $this->Model_playlist->get_playlist_by_id($playlist_id);
         $songs = $this->Model_playlist->get_songs_by_playlist($playlist_id);
 
@@ -130,6 +173,10 @@ class Playlists extends CI_Controller {
     }
 
     public function generate_random() {
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+
         $nbrMusiqueAleatoire = 10;
         $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire); // 10 chansons aléatoires
         $new_playlist = array(
@@ -153,6 +200,8 @@ class Playlists extends CI_Controller {
     }
 
     public function add_album($playlist_id) {
+        $this->verify_playlist_ownership($playlist_id);
+
         if ($this->input->post()) {
             $album_id = $this->input->post('album_id');
             $songs = $this->Model_music->get_songs_by_album($album_id);
@@ -192,6 +241,8 @@ class Playlists extends CI_Controller {
     }
     
     public function view($playlist_id) {
+        $this->verify_playlist_ownership($playlist_id);
+
         // Charger les détails de la playlist spécifique en fonction de son ID
         $data['playlist'] = $this->Model_playlist->get_playlist_by_id($playlist_id);
         
@@ -205,6 +256,8 @@ class Playlists extends CI_Controller {
     }
     
     public function add_artist($playlist_id) {
+        $this->verify_playlist_ownership($playlist_id);
+
         if ($this->input->post()) {
             // Récupérer l'ID de l'artiste à partir du formulaire
             $artist_id = $this->input->post('artist_id');
@@ -232,7 +285,7 @@ class Playlists extends CI_Controller {
                     }
                 }
     
-                $this->session->set_flashdata('success', 'Les chansons manquantes de l\'artiste ont été ajoutées avec succès à la playlist.');
+                $this->session->set_flashdata('success', 'Les chansons de l\'artiste ont été ajoutées avec succès à la playlist.');
             }
     
             redirect('playlists/view/' . $playlist_id);

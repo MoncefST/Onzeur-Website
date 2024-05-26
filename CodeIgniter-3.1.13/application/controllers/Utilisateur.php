@@ -347,5 +347,10 @@ class Utilisateur extends CI_Controller {
     
         redirect('/');
     }
-    
+
+    public function non_autorisee(){
+        $this->load->view('layout/header_dark');
+        $this->load->view('non_autorisee');
+        $this->load->view('layout/footer_dark');
+    }
 }
