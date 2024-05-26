@@ -7,7 +7,7 @@
 <body>
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
-        <p>Le service de streaming musical numéro 1 en France.</p>
+        <p>Le service de création de playlist musical numéro 1 en France.</p>
         <a href="<?php echo site_url('musiques'); ?>"><button type="button">Accéder à la musique</button></a>
     </div>
 
@@ -68,7 +68,7 @@
                             <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
                         </div>
                         <!-- Champ caché pour stocker la valeur de notation -->
-                        <input type="hidden" name="notation" id="notation">
+                        <input type="hidden" name="notation" id="notation"><br><br>
                         <button type="submit">Ajouter</button>
                     </form>
                 </div>
