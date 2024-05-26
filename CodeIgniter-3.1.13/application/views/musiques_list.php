@@ -32,12 +32,18 @@
                     </header>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($musique->cover); ?>" alt="Couverture de l'album">
                     <footer class="short-text">
-                        <a href="<?php echo base_url('index.php/artiste/index/'.$musique->artist_id); ?>">
+                        <a href="<?php echo base_url('index.php/artiste/index/'.$musique->artist_id); ?>" class="artist-name">
                             <?php echo $musique->artistName; ?>
                         </a> - 
-                        <a href="<?php echo base_url('index.php/albums/view/'.$musique->album_id); ?>">
+                        <a href="<?php echo base_url('index.php/albums/view/'.$musique->album_id); ?>" class="album-name">
                             <?php echo $musique->album_name; ?>
                         </a>
+                        <div class="music-links">
+                            <!-- Lien Spotify -->
+                            <a href="https://open.spotify.com/search/<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="spotify" target="_blank">Écouter sur Spotify</a>
+                            <!-- Lien YouTube  -->
+                            <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="youtube"  target="_blank">Regarder sur YouTube</a>
+                        </div>
                     </footer>
                 </article>
             </div>

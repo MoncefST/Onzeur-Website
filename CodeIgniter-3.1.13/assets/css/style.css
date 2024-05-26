@@ -135,3 +135,42 @@ header.short-text a {
     background-color: #6a0080;
 }
 
+.music-links {
+    margin-top: 10px;
+}
+
+.music-links a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.spotify {
+    background-color: #5bab15;
+}
+
+.youtube {
+    background-color: #c51414;
+}
+
+.spotify:hover{
+    background-color: #3c6915;
+}
+
+.youtube:hover {
+    background-color: #7a1818;
+}
+
+.artist-name,
+.album-name {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #7300ff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}

@@ -35,7 +35,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
-/* Styles pour les boutons de pagination */
+
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -58,4 +58,19 @@ a:hover {
 
 .pagination .active {
     background-color: #29043e;
+}
+
+.music-links {
+    margin-top: 10px;
+}
+
+.music-links a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #560d61;
+    text-decoration: none;
+}
+
+.music-links a:hover {
+    text-decoration: underline;
 }
