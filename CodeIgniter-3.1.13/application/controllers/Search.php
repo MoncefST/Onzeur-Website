@@ -13,7 +13,6 @@ class Search extends CI_Controller {
     public function index(){
         // Récupérer la requête de recherche depuis la barre de recherche
         $query = $this->input->get('query');
-        include 'temporaire.php';
 
         // Vérifier que la requête de recherche n'est pas vide
         if (empty($query)) {

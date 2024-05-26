@@ -1,7 +1,0 @@
-<?php
-
-// ####### Temporaire ########
-
-$logged = false;
-
-?>
