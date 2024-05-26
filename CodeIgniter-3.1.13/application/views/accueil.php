@@ -46,7 +46,7 @@
                         </div>
                         <!-- Ajout du lien de suppression (sous condition d'être l'utilisateur connecté) -->
                         <?php if ($this->session->userdata('user_id') && $this->session->userdata('user_id') == $a->utilisateur_id): ?>
-                            <a href="<?php echo site_url('utilisateur/supprimer_avis/' . $a->id); ?>">Supprimer</a>
+                            <a href="<?php echo site_url('utilisateur/supprimer_avis_accueil/' . $a->id); ?>">Supprimer</a>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

@@ -17,7 +17,6 @@ class Utilisateur extends CI_Controller {
         $this->load->model('Utilisateur_model');
         $this->load->helper('html');
     }
-    
 
     public function inscription(){
         // Définir les règles de validation
@@ -185,18 +184,7 @@ class Utilisateur extends CI_Controller {
             redirect('/');
         }
     }
-    
 
-    public function supprimer_avis($avis_id) {
-        if ($this->Utilisateur_model->supprimer_avis($avis_id)) {
-            $this->session->set_flashdata('success', 'Avis supprimé avec succès.');
-        } else {
-            $this->session->set_flashdata('error', 'Une erreur est survenue lors de la suppression de l\'avis.');
-        }
-    
-        redirect('/');
-    }
-    
     public function connexion(){
         // Définir les règles de validation
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -248,27 +236,29 @@ class Utilisateur extends CI_Controller {
         redirect('utilisateur/connexion');
     }    
     
-    public function dashboard(){
+    public function dashboard() {
         if(!$this->session->userdata('user_id')){
             redirect('utilisateur/connexion');
         }
     
-        // Fetch les informations des utilisateurs
         $user_id = $this->session->userdata('user_id');
         $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
     
-        // Charger les vues
+        $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
+    
         $this->load->view('layout/header_dark');
         $this->load->view('dashboard', $data);
         $this->load->view('layout/footer_dark');
     }
     
+
+    
+   
     public function modifier(){
         if(!$this->session->userdata('user_id')){
             redirect('utilisateur/connexion');
         }
     
-        // Definition des règles
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('nom', 'Nom', 'required');
         $this->form_validation->set_rules('prenom', 'Prénom', 'required');
@@ -289,10 +279,73 @@ class Utilisateur extends CI_Controller {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
             }
     
+            // Récupérer à nouveau les données d'avis pour cet utilisateur
+            $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
+            $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
+    
+            $this->load->view('layout/header_dark');
+            $this->load->view('dashboard', $data);
+            $this->load->view('layout/footer_dark');
+        }
+    }    
+    
+    public function modifier_mot_de_passe() {
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        $this->form_validation->set_rules('ancien_password', 'Ancien mot de passe', 'required');
+        $this->form_validation->set_rules('nouveau_password', 'Nouveau mot de passe', 'required|min_length[8]');
+        $this->form_validation->set_rules('confirmer_password', 'Confirmer le nouveau mot de passe', 'required|matches[nouveau_password]');
+    
+        if ($this->form_validation->run() == FALSE) {
+            $this->dashboard();
+        } else {
+            $user_id = $this->session->userdata('user_id');
+            $user = $this->Utilisateur_model->get_user_by_id($user_id);
+    
+            if (password_verify($this->input->post('ancien_password'), $user->password)) {
+                $data = array(
+                    'password' => password_hash($this->input->post('nouveau_password'), PASSWORD_DEFAULT)
+                );
+    
+                if ($this->Utilisateur_model->update_user($user_id, $data)) {
+                    $data['success'] = 'Mot de passe mis à jour avec succès.';
+                } else {
+                    $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
+                }
+            } else {
+                $data['error'] = 'L\'ancien mot de passe est incorrect.';
+            }
+    
             $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
             $this->load->view('layout/header_dark');
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
     }
+
+    // Suppression d'avis
+    public function supprimer_avis_dashboard($id) {
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        $this->load->model('Utilisateur_model');
+        $this->Utilisateur_model->supprimer_avis($id);
+    
+        redirect('utilisateur/dashboard');
+    }
+
+    public function supprimer_avis_accueil($id) {
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        $this->load->model('Utilisateur_model');
+        $this->Utilisateur_model->supprimer_avis($id);
+    
+        redirect('/');
+    }
+    
 }

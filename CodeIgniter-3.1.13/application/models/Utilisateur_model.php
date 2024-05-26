@@ -22,11 +22,11 @@ class Utilisateur_model extends CI_Model {
         return $query->row();
     }
 
-    public function update_user($id, $data){
-        $this->db->where('id', $id);
+    public function update_user($user_id, $data) {
+        $this->db->where('id', $user_id);
         return $this->db->update('utilisateur', $data);
     }
-
+    
     
     public function insert_avis($data) {
         return $this->db->insert('avis', $data);
@@ -42,6 +42,12 @@ class Utilisateur_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_avis_by_user($user_id) {
+        $this->db->where('utilisateur_id', $user_id);
+        $query = $this->db->get('avis');
+        return $query->result();
+    }
+
     public function get_avis($utilisateur_id) {
         $this->db->select('*');
         $this->db->from('avis');
@@ -52,7 +58,7 @@ class Utilisateur_model extends CI_Model {
 
     public function supprimer_avis($avis_id) {
         return $this->db->delete('avis', array('id' => $avis_id));
-    }    
+    } 
     
 }
 ?>

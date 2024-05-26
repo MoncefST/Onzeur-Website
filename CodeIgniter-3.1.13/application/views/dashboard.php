@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/inscription.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/dashboard'); ?>">
 </head>
 <body>
     <div class="container">
@@ -36,7 +36,7 @@
 
         <h3>Modifier vos informations</h3>
 
-        <?php echo form_open('utilisateur/modifier'); ?>
+        <?php echo form_open_multipart('utilisateur/modifier'); ?>
 
         <div class="form-group">
             <label for="prenom">Prénom :</label>
@@ -56,9 +56,44 @@
             <?php echo form_error('email'); ?>
         </div>
         
+        
         <button type="submit" class="btn-submit">Mettre à jour</button>
 
         <?php echo form_close(); ?>
+
+        <h3>Modifier votre mot de passe</h3>
+        <?php echo form_open('utilisateur/modifier_mot_de_passe'); ?>
+        <div class="form-group">
+            <label for="ancien_password">Ancien mot de passe :</label>
+            <input type="password" name="ancien_password" id="ancien_password" required>
+            <?php echo form_error('ancien_password'); ?>
+        </div>
+        <div class="form-group">
+            <label for="nouveau_password">Nouveau mot de passe :</label>
+            <input type="password" name="nouveau_password" id="nouveau_password" required>
+            <?php echo form_error('nouveau_password'); ?>
+        </div>
+        <div class="form-group">
+            <label for="confirmer_password">Confirmer le nouveau mot de passe :</label>
+            <input type="password" name="confirmer_password" id="confirmer_password" required>
+            <?php echo form_error('confirmer_password'); ?>
+        </div>
+        <button type="submit" class="btn-submit">Modifier le mot de passe</button>
+        <?php echo form_close(); ?>
+
+        <h3>Vos avis</h3>
+        <?php if (isset($avis) && !empty($avis)): ?>
+            <ul>
+                <?php foreach ($avis as $avi): ?>
+                    <li>
+                        <p><?php echo $avi->commentaire; ?> - <strong><?php echo $avi->notation; ?>/5</strong></p>
+                        <p><a href="<?php echo site_url('utilisateur/supprimer_avis_dashboard/'.$avi->id); ?>">Supprimer</a></p>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>Vous n'avez écrit aucun avis.</p>
+        <?php endif; ?>
     </div>
 </body>
 </html>
