@@ -27,7 +27,7 @@
                             <td>
                                 <a href="<?php echo site_url('playlists/view/' . $playlist->id); ?>" class="btn btn-info">Voir</a>
                                 <a href="<?php echo site_url('playlists/delete/' . $playlist->id); ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette playlist ?');">Supprimer</a>
-                                <a href="<?php echo site_url('playlists/duplicate/' . $playlist->id); ?>" class="btn btn-warning">Dupliquer</a>
+                                <a href="<?php echo site_url('playlists/duplicate/' . $playlist->id); ?>" class="btn btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir dupliquer cette playlist ?');">Dupliquer</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
