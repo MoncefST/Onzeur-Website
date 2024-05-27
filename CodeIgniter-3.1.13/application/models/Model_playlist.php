@@ -107,14 +107,14 @@ class Model_playlist extends CI_Model {
         return $this->db->delete('playlist_song');
     }
 
-    // Récupérer les chansons d'une playlist
     public function get_songs_by_playlist($playlist_id) {
-        $this->db->select('song.*');
+        $this->db->select('song.*, artist.name as artist_name');
         $this->db->from('playlist_song');
         $this->db->join('song', 'song.id = playlist_song.song_id');
+        $this->db->join('artist', 'artist.id = song.artistId');
         $this->db->where('playlist_song.playlist_id', $playlist_id);
         return $this->db->get()->result();
-    }
+    }    
 
     public function add_album_to_playlist($data) {
         return $this->db->insert('playlist_album', $data);

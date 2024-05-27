@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Détails de la Playlist</title>
+    <title>Détails de la Playlist - Onzeur</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view.css'); ?>">
 </head>
 <body>
@@ -36,16 +36,17 @@
         <h2>Chansons</h2>
         <table class="table">
             <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <tr>
+                <th>Titre</th>
+                <th>Artiste</th>
+                <th>Actions</th>
+            </tr>
             <tbody>
                 <?php if (!empty($songs)) : ?>
                     <?php foreach ($songs as $song) : ?>
                         <tr>
                             <td><?php echo htmlspecialchars($song->name, ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($song->artist_name, ENT_QUOTES, 'UTF-8'); ?></td> <!-- Affichage du nom de l'artiste -->
                             <td>
                                 <a href="<?php echo site_url('playlists/remove_song/' . $playlist->id . '/' . $song->id); ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chanson de la playlist ?');">Supprimer</a>
                             </td>
@@ -53,10 +54,11 @@
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="2">Aucune chanson trouvée dans cette playlist.</td>
+                        <td colspan="3">Aucune chanson trouvée dans cette playlist.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
+
         </table>
 
         <a href="<?php echo site_url('playlists/add_song/' . $playlist->id); ?>" class="btn btn-primary">Ajouter une musique</a>

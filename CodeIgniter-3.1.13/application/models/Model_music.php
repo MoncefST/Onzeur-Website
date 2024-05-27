@@ -72,6 +72,10 @@ class Model_music extends CI_Model {
         return $query->result();
     }
 
+    public function get_artist_name_by_id($artist_id) {
+        return $this->db->get_where('artist', array('id' => $artist_id))->row('name');
+    }    
+
     public function get_album_by_id($id){
         $query = $this->db->query(
             "SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg
