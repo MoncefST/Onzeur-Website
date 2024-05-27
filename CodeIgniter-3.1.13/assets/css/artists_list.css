@@ -129,6 +129,6 @@ body {
 .artist-details a.spotify:hover,
 .artist-details a.deezer:hover,
 .artist-details a.youtube:hover {
-    color: black;
-    background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement plus clair au survol */
+    color: rgb(255, 255, 255);
+    background-color: rgba(84, 15, 202, 0.8); 
 }
