@@ -17,8 +17,7 @@ class Model_playlist extends CI_Model {
             return false;
         }
     }
-
-
+    
     // Récupérer une playlist par ID
     public function get_playlist_by_id($playlist_id) {
         return $this->db->get_where('playlist', array('id' => $playlist_id))->row();
@@ -44,16 +43,13 @@ class Model_playlist extends CI_Model {
     }
 
     public function add_song_to_playlist($data) {
-        // Vérifier si la combinaison playlist_id et song_id existe déjà
         $this->db->where($data);
         $existing_entry = $this->db->get('playlist_song')->row();
 
-        // Si la combinaison existe déjà, retourner false
         if ($existing_entry) {
             return false;
         }
 
-        // Sinon, effectuer l'insertion
         return $this->db->insert('playlist_song', $data);
     }
 

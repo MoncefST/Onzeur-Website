@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/artiste_details'); ?>">
-    <title>Détails de l'artiste <?php echo $artiste->name; ?></title>
+    <title>Détails de l'artiste - Onzeur <?php echo $artiste->name; ?></title>
 </head>
 <body>
     <div class="artist-details">
@@ -27,9 +27,9 @@
                         <ul class="songs-list">
                         <?php foreach($album->tracks as $track): ?>
                             <li>
-                                <span><?php echo $track->number . '.' . $track->diskNumber; ?></span>
+                                <span><strong><?php echo $track->number . '.' . $track->diskNumber; ?></strong></span>
                                 <span><?php echo $track->songName; ?></span>
-                                <span><?php echo gmdate("i:s", $track->duration); ?></span>
+                                <span><strong><?php echo gmdate("i:s", $track->duration); ?></strong></span>
                             </li>
                         <?php endforeach; ?>
 
