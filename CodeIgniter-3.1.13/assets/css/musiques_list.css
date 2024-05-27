@@ -1,41 +1,90 @@
+/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #f8f8f8;
 }
 
-h1 {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
     color: #6a0dad; 
     text-align: center;
     margin-top: 20px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-li {
+.list > div {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les articles */
+article {
     background-color: #fff;
-    padding: 20px;
-    margin-bottom: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-strong {
-    color: #560d61;
+article:hover {
+    transform: translateY(-5px);
 }
 
-a {
-    color: #560d61;
+header.short-text,
+footer.short-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 10px;
 }
 
-a:hover {
-    text-decoration: underline;
+header.short-text {
+    background-color: #6a0dad;
+    color: #fff;
 }
 
+footer.short-text {
+    background-color: #f0f0f0;
+}
+
+/* Styles pour les liens hypertexte */
+header.short-text a {
+    color: #fff; /* Blanc pour les liens */
+}
+
+/* Image styles */
+.list img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .list > div {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .list > div {
+        width: 100%;
+    }
+}
+
+/* Styles pour les boutons de pagination */
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -50,6 +99,7 @@ a:hover {
     border-radius: 4px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .pagination a:hover {
@@ -60,6 +110,32 @@ a:hover {
     background-color: #29043e;
 }
 
+.filters {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.filters select {
+    margin-right: 10px;
+}
+
+.filters button {
+    background-color: #8c00ff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #6a0080;
+}
+
 .music-links {
     margin-top: 10px;
 }
@@ -67,10 +143,58 @@ a:hover {
 .music-links a {
     display: inline-block;
     margin-right: 10px;
-    color: #560d61;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
     text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.music-links a:hover {
-    text-decoration: underline;
+.music-links a.spotify,
+.music-links a.deezer,
+.music-links a.youtube {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.music-links a.spotify {
+    background-color: #1DB954; /* Vert Spotify */
+}
+
+.music-links a.deezer {
+    background-color: #6E44FF; /* Violet Deezer */
+}
+
+.music-links a.youtube {
+    background-color: #FF0000; /* Rouge YouTube */
+}
+
+.music-links a.spotify:hover,
+.music-links a.deezer:hover,
+.music-links a.youtube:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(84, 15, 202, 0.8); /* Fond légèrement plus clair au survol */
+}
+
+
+
+.artist-name,
+.album-name {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #7300ff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  
+}
+
+footer.short-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items vertically */
 }
