@@ -12,7 +12,9 @@ body {
 }
 
 .error-message {
-    color: #f44336;
+    color: red;
+    margin-top: 5px;
+    font-size: 25px;
     text-align: center;
 }
 

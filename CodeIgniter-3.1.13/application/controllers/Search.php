@@ -27,6 +27,7 @@ class Search extends CI_Controller {
             $this->load->view('layout/header_dark');
             $this->load->view('search_results', $data); 
             $this->load->view('layout/footer_dark');
+            return;
         }
 
         // Faire une recherche dans les musiques, les albums, les genres et les artistes
