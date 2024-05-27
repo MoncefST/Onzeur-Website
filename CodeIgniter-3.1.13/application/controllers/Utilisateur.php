@@ -476,6 +476,7 @@ class Utilisateur extends CI_Controller {
     
             if ($this->Utilisateur_model->update_user($user_id, $data)) {
                 $data['success'] = 'Informations mises à jour avec succès.';
+                $this->send_confirmation_email_modification($data['email'], $data['prenom'], $data['nom']);
             } else {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
             }
@@ -553,5 +554,102 @@ class Utilisateur extends CI_Controller {
         $this->load->view('layout/header_dark');
         $this->load->view('non_autorisee');
         $this->load->view('layout/footer_dark');
+    }
+
+    public function send_confirmation_email_modification($to_email, $prenom, $nom) {
+        $mail = new PHPMailer(true);
+        try {
+            // Configuration du serveur SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'onzeur.contact@gmail.com';
+            $mail->Password = 'ofoi hjpo isxf azdk'; 
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+    
+            // Destinataires
+            $mail->setFrom('onzeur.contact@gmail.com', 'Support Onzeur');
+            $mail->addAddress($to_email);
+    
+            // Contenu de l'e-mail
+            $mail->isHTML(true);
+            $mail->Subject = 'Modification de vos informations sur Onzeur';
+    
+            $mail_body = '
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .container {
+                        width: 80%;
+                        margin: 0 auto;
+                        background-color: #fff;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    .header {
+                        text-align: center;
+                        padding: 20px;
+                    }
+                    .header img {
+                        max-width: 150px;
+                    }
+                    .content {
+                        margin-top: 20px;
+                    }
+                    .content h1 {
+                        color: #333;
+                    }
+                    .content p {
+                        font-size: 16px;
+                        line-height: 1.6;
+                        color: #666;
+                    }
+                    .footer {
+                        margin-top: 20px;
+                        text-align: center;
+                        font-size: 14px;
+                        color: #999;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <img src="'.base_url('assets/img/Logo_ONZEUR_LIGHT.png').'" alt="Logo Onzeur">
+                    </div>
+                    <div class="content">
+                        <h1>Modification de vos informations</h1>
+                        <p>Vos informations personnelles ont été modifiées avec succès sur Onzeur.</p>
+                        <p>Voici les informations mises à jour :</p>
+                        <ul>
+                            <li><strong>Prénom :</strong> '.$prenom.'</li>
+                            <li><strong>Nom :</strong> '.$nom.'</li>
+                        </ul>
+                        <p>Si vous n\'êtes pas à l\'origine de cette modification, veuillez nous contacter immédiatement.</p>
+                        <p>Cordialement,<br>L\'équipe Onzeur</p>
+                    </div>
+                    <div class="footer">
+                        &copy; '.date("Y").' Onzeur. Tous droits réservés.
+                    </div>
+                </div>
+            </body>
+            </html>';
+    
+            $mail->Body = $mail_body;
+    
+            $mail->send();
+        } catch (Exception $e) {
+            log_message('error', 'Erreur lors de l\'envoi de l\'e-mail: ' . $mail->ErrorInfo);
+        }
     }
 }
