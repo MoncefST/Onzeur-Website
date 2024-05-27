@@ -46,6 +46,7 @@
         <button type="submit" class="btn-submit">Inscription</button>
 
         <?php echo form_close(); ?>
+        <p>Vous avez déjà un compte ? <a href="<?php echo base_url('index.php/utilisateur/connexion'); ?>">Connectez-vous ici</a>.</p>
     </div>
 
     <script>
