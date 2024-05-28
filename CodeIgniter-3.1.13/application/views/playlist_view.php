@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Playlist - Onzeur</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view'); ?>">
 </head>
 <body>
     <div class="container">
@@ -39,6 +39,7 @@
             <tr>
                 <th>Titre</th>
                 <th>Artiste</th>
+                <th>Écouter sur</th> 
                 <th>Actions</th>
             </tr>
             <tbody>
@@ -46,7 +47,12 @@
                     <?php foreach ($songs as $song) : ?>
                         <tr>
                             <td><?php echo htmlspecialchars($song->name, ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($song->artist_name, ENT_QUOTES, 'UTF-8'); ?></td> <!-- Affichage du nom de l'artiste -->
+                            <td><a href="<?php echo site_url('artiste/index/' . $song->artistId); ?>"><?php echo htmlspecialchars($song->artist_name, ENT_QUOTES, 'UTF-8'); ?></a></td>
+                            <td>
+                                <a href="https://open.spotify.com/search/<?php echo urlencode($song->artist_name . ' ' . $song->name); ?>" class="spotify" target="_blank">Spotify</a> |
+                                <a href="https://www.deezer.com/search/<?php echo urlencode($song->artist_name . ' ' . $song->name); ?>" class="deezer" target="_blank">Deezer</a> |
+                                <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($song->artist_name . ' ' . $song->name); ?>" class="youtube" target="_blank">YouTube</a>
+                            </td>
                             <td>
                                 <a href="<?php echo site_url('playlists/remove_song/' . $playlist->id . '/' . $song->id); ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chanson de la playlist ?');">Supprimer</a>
                             </td>
@@ -54,11 +60,10 @@
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="3">Aucune chanson trouvée dans cette playlist.</td>
+                        <td colspan="4">Aucune chanson trouvée dans cette playlist.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
-
         </table>
 
         <a href="<?php echo site_url('playlists/add_song/' . $playlist->id); ?>" class="btn btn-primary">Ajouter une musique</a>

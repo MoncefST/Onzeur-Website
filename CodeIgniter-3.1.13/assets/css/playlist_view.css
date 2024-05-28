@@ -13,13 +13,17 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 90%;
     margin: 0 auto;
     padding: 20px;
 }
 
 h1, h2 {
     margin-bottom: 10px;
+}
+
+h2 {
+    padding-top: 50px;
 }
 
 p {
@@ -114,4 +118,33 @@ textarea {
 /* Style pour le bouton Enregistrer au survol */
 .btn-primary:hover {
     background-color: #3c0c72;
+}
+
+a.spotify,
+a.deezer,
+a.youtube {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a.spotify {
+    background-color: #1DB954; /* Vert Spotify */
+}
+
+a.deezer {
+    background-color: #8826df; /* Violet Deezer */
+}
+
+a.youtube {
+    background-color: #FF0000; /* Rouge YouTube */
+}
+
+a.spotify:hover,
+a.deezer:hover,
+a.youtube:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(84, 15, 202, 0.8); 
 }
