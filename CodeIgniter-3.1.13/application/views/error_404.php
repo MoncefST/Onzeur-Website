@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>404 - Page non trouvée</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/error_404'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/error_404.css'); ?>">
 </head>
 <body>
     <h1>Erreur 404 🤖 - Cette page n'existe pas<h1>
@@ -70,6 +70,10 @@
         // Contrôles
         document.addEventListener('keydown', function (e) {
             if (e.code === 'Space') bird.flap();
+        });
+
+        canvas.addEventListener('click', function () {
+            bird.flap();
         });
 
         // Fonction principale pour démarrer le jeu après un compte à rebours de 3 secondes
