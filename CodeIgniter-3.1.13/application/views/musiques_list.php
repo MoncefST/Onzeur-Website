@@ -2,16 +2,32 @@
     
     <div class="filters">
         <form method="GET" action="<?php echo base_url('index.php/musiques/index'); ?>">
+            <label for="genre">Genre:</label>
+            <select name="genre_id" id="genre">
+                <option value="">Tous les genres</option>
+                <?php foreach($genres as $genre): ?>
+                    <option value="<?php echo $genre->id; ?>" <?php echo ($genre->id == $genre_id) ? 'selected' : ''; ?>><?php echo $genre->name; ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <label for="artist">Artiste:</label>
+            <select name="artist_id" id="artist">
+                <option value="">Tous les artistes</option>
+                <?php foreach($artists as $artist): ?>
+                    <option value="<?php echo $artist->id; ?>" <?php echo ($artist->id == $artist_id) ? 'selected' : ''; ?>><?php echo $artist->name; ?></option>
+                <?php endforeach; ?>
+            </select>
+
             <label for="sort">Trier par:</label>
             <select name="sort" id="sort">
-                <option value="name" <?php echo (isset($sort) && $sort == 'name') ? 'selected' : ''; ?>>Titre</option>
-                <option value="artist" <?php echo (isset($sort) && $sort == 'artist') ? 'selected' : ''; ?>>Artiste</option>
-                <option value="album" <?php echo (isset($sort) && $sort == 'album') ? 'selected' : ''; ?>>Album</option>
+                <option value="name" <?php echo ($sort == 'name') ? 'selected' : ''; ?>>Nom</option>
+                <option value="year" <?php echo ($sort == 'year') ? 'selected' : ''; ?>>Année</option>
             </select>
 
             <button type="submit">Filtrer</button>
         </form>
     </div>
+
     
     <section class="list">
         <?php foreach($musiques as $musique): ?>

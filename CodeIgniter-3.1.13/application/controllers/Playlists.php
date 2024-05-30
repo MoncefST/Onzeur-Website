@@ -83,8 +83,6 @@ class Playlists extends CI_Controller {
         }
     }
     
-
-
     public function update($playlist_id) {
         // Vérifier si l'utilisateur est connecté
         $this->verify_playlist_ownership($playlist_id);
@@ -112,7 +110,6 @@ class Playlists extends CI_Controller {
             redirect('playlists/view/' . $playlist_id);
         }
     }
-    
     
     public function add_song($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
@@ -143,7 +140,6 @@ class Playlists extends CI_Controller {
         }
     }
      
-
     public function delete($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
 

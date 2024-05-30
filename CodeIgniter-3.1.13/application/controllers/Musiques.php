@@ -12,37 +12,40 @@ class Musiques extends CI_Controller {
     }
 
     public function index($page = 1){
-        // Nombre de musiques par page
-        $limit = 30; 
-        // Calcul de l'offset pour la pagination
+        $this->load->model('Model_music');
+        $this->load->library('pagination');
+        $this->load->helper('url');
+        $this->load->helper('html');
+    
+        $limit = 30;
         $offset = ($page - 1) * $limit;
-        
-        // Récupérer la valeur de tri depuis la requête GET
         $sort = $this->input->get('sort');
+        $genre_id = $this->input->get('genre_id');
+        $artist_id = $this->input->get('artist_id');
     
-        // Récupérer les musiques triées
-        $musiques = $this->Model_music->getMusiques($limit, $offset, $sort);
-        
-        // Récupérer le nombre total de musiques pour la pagination
+        $musiques = $this->Model_music->getMusiques($limit, $offset, $sort, 'ASC', $genre_id, $artist_id);
         $total_musiques = $this->Model_music->get_total_musiques();
-        // Calculer le nombre total de pages
         $total_pages = ceil($total_musiques / $limit); 
-        // Définition de la variable $current_page
+
         $current_page = $page; 
-    
-        // Données à passer à la vue
+        $genres = $this->Model_music->getGenres();
+        $artists = $this->Model_music->getArtists();
+
         $data['musiques'] = $musiques;
         $data['total_pages'] = $total_pages;
         $data['current_page'] = $current_page;
-        $data['sort'] = $sort; // Passer la valeur de tri à la vue
-
-        $data['title']="Musiques - Onzeur";
-        $data['css']="assets/css/musiques_list";
+        $data['sort'] = $sort;
+        $data['genres'] = $genres;
+        $data['artists'] = $artists;
+        $data['genre_id'] = $genre_id;
+        $data['artist_id'] = $artist_id;
     
-        // Charger la vue
+        $data['title'] = "Musiques - Onzeur";
+        $data['css'] = "assets/css/musiques_list";
+    
         $this->load->view('layout/header_dark', $data);
-        $this->load->view('musiques_list',$data);
+        $this->load->view('musiques_list', $data);
         $this->load->view('layout/footer_dark');
-    }
+    }    
     
 }

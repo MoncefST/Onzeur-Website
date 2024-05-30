@@ -101,7 +101,8 @@ class Model_music extends CI_Model {
         return $album;
     }
 
-    public function getMusiques($limit, $offset, $order_by = 'title', $order_direction = 'ASC') {
+    public function getMusiques($limit, $offset, $order_by = 'name', $order_direction = 'ASC', $genre_id = null, $artist_id = null) {
+        // Préparer la colonne de tri en fonction du paramètre $order_by
         $order_column = '';
         switch ($order_by) {
             case 'artist':
@@ -110,26 +111,45 @@ class Model_music extends CI_Model {
             case 'album':
                 $order_column = 'album.name';
                 break;
-            case 'title':
-                $order_column = 'song.name';
+            case 'year':
+                $order_column = 'album.year';
                 break;
+            case 'name':
             default:
                 $order_column = 'song.name';
                 break;
         }
+    
+        // Préparer la clause WHERE pour le genre et l'artiste, si nécessaire
+        $where_clause = '';
+        $params = array();
+        if ($genre_id) {
+            $where_clause .= " WHERE genre.id = ?";
+            $params[] = $genre_id;
+        }
+        if ($artist_id) {
+            $where_clause .= ($where_clause == '') ? ' WHERE' : ' AND';
+            $where_clause .= " artist.id = ?";
+            $params[] = $artist_id;
+        }
+    
+        // Exécuter la requête avec la clause WHERE et l'ordre de tri spécifié
+        $query = $this->db->query("
+            SELECT song.id, song.name, artist.id as artist_id, artist.name as artistName, album.name as album_name, track.albumid as album_id, cover.jpeg as cover
+            FROM song
+            JOIN track ON song.id = track.songid
+            JOIN album ON track.albumid = album.id
+            JOIN artist ON album.artistid = artist.id
+            JOIN cover ON album.coverid = cover.id
+            JOIN genre ON album.genreid = genre.id
+            $where_clause
+            ORDER BY $order_column $order_direction
+            LIMIT $limit OFFSET $offset
+        ", $params);
         
-        $query = $this->db->query(
-            "SELECT song.id, song.name, artist.id as artist_id, artist.name as artistName, album.name as album_name, track.albumid as album_id, cover.jpeg as cover
-             FROM song
-             JOIN track ON song.id = track.songid
-             JOIN album ON track.albumid = album.id
-             JOIN artist ON album.artistid = artist.id
-             JOIN cover ON album.coverid = cover.id
-             ORDER BY $order_column $order_direction
-             LIMIT $limit OFFSET $offset"
-        );        
         return $query->result();
     }
+    
     
 
     public function get_all_songs() {

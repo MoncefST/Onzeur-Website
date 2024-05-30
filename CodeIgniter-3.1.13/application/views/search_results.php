@@ -53,7 +53,6 @@
     </div>
 <?php endif; ?>
 
-
 <?php if (!empty($artistes)): ?>
     <div class="section">
         <h3 class="section-title">Artistes</h3>
