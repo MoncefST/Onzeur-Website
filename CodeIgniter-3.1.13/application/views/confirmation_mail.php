@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/confirmation_mail'); ?>">
-    <title>Confirmation d'envoi - Onzeur</title>
-</head>
-<body>
     <div class="hero">
         <h1>Confirmation d'envoi</h1>
         <p>Merci ! Votre message a été envoyé avec succès.</p>
@@ -25,4 +18,4 @@
         </div>
     </div>
 </body>
-</html>
+

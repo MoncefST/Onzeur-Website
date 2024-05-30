@@ -29,8 +29,12 @@ class Utilisateur extends CI_Controller {
         ));
     
         if ($this->form_validation->run() == FALSE) {
+
+            $data['title']="Inscription";
+            $data['css']="assets/css/inscription";
+
             // Charger la vue avec les erreurs
-            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_dark',$data);
             $this->load->view('inscription');
             $this->load->view('layout/footer_dark');
         } else {
@@ -51,8 +55,12 @@ class Utilisateur extends CI_Controller {
                 redirect('utilisateur/connexion');
             } else {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
-                $this->load->view('layout/header_dark');
-                $this->load->view('inscription', $data);
+
+                $data['title']="Inscription";
+                $data['css']="assets/css/inscription";
+
+                $this->load->view('layout/header_dark',$data);
+                $this->load->view('inscription',$data);
                 $this->load->view('layout/footer_dark');
             }
         }
@@ -392,8 +400,12 @@ class Utilisateur extends CI_Controller {
         $this->form_validation->set_rules('password', 'Mot de passe', 'required');
     
         if ($this->form_validation->run() == FALSE) {
+
+            $data['title']="Connexion";
+            $data['css']="assets/css/inscription";
+
             // Charger la vue avec les erreurs
-            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('connexion');
             $this->load->view('layout/footer_dark');
         } else {
@@ -418,7 +430,11 @@ class Utilisateur extends CI_Controller {
                 redirect('utilisateur/dashboard');
             } else {
                 $data['error'] = 'Email ou mot de passe incorrect.';
-                $this->load->view('layout/header_dark');
+                
+                $data['title']="Connexion";
+                $data['css']="assets/css/inscription";
+                
+                $this->load->view('layout/header_dark',$data);
                 $this->load->view('connexion', $data);
                 $this->load->view('layout/footer_dark');
             }
@@ -446,8 +462,11 @@ class Utilisateur extends CI_Controller {
         $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
     
         $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
+
+        $data['title']="Dashboard - Onzeur";
+        $data['css']="assets/css/dashboard";
     
-        $this->load->view('layout/header_dark');
+        $this->load->view('layout/header_dark', $data);
         $this->load->view('dashboard', $data);
         $this->load->view('layout/footer_dark');
     }
@@ -484,8 +503,11 @@ class Utilisateur extends CI_Controller {
             // Récupérer à nouveau les données d'avis pour cet utilisateur
             $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
             $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
+
+            $data['title']="Dashboard - Onzeur";
+            $data['css']="assets/css/dashboard";
     
-            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_dark',$data);
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
@@ -521,7 +543,11 @@ class Utilisateur extends CI_Controller {
             }
     
             $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
-            $this->load->view('layout/header_dark');
+
+            $data['title']="Dashboard - Onzeur";
+            $data['css']="assets/css/dashboard";
+
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
@@ -551,7 +577,11 @@ class Utilisateur extends CI_Controller {
     }
 
     public function non_autorisee(){
-        $this->load->view('layout/header_dark');
+
+        $data['title']="Accès non autorisé - Onzeur";
+        $data['css']="assets/css/style.css";
+
+        $this->load->view('layout/header_dark', $data);
         $this->load->view('non_autorisee');
         $this->load->view('layout/footer_dark');
     }

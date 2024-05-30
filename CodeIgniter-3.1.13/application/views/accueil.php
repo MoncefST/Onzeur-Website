@@ -1,8 +1,5 @@
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/accueil'); ?>">
-    <title>Accueil - Onzeur</title>
-</head>
-<body>
+
+
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
         <p>Le service de création de playlist musical numéro 1 en France.</p>

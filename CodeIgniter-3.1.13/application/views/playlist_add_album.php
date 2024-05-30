@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter un Album à la Playlist</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_add_song'); ?>">
-</head>
-<body>
     <div class="container">
         <h1>Ajouter un Album à la Playlist</h1>
         <?php echo form_open('playlists/add_album/'.$playlist_id); ?>
@@ -21,4 +13,3 @@
         <?php echo form_close(); ?>
     </div>
 </body>
-</html>

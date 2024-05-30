@@ -19,8 +19,12 @@ class Playlists extends CI_Controller {
         // Vérifier si l'utilisateur est connecté
         if ($user_id) {
             $data['playlists'] = $this->Model_playlist->get_user_playlists($user_id);
-            $this->load->view('layout/header_dark');
-            $this->load->view('playlists_list', $data);
+
+            $data['title']="Liste des Playlists - Onzeur";
+            $data['css']="assets/css/playlists_list.css";
+
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('playlists_list',$data);
             $this->load->view('layout/footer_dark');
         } else {
             redirect('utilisateur/connexion');
@@ -69,7 +73,11 @@ class Playlists extends CI_Controller {
                 redirect('utilisateur/connexion');
             }
         } else {
-            $this->load->view('layout/header_dark');
+
+            $data['title']="Créer une Nouvelle Playlist";
+            $data['css']="assets/css/playlist_create";
+
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('playlist_create');
             $this->load->view('layout/footer_dark');
         }
@@ -125,8 +133,12 @@ class Playlists extends CI_Controller {
             // Récupérer toutes les musiques disponibles
             $data['songs'] = $this->Model_music->get_all_songs();
             $data['playlist_id'] = $playlist_id;
-            $this->load->view('layout/header_dark');
-            $this->load->view('playlist_add_song', $data);
+
+            $data['title']="Ajouter une Chanson à la Playlist";
+            $data['css']="assets/css/playlist_add_song";
+
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('playlist_add_song',$data);
             $this->load->view('layout/footer_dark');
         }
     }
@@ -234,8 +246,12 @@ class Playlists extends CI_Controller {
         } else {
             $data['albums'] = $this->Model_music->get_all_albums();
             $data['playlist_id'] = $playlist_id;
-            $this->load->view('layout/header_dark');
-            $this->load->view('playlist_add_album', $data);
+
+            $data['title']="Ajouter un Album à la Playlist";
+            $data['css']="assets/css/playlist_add_song";
+
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('playlist_add_album',$data);
             $this->load->view('layout/footer_dark');
         }
     }
@@ -248,9 +264,14 @@ class Playlists extends CI_Controller {
         
         // Charger les chansons de la playlist spécifique
         $data['songs'] = $this->Model_playlist->get_songs_by_playlist($playlist_id);
+
+
+        $data['title']="Détails de la Playlist - Onzeur";
+        $data['css']="assets/css/playlist_view";
+
         
         // Charger la vue pour afficher les détails de la playlist
-        $this->load->view('layout/header_dark');
+        $this->load->view('layout/header_dark', $data);
         $this->load->view('playlist_view', $data);
         $this->load->view('layout/footer_dark');
     }
@@ -293,8 +314,12 @@ class Playlists extends CI_Controller {
             // Récupérer tous les artistes disponibles
             $data['artists'] = $this->Model_music->get_all_artists();
             $data['playlist_id'] = $playlist_id;
-            $this->load->view('layout/header_dark');
-            $this->load->view('playlist_add_artist', $data);
+
+            $data['title']="Ajouter les musiques d'un Artiste à la Playlist";
+            $data['css']="assets/css/playlist_add_song";
+
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('playlist_add_artist',$data);
             $this->load->view('layout/footer_dark');
         }
     }    

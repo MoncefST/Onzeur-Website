@@ -17,7 +17,11 @@ class Contact extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('layout/header_dark');
+        
+        $data['title']='Nous contacter - Onzeur';
+        $data['css']='assets/css/nous-contacter';
+        
+        $this->load->view('layout/header_dark', $data);
         $this->load->view('nous-contacter'); 
         $this->load->view('layout/footer_dark');
     }
@@ -110,11 +114,19 @@ class Contact extends CI_Controller {
                     </html>';
                 
                 $mail->send();
-                $this->load->view('layout/header_dark');
+                
+                $data['title']="Confirmation d'envoi - Onzeur";
+                $data['css']="assets/css/confirmation_mail";
+
+                $this->load->view('layout/header_dark',$data);
                 $this->load->view('confirmation_mail.php');
                 $this->load->view('layout/footer_dark');
             } catch (Exception $e) {
-                $this->load->view('layout/header_dark');
+
+                $data['title']="Erreur d'envoi - Onzeur";
+                $data['css']="assets/css/erreur_mail";
+
+                $this->load->view('layout/header_dark', $data);
                 $this->load->view('erreur_mail.php');
                 $this->load->view('layout/footer_dark');
             }
@@ -217,11 +229,19 @@ class Contact extends CI_Controller {
                 }
     
                 $mail->send();
-                $this->load->view('layout/header_dark');
+                
+                $data['title']="Confirmation d'envoi - Onzeur";
+                $data['css']="assets/css/confirmation_mail";
+
+                $this->load->view('layout/header_dark',$data);
                 $this->load->view('confirmation_mail.php');
                 $this->load->view('layout/footer_dark');
             } catch (Exception $e) {
-                $this->load->view('layout/header_dark');
+               
+                $data['title']="Erreur d'envoi - Onzeur";
+                $data['css']="assets/css/erreur_mail";
+
+                $this->load->view('layout/header_dark', $data);
                 $this->load->view('erreur_mail.php');
                 $this->load->view('layout/footer_dark');
             }

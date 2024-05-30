@@ -35,10 +35,13 @@ class Musiques extends CI_Controller {
         $data['total_pages'] = $total_pages;
         $data['current_page'] = $current_page;
         $data['sort'] = $sort; // Passer la valeur de tri à la vue
+
+        $data['title']="Musiques - Onzeur";
+        $data['css']="assets/css/musiques_list";
     
         // Charger la vue
-        $this->load->view('layout/header_dark');
-        $this->load->view('musiques_list', $data);
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('musiques_list',$data);
         $this->load->view('layout/footer_dark');
     }
     

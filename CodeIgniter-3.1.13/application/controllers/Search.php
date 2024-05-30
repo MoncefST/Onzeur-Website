@@ -24,8 +24,11 @@ class Search extends CI_Controller {
             $data['artistes'] = [];
             $data['error'] = "La requête de recherche ne peut pas être vide.";
 
-            $this->load->view('layout/header_dark');
-            $this->load->view('search_results', $data); 
+            $data['title']="Résultats de la recherche";
+            $data['css']="assets/css/search_results";
+
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('search_results',$data); 
             $this->load->view('layout/footer_dark');
             return;
         }
@@ -42,9 +45,12 @@ class Search extends CI_Controller {
         $data['albums'] = $albums;
         $data['genres'] = $genres;
         $data['artistes'] = $artistes;
+
+        $data['title']="Résultats de la recherche";
+        $data['css']="assets/css/search_results";
         
-        $this->load->view('layout/header_dark');
-        $this->load->view('search_results', $data); 
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('search_results',$data); 
         $this->load->view('layout/footer_dark');
     }
 }

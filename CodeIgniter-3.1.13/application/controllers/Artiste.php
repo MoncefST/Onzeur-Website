@@ -24,8 +24,10 @@ class Artiste extends CI_Controller {
             $data['artiste'] = $artiste;
             $data['albums'] = $albums;
             $data['mostUsedGenre'] = $mostUsedGenre; // Passer $mostUsedGenre à la vue
+            $data['title']="Détails de l'artiste - Onzeur ".$artiste->name;
+            $data['css'] = 'assets/css/artiste_details';
             
-            $this->load->view('layout/header_dark');
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('artiste_details', $data);
             $this->load->view('layout/footer_dark');
             
@@ -46,8 +48,10 @@ class Artiste extends CI_Controller {
         // Charger la vue avec la liste des artistes
         $data['artists'] = $artists;
         $data['current_order'] = $order;
+        $data['title']="Détails de l'artiste - Onzeur ";
+        $data['css'] = 'assets/css/artists_list.css';
         
-        $this->load->view('layout/header_dark');
+        $this->load->view('layout/header_dark',$data);
         $this->load->view('artists_list', $data);
         $this->load->view('layout/footer_dark');
     }

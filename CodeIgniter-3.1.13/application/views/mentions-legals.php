@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/mention-legals'); ?>">
-    <title>Mentions Légales</title>
-</head>
-<body>
     <header>
         <h1>Mentions Légales</h1>
     </header>
@@ -39,4 +30,3 @@
         <p>Cette page de mentions légales est conforme aux exigences légales en vigueur. Dernière mise à jour : 22 mai 2024.</p>
     </footer>
 </body>
-</html>

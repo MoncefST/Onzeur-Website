@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/nous-contacter'); ?>">
-    <title>Nous contacter - Onzeur</title>
-</head>
-<body>
+
     <div class="hero">
         <h1>Nous contacter</h1>
         <p>N'hésitez pas à nous contacter pour toute question ou demande.</p>
@@ -23,4 +17,3 @@
         </div>
     </div>
 </body>
-</html>

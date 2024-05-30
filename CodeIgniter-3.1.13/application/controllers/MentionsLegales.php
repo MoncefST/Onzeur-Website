@@ -11,7 +11,10 @@ class MentionsLegales extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('layout/header_dark');
+        $data['title']="Mentions Légales";
+        $data['css']="assets/css/mention-legals";
+
+        $this->load->view('layout/header_dark',$data);
         $this->load->view('mentions-legals');
         $this->load->view('layout/footer_dark');
         

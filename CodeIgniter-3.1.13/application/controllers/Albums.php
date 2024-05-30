@@ -28,22 +28,27 @@ class Albums extends CI_Controller {
         $data['order_by'] = $order_by;
         $data['genre_id'] = $genre_id;
         $data['artist_id'] = $artist_id;
+        $data['title']= 'Albums - Onzeur';
+        $data['css']='assets/css/style';
 
         // Récupérer les genres et les artistes pour les filtres
         $data['genres'] = $this->model_music->getGenres();
         $data['artists'] = $this->model_music->getArtists();
         
-        $this->load->view('layout/header_dark');
-        $this->load->view('albums_list', $data);
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('albums_list',$data);
         $this->load->view('layout/footer_dark');
     }
 
     public function view($id){
         $album = $this->model_music->get_album_by_id($id);
         $data['album'] = $album;
+        
+        $data['title'] = $album->name." - Details";
+        $data['css']='assets/css/album_view';
 
-        $this->load->view('layout/header_dark');
-        $this->load->view('album_view', $data);
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('album_view');
         $this->load->view('layout/footer_dark');
     }
 

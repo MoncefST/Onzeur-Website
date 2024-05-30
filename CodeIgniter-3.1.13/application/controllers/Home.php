@@ -15,6 +15,9 @@ class Home extends CI_Controller {
     
         $this->load->helper('url');
         $this->load->helper('html');
+
+        $data['title']='Accueil - Onzeur';
+        $data['css']='assets/css/accueil';
     
         // Appeler la fonction pour récupérer les couvertures d'albums
         $data['covers'] = $this->Cover_model->get_covers();
@@ -23,8 +26,8 @@ class Home extends CI_Controller {
         $data['avis'] = $this->Utilisateur_model->get_recent_avis();
     
         // Charger la vue avec les données récupérées
-        $this->load->view('layout/header_dark');
-        $this->load->view('accueil', $data);
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('accueil',$data);
         $this->load->view('layout/footer_dark');
     }
     

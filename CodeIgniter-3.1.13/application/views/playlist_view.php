@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Détails de la Playlist - Onzeur</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/playlist_view'); ?>">
-</head>
-<body>
     <div class="container">
         <!-- Messages Flash -->
         <?php if($this->session->flashdata('success')): ?>
@@ -72,4 +64,3 @@
         <a href="<?php echo site_url('playlists'); ?>" class="btn btn-secondary">Retour</a>
     </div>
 </body>
-</html>

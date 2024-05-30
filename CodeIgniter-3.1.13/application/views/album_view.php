@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/album_view'); ?>">
-    <title><?php echo $album->name; ?> - Details</title>
-</head>
-<body>
+
     <div class="album-details">
         <h1><?php echo $album->name; ?></h1>
         
@@ -29,4 +21,3 @@
         <?php endif; ?>
     </div>
 </body>
-</html>

@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/erreur_mail'); ?>">
-    <title>Erreur d'envoi - Onzeur</title>
-</head>
-<body>
     <div class="hero">
         <h1>Erreur d'envoi</h1>
         <p>Une erreur s'est produite lors de l'envoi de votre message.</p>
@@ -18,4 +11,4 @@
         </div>
     </div>
 </body>
-</html>
+
