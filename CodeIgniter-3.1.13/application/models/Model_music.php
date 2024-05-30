@@ -150,8 +150,6 @@ class Model_music extends CI_Model {
         return $query->result();
     }
     
-    
-
     public function get_all_songs() {
         return $this->db->get('song')->result();
     }

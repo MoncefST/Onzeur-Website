@@ -471,11 +471,8 @@ class Utilisateur extends CI_Controller {
         $this->load->view('layout/footer_dark');
     }
     
-
-    
-   
-    public function modifier(){
-        if(!$this->session->userdata('user_id')){
+    public function modifier() {
+        if (!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
         }
     
@@ -487,8 +484,25 @@ class Utilisateur extends CI_Controller {
             $this->dashboard();
         } else {
             $user_id = $this->session->userdata('user_id');
+            $new_email = $this->input->post('email');
+    
+            // Vérifie si l'email est déjà utilisé par un autre utilisateur
+            $existing_user = $this->Utilisateur_model->get_user_by_email($new_email);
+            if ($existing_user && $existing_user->id != $user_id) {
+                $data['error'] = 'Cet email est déjà utilisé par un autre utilisateur.';
+                $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
+                $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
+                $data['title'] = "Dashboard - Onzeur";
+                $data['css'] = "assets/css/dashboard";
+    
+                $this->load->view('layout/header_dark', $data);
+                $this->load->view('dashboard', $data);
+                $this->load->view('layout/footer_dark');
+                return; // Sortie de la méthode
+            }
+    
             $data = array(
-                'email' => $this->input->post('email'),
+                'email' => $new_email,
                 'nom' => $this->input->post('nom'),
                 'prenom' => $this->input->post('prenom')
             );
@@ -503,15 +517,16 @@ class Utilisateur extends CI_Controller {
             // Récupérer à nouveau les données d'avis pour cet utilisateur
             $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
             $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
-
-            $data['title']="Dashboard - Onzeur";
-            $data['css']="assets/css/dashboard";
     
-            $this->load->view('layout/header_dark',$data);
+            $data['title'] = "Dashboard - Onzeur";
+            $data['css'] = "assets/css/dashboard";
+    
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
-    }    
+    }
+             
     
     public function modifier_mot_de_passe() {
         if (!$this->session->userdata('user_id')) {

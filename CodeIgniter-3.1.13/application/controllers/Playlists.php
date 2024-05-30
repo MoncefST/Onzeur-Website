@@ -9,7 +9,7 @@ class Playlists extends CI_Controller {
         $this->load->model('Model_music');
         $this->load->helper('url');
         $this->load->helper('html');
-        $this->load->library('session'); // Charger la bibliothèque de sessions
+        $this->load->library('session');
     }
 
     public function index(){
@@ -269,6 +269,10 @@ class Playlists extends CI_Controller {
         // Charger les chansons de la playlist spécifique
         $data['songs'] = $this->Model_playlist->get_songs_by_playlist($playlist_id);
     
+        // Charger la liste des playlists de l'utilisateur
+        $user_id = $this->session->userdata('user_id');
+        $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+    
         $data['title'] = "Détails de la Playlist - Onzeur";
         $data['css'] = "assets/css/playlist_view";
     
@@ -276,7 +280,7 @@ class Playlists extends CI_Controller {
         $this->load->view('layout/header_dark', $data);
         $this->load->view('playlist_view', $data);
         $this->load->view('layout/footer_dark');
-    }
+    }    
     
     private function verify_playlist_accessibility($playlist_id) {
         // Récupérer l'ID de l'utilisateur connecté

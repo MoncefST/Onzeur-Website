@@ -17,6 +17,12 @@ class Utilisateur_model extends CI_Model {
         return $query->row();
     }
 
+    public function get_user_by_email($email) {
+        $this->db->where('email', $email);
+        $query = $this->db->get('utilisateur'); // Assurez-vous que 'utilisateurs' est le nom de votre table d'utilisateurs
+        return $query->row(); // Retourne le premier résultat
+    }
+
     public function get_user_by_id($id) {
         $query = $this->db->get_where('utilisateur', array('id' => $id));
         return $query->row();

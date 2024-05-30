@@ -10,7 +10,7 @@
         <div>
             <video width="100%" controls>
                 <source src="<?php echo base_url('assets/mp4/videoOnzeur.mp4'); ?>" type="video/mp4">
-                Your browser does not support the video tag.
+                Votre navigateur ne supporte pas les vidéos.
             </video>
         </div>
 

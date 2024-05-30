@@ -6,8 +6,10 @@ class Albums extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('model_music');
+        $this->load->model('model_playlist');
         $this->load->helper('url');
         $this->load->helper('html');
+        $this->load->library('session');
     }
 
     public function index($page = 1){
@@ -44,13 +46,23 @@ class Albums extends CI_Controller {
         $album = $this->model_music->get_album_by_id($id);
         $data['album'] = $album;
         
-        $data['title'] = $album->name." - Details";
-        $data['css']='assets/css/album_view';
-
+        // Récupérer les playlists de l'utilisateur connecté
+        $data['playlist'] = $this->model_playlist->get_user_playlists($this->session->userdata('user_id'));
+    
+        // Définir le playlist_id si la playlist est définie
+        if(isset($data['playlist']) && !empty($data['playlist'])){
+            $data['playlist_id'] = isset($data['playlist']->id) ? $data['playlist']->id : null;
+        } else {
+            $data['playlist_id'] = null; // Gérer le cas où aucune playlist n'est disponible
+        }
+        
+        $data['title'] = $album->name . " - Details";
+        $data['css'] = 'assets/css/album_view';
+    
         $this->load->view('layout/header_dark', $data);
-        $this->load->view('album_view');
+        $this->load->view('album_view', $data); // Transmettre les données à la vue
         $this->load->view('layout/footer_dark');
     }
-
+    
 }
 ?>
