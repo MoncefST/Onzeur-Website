@@ -22,7 +22,7 @@ class Search_model extends CI_Model {
     }
 
     public function searchAlbums($query){
-        $sql = "SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg
+        $sql = "SELECT album.id, album.name, album.year, artist.id as artist_id, artist.name as artistName, genre.name as genreName, cover.jpeg
                 FROM album
                 JOIN artist ON album.artistid = artist.id
                 JOIN genre ON album.genreid = genre.id
@@ -32,6 +32,7 @@ class Search_model extends CI_Model {
         $query = $this->db->query($sql, array('%' . $query . '%'));
         return $query->result();
     }
+    
 
     public function searchGenres($query){
         $sql = "SELECT id, name FROM genre WHERE name LIKE ? ORDER BY name ASC";
@@ -45,3 +46,4 @@ class Search_model extends CI_Model {
         return $query->result();
     }
 }
+?>

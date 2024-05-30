@@ -5,60 +5,147 @@ body {
     background-color: #f8f8f8;
 }
 
-.search-title {
-    color: #6a0dad; 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    color: #6a0dad;
     text-align: center;
     margin-top: 20px;
 }
 
-.error-message {
-    color: red;
-    margin-top: 5px;
-    font-size: 25px;
-    text-align: center;
-}
-
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .section-title {
     color: #6a0dad;
-    font-size: 1.5em;
+    font-size: 1.8em;
+    border-bottom: 2px solid #6a0dad;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-ul {
+.music-list, .album-list, .genre-list, .artist-list {
+    list-style-type: none;
     padding: 0;
 }
 
-ul li {
+.music-list li, .album-list li, .genre-list li, .artist-list li {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease;
 }
 
-ul li a {
+.music-list li:hover, .album-list li:hover, .genre-list li:hover, .artist-list li:hover {
+    transform: translateY(-5px);
+}
+
+.music-list li a, .album-list li a, .artist-list li a, .genre-list li a {
     color: #6a0dad;
-    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-ul li a:hover {
+.music-list li a:hover, .album-list li a:hover, .artist-list li a:hover, .genre-list li a:hover {
     color: #4a0772;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .no-results {
     text-align: center;
-    color: #777; /* Grey */
+    font-size: 1.2em;
+    color: #888;
 }
 
-/* Responsive styles */
+.music-links {
+    margin-top: 10px;
+}
+
+.music-links a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.music-links a.spotify {
+    background-color: #1DB954;
+}
+
+.music-links a.deezer {
+    background-color: #6E44FF;
+}
+
+.music-links a.youtube {
+    background-color: #FF0000;
+}
+
+.music-links a.spotify:hover, .music-links a.deezer:hover, .music-links a.youtube:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
 @media screen and (max-width: 768px) {
-    ul li {
+    .music-list li, .album-list li, .genre-list li, .artist-list li {
         width: 45%;
+        margin: 10px 0;
     }
 }
 
 @media screen and (max-width: 576px) {
-    ul li {
+    .music-list li, .album-list li, .genre-list li, .artist-list li {
         width: 100%;
     }
+}
+
+.filters button {
+    background-color: #8c00ff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #6a0080;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    background-color: #6a0dad;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.pagination a:hover {
+    background-color: #4a0772;
+}
+
+.pagination .active {
+    background-color: #29043e;
 }
