@@ -8,10 +8,11 @@ class Model_playlist extends CI_Model {
     }
 
     public function create_playlist($data) {
-        // Récupérer l'ID de l'utilisateur à partir de la session
         $user_id = $this->session->userdata('user_id');
         if ($user_id !== null) {
             $data['utilisateur_id'] = $user_id;
+            // Définir la visibilité par défaut
+            $data['public'] = 0; // Playlist privée par défaut
             return $this->db->insert('playlist', $data);
         } else {
             return false;
@@ -26,9 +27,10 @@ class Model_playlist extends CI_Model {
     // Récupérer toutes les playlists d'un utilisateur spécifique
     public function get_user_playlists($user_id) {
         $this->db->where('utilisateur_id', $user_id);
+        // Ne récupérer que les playlists publiques ou celles appartenant à l'utilisateur
+        $this->db->where('(public = 1 OR utilisateur_id = ' . $user_id . ')');
         return $this->db->get('playlist')->result();
     }
-
 
     // Mettre à jour une playlist
     public function update_playlist($playlist_id, $data) {
@@ -115,5 +117,13 @@ class Model_playlist extends CI_Model {
     public function add_album_to_playlist($data) {
         return $this->db->insert('playlist_album', $data);
     }
+
+    public function get_public_playlists($user_id) {
+        // Récupérer les playlists publiques en excluant celles de l'utilisateur connecté
+        $this->db->where('utilisateur_id !=', $user_id);
+        $this->db->where('public', 1);
+        return $this->db->get('playlist')->result();
+    }
+    
 }
 ?>

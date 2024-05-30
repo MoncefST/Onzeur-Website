@@ -15,21 +15,26 @@ class Playlists extends CI_Controller {
     public function index(){
         // Récupérer l'ID de l'utilisateur connecté depuis la session
         $user_id = $this->session->userdata('user_id');
-    
+        
         // Vérifier si l'utilisateur est connecté
         if ($user_id) {
+            // Récupérer les playlists de l'utilisateur connecté
             $data['playlists'] = $this->Model_playlist->get_user_playlists($user_id);
-
+            
+            // Récupérer les playlists publiques
+            $data['public_playlists'] = $this->Model_playlist->get_public_playlists($user_id);
+            
             $data['title']="Liste des Playlists - Onzeur";
             $data['css']="assets/css/playlists_list.css";
-
+    
             $this->load->view('layout/header_dark', $data);
-            $this->load->view('playlists_list',$data);
+            $this->load->view('playlists_list', $data);
             $this->load->view('layout/footer_dark');
         } else {
             redirect('utilisateur/connexion');
         }
     }
+    
     
     public function verify_playlist_ownership($playlist_id) {
         // Vérifier si l'utilisateur est connecté
@@ -63,7 +68,8 @@ class Playlists extends CI_Controller {
                 $data = array(
                     'name' => $this->input->post('name'),
                     'description' => $this->input->post('description'),
-                    'utilisateur_id' => $user_id // Ajoutez l'ID de l'utilisateur
+                    'utilisateur_id' => $user_id, // Ajoutez l'ID de l'utilisateur
+                    'public' => $this->input->post('public') ? 1 : 0 // Champ pour définir si la playlist est publique ou privée
                 );
                 $this->Model_playlist->create_playlist($data);
                 redirect('playlists');
@@ -73,10 +79,10 @@ class Playlists extends CI_Controller {
                 redirect('utilisateur/connexion');
             }
         } else {
-
+    
             $data['title']="Créer une Nouvelle Playlist";
             $data['css']="assets/css/playlist_create";
-
+    
             $this->load->view('layout/header_dark', $data);
             $this->load->view('playlist_create');
             $this->load->view('layout/footer_dark');
@@ -84,7 +90,7 @@ class Playlists extends CI_Controller {
     }
     
     public function update($playlist_id) {
-        // Vérifier si l'utilisateur est connecté
+        // Vérifier si l'utilisateur est connecté et s'il est propriétaire de la playlist
         $this->verify_playlist_ownership($playlist_id);
     
         // Récupérer l'ID de l'utilisateur connecté
@@ -101,7 +107,8 @@ class Playlists extends CI_Controller {
         if ($this->input->post()) {
             $data = array(
                 'name' => $this->input->post('name'),
-                'description' => $this->input->post('description')
+                'description' => $this->input->post('description'),
+                'public' => $this->input->post('public') ? 1 : 0 // Mise à jour de la visibilité
             );
             $this->Model_playlist->update_playlist($playlist_id, $data);
             redirect('playlists/view/' . $playlist_id);
@@ -109,7 +116,7 @@ class Playlists extends CI_Controller {
             // Gérer le cas où les données POST ne sont pas disponibles
             redirect('playlists/view/' . $playlist_id);
         }
-    }
+    }    
     
     public function add_song($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
@@ -253,24 +260,38 @@ class Playlists extends CI_Controller {
     }
     
     public function view($playlist_id) {
-        $this->verify_playlist_ownership($playlist_id);
-
+        // Vérifiez si la playlist est accessible à l'utilisateur actuellement connecté
+        $this->verify_playlist_accessibility($playlist_id);
+    
         // Charger les détails de la playlist spécifique en fonction de son ID
         $data['playlist'] = $this->Model_playlist->get_playlist_by_id($playlist_id);
-        
+    
         // Charger les chansons de la playlist spécifique
         $data['songs'] = $this->Model_playlist->get_songs_by_playlist($playlist_id);
-
-
-        $data['title']="Détails de la Playlist - Onzeur";
-        $data['css']="assets/css/playlist_view";
-
-        
+    
+        $data['title'] = "Détails de la Playlist - Onzeur";
+        $data['css'] = "assets/css/playlist_view";
+    
         // Charger la vue pour afficher les détails de la playlist
         $this->load->view('layout/header_dark', $data);
         $this->load->view('playlist_view', $data);
         $this->load->view('layout/footer_dark');
     }
+    
+    private function verify_playlist_accessibility($playlist_id) {
+        // Récupérer l'ID de l'utilisateur connecté
+        $user_id = $this->session->userdata('user_id');
+    
+        // Récupérer les détails de la playlist
+        $playlist = $this->Model_playlist->get_playlist_by_id($playlist_id);
+    
+        // Vérifier si la playlist existe et si elle est publique
+        if (!$playlist || ($playlist->public == 0 && $playlist->utilisateur_id !== $user_id)) {
+            // Rediriger vers une page d'erreur ou une page appropriée
+            redirect('erreur/page_non_autorisee');
+        }
+    }
+    
     
     public function add_artist($playlist_id) {
         $this->verify_playlist_ownership($playlist_id);
