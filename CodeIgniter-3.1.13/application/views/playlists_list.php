@@ -2,6 +2,7 @@
     <h1>Liste des Playlists</h1>
     <a href="<?php echo site_url('playlists/create'); ?>" class="btn btn-primary">Créer une Nouvelle Playlist</a>
     <a href="<?php echo site_url('playlists/generate_random'); ?>" class="btn btn-primary">Générer une playlist aléatoire</a>
+    <h1><br>Mes Playlists</h1>
     <table class="table">
         <thead>
             <tr>

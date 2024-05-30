@@ -1,3 +1,4 @@
+
 <div class="container">
     <!-- Messages Flash -->
     <?php if($this->session->flashdata('success')): ?>
@@ -14,24 +15,27 @@
 
     <h1><?php echo htmlspecialchars($playlist->name, ENT_QUOTES, 'UTF-8'); ?></h1>
     
+    <!-- Affichage de la description de la playlist -->
+    <p><?php echo htmlspecialchars($playlist->description, ENT_QUOTES, 'UTF-8'); ?></p>
+    
     <?php if ($this->session->userdata('user_id') === $playlist->utilisateur_id): ?>
         <form action="<?php echo site_url('playlists/update/' . $playlist->id); ?>" method="post">
             <div class="form-group">
-                <label for="name">Nom de la Playlist:</label>
+                <br><label for="name">Nom de la Playlist:</label>
                 <input type="text" name="name" value="<?php echo htmlspecialchars($playlist->name, ENT_QUOTES, 'UTF-8'); ?>" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="description">Description de la Playlist:</label>
+                <br><label for="description">Description de la Playlist:</label>
                 <textarea name="description" class="form-control" required><?php echo htmlspecialchars($playlist->description, ENT_QUOTES, 'UTF-8'); ?></textarea>
             </div>
             <div class="form-group">
-                <label for="visibility">Visibilité de la Playlist:</label>
+                <br><label for="visibility">Visibilité de la Playlist:</label>
                 <select name="public" class="form-control">
                     <option value="1" <?php if ($playlist->public == 1) echo 'selected'; ?>>Public</option>
                     <option value="0" <?php if ($playlist->public == 0) echo 'selected'; ?>>Privé</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <br><button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
     <?php endif; ?>
 
