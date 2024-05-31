@@ -196,21 +196,23 @@ header.short-text a {
 footer.short-text {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the items vertically */
 }
 
 /* Style pour la liste déroulante */
 .select-playlist {
+    display: inline-block; /* Transformer en élément inline-block */
     padding: 8px 15px; /* Rembourrage intérieur */
     font-size: 16px; /* Taille de la police */
     border: 1px solid #ccc; /* Bordure */
     border-radius: 4px; /* Coins arrondis */
     background-color: #f0f0f0;
     margin-right: 10px; /* Marge à droite pour l'espace entre la liste déroulante et le bouton */
+    margin-bottom: 10px; /* Ajout d'un espace en bas */
 }
 
 /* Style pour le bouton Ajouter à la playlist */
 .btn-add-to-playlist {
+    display: inline-block; /* Transformer en élément inline-block */
     background-color: #6021aa; /* Couleur de fond */
     color: white; /* Couleur du texte */
     padding: 10px 20px; /* Rembourrage intérieur */
