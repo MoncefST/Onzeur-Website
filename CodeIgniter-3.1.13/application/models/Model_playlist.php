@@ -54,6 +54,7 @@ class Model_playlist extends CI_Model {
 
         return $this->db->insert('playlist_song', $data);
     }
+    
 
     public function song_exists_in_playlist($playlist_id, $song_id) {
         $this->db->where('playlist_id', $playlist_id);

@@ -6,9 +6,11 @@ class Musiques extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('Model_music');
+        $this->load->model('Model_playlist');
         $this->load->library('pagination');
         $this->load->helper('url');
         $this->load->helper('html');
+        $this->load->library('session');
     }
 
     public function index($page = 1){
@@ -30,6 +32,11 @@ class Musiques extends CI_Controller {
         $current_page = $page; 
         $genres = $this->Model_music->getGenres();
         $artists = $this->Model_music->getArtists();
+
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+        }
 
         $data['musiques'] = $musiques;
         $data['total_pages'] = $total_pages;

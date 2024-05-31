@@ -258,6 +258,25 @@ class Playlists extends CI_Controller {
             $this->load->view('layout/footer_dark');
         }
     }
+
+    public function add_album_to_playlist($album_id, $playlist_id) {
+        // Vérifiez si l'utilisateur est connecté
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        // Ajouter toutes les chansons de l'album à la playlist spécifiée
+        $songs = $this->Model_music->get_songs_by_album($album_id);
+        foreach ($songs as $song) {
+            $data = array(
+                'playlist_id' => $playlist_id,
+                'song_id' => $song->id
+            );
+            $this->Model_playlist->add_song_to_playlist($data);
+        }
+    
+        redirect('playlists/view/' . $playlist_id);
+    }     
     
     public function view($playlist_id) {
         // Vérifiez si la playlist est accessible à l'utilisateur actuellement connecté
@@ -294,6 +313,23 @@ class Playlists extends CI_Controller {
             // Rediriger vers une page d'erreur ou une page appropriée
             redirect('erreur/page_non_autorisee');
         }
+    }
+
+    public function add_music_to_playlist($music_id, $playlist_id) {
+        // Vérifiez si l'utilisateur est connecté
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        // Ajoutez la musique à la playlist spécifiée
+        $data = array(
+            'playlist_id' => $playlist_id,
+            'song_id' => $music_id  // Utilisez 'song_id' au lieu de 'music_id'
+        );
+        $this->Model_playlist->add_song_to_playlist($data);
+    
+        // Redirigez l'utilisateur vers la vue de la playlist
+        redirect('playlists/view/' . $playlist_id);
     }
     
     

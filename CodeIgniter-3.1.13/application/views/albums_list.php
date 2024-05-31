@@ -38,6 +38,14 @@
                     </header>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($album->jpeg); ?>" alt="<?php echo $album->name; ?>">
                     <footer class="short-text"><?php echo $album->year; ?> - <?php echo $album->artistName; ?></footer>
+                    <?php if ($this->session->userdata('user_id')): ?>
+                        <select id="playlist_<?php echo $album->id; ?>" class="select-playlist">
+                            <?php foreach ($user_playlists as $playlist) : ?>
+                                <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
+                    <?php endif; ?>
                 </article>
             </div>
         <?php endforeach; ?>
@@ -57,3 +65,12 @@
         <?php endif; ?>
     </div>
 </body>
+<script>
+    function addToPlaylist(albumId) {
+        // Récupérer l'ID de la playlist sélectionnée
+        var playlistId = document.getElementById('playlist_' + albumId).value;
+
+        // Redirection vers la méthode du contrôleur Playlists pour ajouter la chanson à la playlist spécifiée
+        window.location.href = "<?php echo base_url('index.php/playlists/add_album_to_playlist/'); ?>" + albumId + "/" + playlistId;
+    }
+</script>

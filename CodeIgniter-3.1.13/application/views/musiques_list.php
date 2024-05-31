@@ -52,6 +52,16 @@
                             <!-- Lien YouTube  -->
                             <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="youtube"  target="_blank">YouTube</a>
                         </div>
+
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            <select id="playlist_music_<?php echo $musique->id; ?>" class="select-playlist">
+                                <?php foreach ($user_playlists as $playlist) : ?>
+                                    <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button onclick="addToPlaylistMusic(<?php echo $musique->id; ?>)" class="btn-add-to-playlist">Ajouter la musique à la playlist</button>
+                        <?php endif; ?>
+
                     </footer>
                 </article>
             </div>
@@ -72,3 +82,12 @@
         <?php endif; ?>
     </div>
 </body>
+<script>
+    function addToPlaylistMusic(musiqueId) {
+        // Récupérer l'ID de la playlist sélectionnée
+        var playlistId = document.getElementById('playlist_music_' + musiqueId).value;
+
+        // Redirection vers la méthode du contrôleur Playlists pour ajouter la musique à la playlist spécifiée
+        window.location.href = "<?php echo base_url('index.php/playlists/add_music_to_playlist/'); ?>" + musiqueId + "/" + playlistId;
+    }
+</script>

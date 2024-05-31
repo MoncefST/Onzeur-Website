@@ -6,8 +6,10 @@ class Albums extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('model_music');
+        $this->load->model('Model_playlist');
         $this->load->helper('url');
         $this->load->helper('html');
+        $this->load->library('session');
     }
 
     public function index($page = 1){
@@ -22,6 +24,11 @@ class Albums extends CI_Controller {
         $albums = $this->model_music->getAlbums($limit, $offset, $order_by, $genre_id, $artist_id);
         $total_albums = $this->model_music->get_total_albums($genre_id, $artist_id);
 
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+        }
+        
         $data['total_pages'] = ceil($total_albums / $limit);
         $data['current_page'] = $page;
         $data['albums'] = $albums;
