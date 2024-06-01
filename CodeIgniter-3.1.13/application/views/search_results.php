@@ -15,12 +15,14 @@
                     <?php echo htmlspecialchars($musique->artistName, ENT_QUOTES, 'UTF-8'); ?>
                 </a>
                 <?php if ($this->session->userdata('user_id')): ?>
+                    <?php if (!empty($user_playlists)): ?>
                     <select id="playlist_<?php echo $musique->id; ?>" class="select-playlist">
                         <?php foreach ($user_playlists as $playlist) : ?>
                             <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <button onclick="addToMusicPlaylist(<?php echo $musique->id; ?>)" class="btn-add-to-playlist">Ajouter la musique à la playlist</button>
+                <?php endif; ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
@@ -41,12 +43,14 @@
                     <?php echo htmlspecialchars($album->artistName, ENT_QUOTES, 'UTF-8'); ?>
                 </a>
                 <?php if ($this->session->userdata('user_id')): ?>
+                    <?php if (!empty($user_playlists)): ?>
                     <select id="playlist_<?php echo $album->id; ?>" class="select-playlist">
                         <?php foreach ($user_playlists as $playlist) : ?>
                             <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <button onclick="addAlbumToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
+                <?php endif; ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
@@ -73,21 +77,23 @@
     <div class="section">
         <h3 class="section-title">Artistes</h3>
         <ul class="artist-list">
-        <?php foreach ($artistes as $artiste): ?>
-            <li>
-                <a href="<?php echo site_url('artiste/' . htmlspecialchars($artiste->id, ENT_QUOTES, 'UTF-8')); ?>">
-                    <?php echo htmlspecialchars($artiste->name, ENT_QUOTES, 'UTF-8'); ?>
-                </a>
-                <?php if ($this->session->userdata('user_id')): ?>
-                    <select id="playlist_<?php echo $artiste->id; ?>" class="select-playlist">
-                        <?php foreach ($user_playlists as $playlist) : ?>
-                            <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button onclick="addArtistToPlaylist(<?php echo $artiste->id; ?>)" class="btn-add-to-playlist">Ajouter l'artiste à la playlist</button>
-                <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
+            <?php foreach ($artistes as $artiste): ?>
+                <li>
+                    <a href="<?php echo site_url('artiste/' . htmlspecialchars($artiste->id, ENT_QUOTES, 'UTF-8')); ?>">
+                        <?php echo htmlspecialchars($artiste->name, ENT_QUOTES, 'UTF-8'); ?>
+                    </a>
+                    <?php if ($this->session->userdata('user_id')): ?>
+                        <?php if (!empty($user_playlists)): ?>
+                            <select id="playlist_<?php echo $artiste->id; ?>" class="select-playlist">
+                                <?php foreach ($user_playlists as $playlist) : ?>
+                                    <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button onclick="addArtistToPlaylist(<?php echo $artiste->id; ?>)" class="btn-add-to-playlist">Ajouter l'artiste à la playlist</button>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 <?php endif; ?>

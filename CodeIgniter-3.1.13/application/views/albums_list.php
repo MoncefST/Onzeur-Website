@@ -37,14 +37,16 @@
                         <?php echo anchor("albums/view/{$album->id}", $album->name); ?>
                     </header>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($album->jpeg); ?>" alt="<?php echo $album->name; ?>">
-                    <footer class="short-text"><?php echo $album->year; ?> - <?php echo $album->artistName; ?><br><br>
+                    <footer class="short-text"><?php echo $album->year; ?> - <?php echo $album->artistName; ?>
                     <?php if ($this->session->userdata('user_id')): ?>
-                        <select id="playlist_<?php echo $album->id; ?>" class="select-playlist">
+                        <?php if (!empty($user_playlists)): ?>
+                            <br><br><select id="playlist_<?php echo $album->id; ?>" class="select-playlist">
                             <?php foreach ($user_playlists as $playlist) : ?>
                                 <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
+                    <?php endif; ?>
                     <?php endif; ?>
                 </footer>
                 </article>

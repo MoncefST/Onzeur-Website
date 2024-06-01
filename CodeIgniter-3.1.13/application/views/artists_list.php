@@ -16,6 +16,7 @@
                         <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($artist->name); ?>&sp=EgIQAg%253D%253D" class="youtube" target="_blank">YouTube</a>
                     </p>
                     <?php if ($this->session->userdata('user_id')): ?>
+                        <?php if (!empty($user_playlists)): ?>
                         <form method="post" action="<?php echo site_url('playlists/add_artist_in_playlist_from_list/'.$artist->id); ?>">
                             <select name="playlist_id" class="select-playlist">
                                 <?php foreach ($user_playlists as $playlist) : ?>
@@ -25,6 +26,7 @@
                             <input type="hidden" name="artist_id" value="<?php echo $artist->id; ?>">
                             <button type="submit" class="btn-add-to-playlist">Ajouter les musiques de l'artiste à la playlist</button>
                         </form>
+                    <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </li>

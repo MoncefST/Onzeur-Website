@@ -52,8 +52,9 @@
                             <!-- Lien YouTube  -->
                             <a href="https://www.youtube.com/results?search_query=<?php echo urlencode($musique->name . ' ' . $musique->artistName); ?>" class="youtube"  target="_blank">YouTube</a>
                         </div>
-                        <br>
                         <?php if ($this->session->userdata('user_id')): ?>
+                            <?php if (!empty($user_playlists)): ?>
+                                <br>
                             <select id="playlist_music_<?php echo $musique->id; ?>" class="select-playlist">
                                 <?php foreach ($user_playlists as $playlist) : ?>
                                     <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
@@ -61,7 +62,7 @@
                             </select>
                             <button onclick="addToPlaylistMusic(<?php echo $musique->id; ?>)" class="btn-add-to-playlist">Ajouter la musique à la playlist</button>
                         <?php endif; ?>
-
+                        <?php endif; ?>
                     </footer>
                 </article>
             </div>
