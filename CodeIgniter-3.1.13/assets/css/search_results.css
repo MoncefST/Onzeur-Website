@@ -149,3 +149,25 @@ body {
 .pagination .active {
     background-color: #29043e;
 }
+
+.btn-add-to-playlist {
+    margin-top: 10px;
+    background-color: #4a0772;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.select-playlist {
+    margin-top: 10px;
+    display: block;
+    padding: 5px;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+}
+
+.select-playlist option {
+    padding: 5px;
+}

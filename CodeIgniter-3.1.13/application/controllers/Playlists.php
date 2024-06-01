@@ -316,19 +316,17 @@ class Playlists extends CI_Controller {
     }
 
     public function add_music_to_playlist($music_id, $playlist_id) {
-        // Vérifiez si l'utilisateur est connecté
+        // Vérifier si l'utilisateur est connecté
         if (!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
         }
     
-        // Ajoutez la musique à la playlist spécifiée
         $data = array(
             'playlist_id' => $playlist_id,
-            'song_id' => $music_id  // Utilisez 'song_id' au lieu de 'music_id'
+            'song_id' => $music_id
         );
         $this->Model_playlist->add_song_to_playlist($data);
     
-        // Redirigez l'utilisateur vers la vue de la playlist
         redirect('playlists/view/' . $playlist_id);
     }
     
@@ -375,6 +373,56 @@ class Playlists extends CI_Controller {
             $data['title']="Ajouter les musiques d'un Artiste à la Playlist";
             $data['css']="assets/css/playlist_add_song";
 
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('playlist_add_artist',$data);
+            $this->load->view('layout/footer_dark');
+        }
+    }
+
+    public function add_artist_in_playlist_from_list($artist_id,$playlist_id = NULL) {
+        if($playlist_id === NULL){
+            $playlist_id = $this->input->post('playlist_id');
+        }
+        $this->verify_playlist_ownership($playlist_id);
+    
+        if ($this->input->post() || $playlist_id) {
+            // Récupérer l'ID de l'artiste à partir du formulaire
+            $songs = $this->Model_music->get_songs_by_artist($artist_id);
+            $all_songs_exist = true; // Variable pour vérifier si toutes les chansons existent déjà dans la playlist
+    
+            // Vérifier si toutes les chansons de l'artiste existent déjà dans la playlist
+            foreach ($songs as $song) {
+                if (!$this->Model_playlist->song_exists_in_playlist($playlist_id, $song->id)) {
+                    $all_songs_exist = false;
+                    break;
+                }
+            }
+    
+            if ($all_songs_exist) {
+                $this->session->set_flashdata('error', 'Toutes les chansons de cet artiste existent déjà dans la playlist.');
+            } else {
+                foreach ($songs as $song) {
+                    if (!$this->Model_playlist->song_exists_in_playlist($playlist_id, $song->id)) {
+                        $data = array(
+                            'playlist_id' => $playlist_id,
+                            'song_id' => $song->id
+                        );
+                        $this->Model_playlist->add_song_to_playlist($data);
+                    }
+                }
+    
+                $this->session->set_flashdata('success', 'Les chansons de l\'artiste ont été ajoutées avec succès à la playlist.');
+            }
+    
+            redirect('playlists/view/' . $playlist_id);
+        } else {
+            // Récupérer tous les artistes disponibles
+            $data['artists'] = $this->Model_music->get_all_artists();
+            $data['playlist_id'] = $playlist_id;
+    
+            $data['title']="Ajouter les musiques d'un Artiste à la Playlist";
+            $data['css']="assets/css/playlist_add_song";
+    
             $this->load->view('layout/header_dark', $data);
             $this->load->view('playlist_add_artist',$data);
             $this->load->view('layout/footer_dark');

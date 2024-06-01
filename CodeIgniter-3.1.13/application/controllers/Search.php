@@ -6,7 +6,9 @@ class Search extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('Search_model');
+        $this->load->model('Model_playlist');
         $this->load->helper(['url', 'html']);
+        $this->load->library('session');
     }
 
     public function index(){
@@ -39,6 +41,11 @@ class Search extends CI_Controller {
         $data['albums'] = $albums;
         $data['genres'] = $genres;
         $data['artistes'] = $artistes;
+                
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+        }
 
         $data['title'] = "Résultats de la recherche";
         $data['css'] = "assets/css/search_results";

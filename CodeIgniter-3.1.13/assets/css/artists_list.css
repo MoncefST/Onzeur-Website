@@ -132,3 +132,35 @@ body {
     color: rgb(255, 255, 255);
     background-color: rgba(84, 15, 202, 0.8); 
 }
+
+.select-playlist {
+    padding: 8px 15px; 
+    font-size: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    align-items: baseline;
+}
+
+.select-playlist option {
+    padding: 8px 15px; 
+    font-size: 16px; 
+    background-color: #fff; 
+    color: #333; 
+}
+
+.btn-add-to-playlist {
+    background-color: #6021aa; 
+    color: white; 
+    padding: 10px 20px; 
+    margin-top: 10px;
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    align-items: baseline;
+}
+
+.btn-add-to-playlist:hover {
+    background-color: #461860; 
+}

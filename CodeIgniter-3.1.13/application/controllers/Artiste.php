@@ -7,8 +7,10 @@ class Artiste extends CI_Controller {
         parent::__construct();
         $this->load->model('Model_artist');
         $this->load->model('Model_music');
+        $this->load->model('Model_playlist');
         $this->load->helper('url');
         $this->load->helper('html');
+        $this->load->library('session');
     }
 
     public function index($artiste_id){
@@ -23,6 +25,7 @@ class Artiste extends CI_Controller {
             // Charger la vue avec les détails de l'artiste et ses albums
             $data['artiste'] = $artiste;
             $data['albums'] = $albums;
+            
             $data['mostUsedGenre'] = $mostUsedGenre; // Passer $mostUsedGenre à la vue
             $data['title']="Détails de l'artiste - Onzeur ".$artiste->name;
             $data['css'] = 'assets/css/artiste_details';
@@ -50,6 +53,11 @@ class Artiste extends CI_Controller {
         $data['current_order'] = $order;
         $data['title']="Détails de l'artiste - Onzeur ";
         $data['css'] = 'assets/css/artists_list.css';
+        
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+        }
         
         $this->load->view('layout/header_dark',$data);
         $this->load->view('artists_list', $data);
