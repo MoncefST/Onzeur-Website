@@ -28,7 +28,6 @@
         </form>
     </div>
 
-    
     <section class="list">
         <?php foreach($musiques as $musique): ?>
             <div>

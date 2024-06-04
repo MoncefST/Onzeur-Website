@@ -460,9 +460,7 @@ class Utilisateur extends CI_Controller {
     
         $user_id = $this->session->userdata('user_id');
         $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
-    
         $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
-
         $data['title']="Dashboard - Onzeur";
         $data['css']="assets/css/dashboard";
     

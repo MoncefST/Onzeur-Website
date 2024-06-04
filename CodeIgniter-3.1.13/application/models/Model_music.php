@@ -78,9 +78,9 @@ class Model_music extends CI_Model {
 
     public function get_album_by_id($id){
         $query = $this->db->query(
-            "SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg
+            "SELECT album.id, album.name, album.year, album.artistId, album.genreId, artist.name as artistName, genre.name as genreName, cover.jpeg
              FROM album
-             JOIN artist ON album.artistid = artist.id
+             JOIN artist ON album.artistId = artist.id
              JOIN genre ON album.genreid = genre.id
              JOIN cover ON album.coverid = cover.id
              WHERE album.id = ?", array($id)
@@ -99,7 +99,7 @@ class Model_music extends CI_Model {
         }
     
         return $album;
-    }
+    }    
 
     public function getMusiques($limit, $offset, $order_by = 'name', $order_direction = 'ASC', $genre_id = null, $artist_id = null) {
         // Préparer la colonne de tri en fonction du paramètre $order_by
