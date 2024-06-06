@@ -21,6 +21,11 @@ class Artiste extends CI_Controller {
         if($artiste){
             // Récupérer tous les albums de l'artiste
             $albums = $this->Model_music->getAlbumsByArtiste($artiste_id);
+
+            if ($this->session->userdata('user_id')) {
+                $user_id = $this->session->userdata('user_id');
+                $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+            }
             
             // Charger la vue avec les détails de l'artiste et ses albums
             $data['artiste'] = $artiste;
