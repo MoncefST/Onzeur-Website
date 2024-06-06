@@ -197,7 +197,7 @@ class Playlists extends CI_Controller {
     
             $new_playlist = array(
                 'name' => 'Playlist aléatoire',
-                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires du ' . date('Y-m-d H:i:s'),
+                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires du ' . date('d/m/Y H:i:s'),
                 'utilisateur_id' => $this->session->userdata('user_id')
             );
     
