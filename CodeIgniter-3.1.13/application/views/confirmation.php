@@ -9,12 +9,12 @@
 <?php echo form_open('utilisateur/confirmer', array('class' => 'confirmation-form')); ?>
     <div>
         <label for="email">Email</label>
-        <input type="text" name="email" value="<?php echo set_value('email'); ?>">
+        <input type="text" id="email" name="email" value="<?php echo set_value('email'); ?>">
         <?php echo form_error('email'); ?>
     </div>
     <div>
         <label for="code">Code de confirmation</label>
-        <input type="text" name="code" value="<?php echo set_value('code'); ?>">
+        <input type="text" id="code" name="code" value="<?php echo set_value('code'); ?>">
         <?php echo form_error('code'); ?>
     </div>
     <div>

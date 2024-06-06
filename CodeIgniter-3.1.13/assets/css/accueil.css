@@ -5,11 +5,17 @@ body {
     padding: 0;
     color: #640875;
 }
+
 .container {
     width: 95%;
     margin: 0 auto;
     padding: 20px;
 }
+
+.container video{
+    width: 100%;
+}
+
 h1, h2, h3 {
     color: #444;
 }
@@ -99,7 +105,7 @@ h1, h2, h3 {
     cursor: pointer;
 }
 
-.hero button {
+.bouton {
     padding: 15px 40px;
     font-size: 1.2rem;
     background-color: #640875;
@@ -108,6 +114,10 @@ h1, h2, h3 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.textAccueil{
+    padding-bottom: 20px;
 }
 
 .hero button:hover {
@@ -199,4 +209,3 @@ h1, h2, h3 {
     border-radius: 4px;
     cursor: pointer;
 }
-

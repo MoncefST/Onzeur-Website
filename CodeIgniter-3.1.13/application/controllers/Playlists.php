@@ -182,6 +182,8 @@ class Playlists extends CI_Controller {
     }
 
     public function generate_random() {
+        date_default_timezone_set('Europe/Paris');
+
         if (!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
         }
@@ -194,8 +196,8 @@ class Playlists extends CI_Controller {
             $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire, $genre, $artist);
     
             $new_playlist = array(
-                'name' => 'Playlist aléatoire du ' . date('Y-m-d H:i:s'),
-                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires.',
+                'name' => 'Playlist aléatoire',
+                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires du ' . date('Y-m-d H:i:s'),
                 'utilisateur_id' => $this->session->userdata('user_id')
             );
     

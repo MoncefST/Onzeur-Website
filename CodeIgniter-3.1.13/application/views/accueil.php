@@ -1,14 +1,12 @@
-
-
     <div class="hero">
         <h1>Bienvenue sur Onzeur !</h1>
-        <p>Le service de création de playlist musical numéro 1 en France.</p>
-        <a href="<?php echo site_url('musiques'); ?>"><button type="button">Accéder à la musique</button></a>
+        <p class="textAccueil">Le service de création de playlist musical numéro 1 en France.</p>
+        <a class="bouton" href="<?php echo site_url('musiques'); ?>">Accéder à la musique</a>
     </div>
 
     <div class="container">
         <div>
-            <video width="100%" controls>
+            <video controls>
                 <source src="<?php echo base_url('assets/mp4/videoOnzeur.mp4'); ?>" type="video/mp4">
                 Votre navigateur ne supporte pas les vidéos.
             </video>
