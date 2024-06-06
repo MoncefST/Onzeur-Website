@@ -53,7 +53,6 @@
                         </div>
                         <?php if ($this->session->userdata('user_id')): ?>
                             <?php if (!empty($user_playlists)): ?>
-                                <br>
                             <select id="playlist_music_<?php echo $musique->id; ?>" class="select-playlist">
                                 <?php foreach ($user_playlists as $playlist) : ?>
                                     <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>

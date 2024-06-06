@@ -158,6 +158,7 @@ header.short-text a {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 10px;
 }
 
 .music-links a.spotify {
@@ -178,8 +179,6 @@ header.short-text a {
     color: rgb(255, 255, 255);
     background-color: rgba(84, 15, 202, 0.8); /* Fond légèrement plus clair au survol */
 }
-
-
 
 .artist-name,
 .album-name {
