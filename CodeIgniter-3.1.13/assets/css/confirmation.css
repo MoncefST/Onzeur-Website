@@ -1,0 +1,56 @@
+/* Styles pour le formulaire de confirmation d'inscription */
+
+/* Conteneur principal du formulaire */
+.confirmation-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style des étiquettes */
+.confirmation-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style des champs de texte */
+.confirmation-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style des boutons */
+.confirmation-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8400ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.confirmation-form button:hover {
+    background-color: #6e00b3;
+}
+
+/* Style des messages d'erreur */
+.confirmation-error {
+    color: #ff0000;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.confirmation-title {
+    text-align: center;
+}

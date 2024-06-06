@@ -19,7 +19,6 @@ class Utilisateur extends CI_Controller {
     }
 
     public function inscription(){
-        // Définir les règles de validation
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilisateur.email]');
         $this->form_validation->set_rules('nom', 'Nom', 'required');
         $this->form_validation->set_rules('prenom', 'Prénom', 'required');
@@ -29,42 +28,134 @@ class Utilisateur extends CI_Controller {
         ));
     
         if ($this->form_validation->run() == FALSE) {
-
-            $data['title']="Inscription";
-            $data['css']="assets/css/inscription";
-
-            // Charger la vue avec les erreurs
-            $this->load->view('layout/header_dark',$data);
+            $data['title'] = "Inscription";
+            $data['css'] = "assets/css/inscription";
+    
+            $this->load->view('layout/header_dark', $data);
             $this->load->view('inscription');
             $this->load->view('layout/footer_dark');
         } else {
-            // Récupérer les données du formulaire
+            $code = rand(100000, 999999); // Générer un code de confirmation à 6 chiffres
             $data = array(
                 'email' => $this->input->post('email'),
                 'nom' => $this->input->post('nom'),
                 'prenom' => $this->input->post('prenom'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT) // Hasher le mot de passe
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'confirmation_code' => $code,
+                'code_sent_at' => date('Y-m-d H:i:s')
             );
     
-            // Insérer les données dans la base de données
             if ($this->Utilisateur_model->insert_user($data)) {
-                // Envoyer un email de confirmation
-                $this->send_confirmation_email($data['email'], $data['prenom'], $data['nom']);
-                
-                $this->session->set_flashdata('success', 'Inscription réussie. Vous pouvez maintenant vous connecter.');
-                redirect('utilisateur/connexion');
+                $this->send_confirmation_code_email($data['email'], $data['prenom'], $data['nom'], $code);
+                $this->session->set_flashdata('success', 'Inscription réussie. Un code de confirmation a été envoyé à votre adresse email.');
+                redirect('utilisateur/confirmer');
             } else {
                 $data['error'] = 'Une erreur est survenue. Veuillez réessayer.';
-
-                $data['title']="Inscription";
-                $data['css']="assets/css/inscription";
-
-                $this->load->view('layout/header_dark',$data);
-                $this->load->view('inscription',$data);
+                $data['title'] = "Inscription";
+                $data['css'] = "assets/css/inscription";
+    
+                $this->load->view('layout/header_dark', $data);
+                $this->load->view('inscription', $data);
                 $this->load->view('layout/footer_dark');
             }
         }
     }
+    
+    private function send_confirmation_code_email($to_email, $prenom, $nom, $code) {
+        $mail = new PHPMailer(true);
+        try {
+            // Configuration du serveur SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'onzeur.contact@gmail.com';
+            $mail->Password = 'ofoi hjpo isxf azdk'; 
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+    
+            // Destinataires
+            $mail->setFrom('onzeur.contact@gmail.com', 'Support Onzeur');
+            $mail->addAddress($to_email);
+    
+            // Contenu de l'email
+            $mail->isHTML(true);
+            $mail->Subject = 'Votre code de confirmation - Onzeur';
+    
+            $mail_body = '
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .container {
+                        width: 80%;
+                        margin: 0 auto;
+                        background-color: #fff;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    .header {
+                        text-align: center;
+                        padding: 20px;
+                    }
+                    .header img {
+                        max-width: 150px;
+                    }
+                    .content {
+                        margin-top: 20px;
+                    }
+                    .content h1 {
+                        color: #333;
+                    }
+                    .content p {
+                        font-size: 16px;
+                        line-height: 1.6;
+                        color: #666;
+                    }
+                    .footer {
+                        margin-top: 20px;
+                        text-align: center;
+                        font-size: 14px;
+                        color: #999;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <img src="'.base_url('assets/img/Logo_ONZEUR_LIGHT.png').'" alt="Logo Onzeur">
+                    </div>
+                    <div class="content">
+                        <h1>Bonjour, '.$prenom.' '.$nom.' !</h1>
+                        <p>Merci de vous être inscrit sur Onzeur. Pour finaliser votre inscription, veuillez utiliser le code de confirmation suivant :</p>
+                        <p><strong>Code de confirmation : '.$code.'</strong></p>
+                        <p>Ce code est valable pendant 1 minute.</p>
+                        <p>Si vous n\'avez pas demandé cette inscription, veuillez ignorer cet email.</p>
+                        <p>Cordialement,<br>L\'équipe Onzeur</p>
+                    </div>
+                    <div class="footer">
+                        &copy; '.date("Y").' Onzeur. Tous droits réservés.
+                    </div>
+                </div>
+            </body>
+            </html>';
+    
+            $mail->Body = $mail_body;
+    
+            $mail->send();
+        } catch (Exception $e) {
+            log_message('error', 'Erreur lors de l\'envoi de l\'email: ' . $mail->ErrorInfo);
+        }
+    }
+    
+    
     
     private function send_confirmation_email($to_email, $prenom, $nom) {
         $mail = new PHPMailer(true);
@@ -166,6 +257,35 @@ class Utilisateur extends CI_Controller {
         }
     }
     
+    public function confirmer() {
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('code', 'Code de confirmation', 'required|exact_length[6]');
+    
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Confirmation - Onzeur";
+            $data['css'] = "assets/css/confirmation";
+    
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('confirmation');
+            $this->load->view('layout/footer_dark');
+        } else {
+            $email = $this->input->post('email');
+            $code = $this->input->post('code');
+    
+            $user = $this->Utilisateur_model->get_user_by_email($email);
+            if ($user && $user['confirmation_code'] == $code && strtotime($user['code_sent_at']) > strtotime('-1 minute')) {
+                // Mettre à jour le statut de l'utilisateur pour confirmer l'inscription
+                $this->Utilisateur_model->confirm_user($email);
+                $this->session->set_flashdata('success', 'Votre inscription a été confirmée. Vous pouvez maintenant vous connecter.');
+                redirect('utilisateur/connexion');
+            } else {
+                $this->session->set_flashdata('error', 'Code de confirmation invalide ou expiré. Veuillez réessayer.');
+                redirect('utilisateur/confirmer');
+            }
+        }
+    }    
+    
+
     public function ajouter_avis() {
         if(!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
@@ -394,16 +514,15 @@ class Utilisateur extends CI_Controller {
     }
     
 
-    public function connexion(){
+    public function connexion() {
         // Définir les règles de validation
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Mot de passe', 'required');
     
         if ($this->form_validation->run() == FALSE) {
-
-            $data['title']="Connexion";
-            $data['css']="assets/css/inscription";
-
+            $data['title'] = "Connexion";
+            $data['css'] = "assets/css/inscription";
+    
             // Charger la vue avec les erreurs
             $this->load->view('layout/header_dark', $data);
             $this->load->view('connexion');
@@ -417,29 +536,41 @@ class Utilisateur extends CI_Controller {
             $user = $this->Utilisateur_model->get_user($email);
     
             if ($user && password_verify($password, $user->password)) {
-                // Connexion réussie, enregistrer l'utilisateur dans la session
-                $this->session->set_userdata('user_id', $user->id);
-                // Définir un cookie pour indiquer que l'utilisateur est connecté
-                $cookie = array(
-                    'name'   => 'user_logged_in',
-                    'value'  => '1',
-                    'expire' => '86500', // durée de vie du cookie (1 jour)
-                    'secure' => TRUE
-                );
-                $this->input->set_cookie($cookie);
-                redirect('utilisateur/dashboard');
+                // Vérifier si l'utilisateur a confirmé son compte
+                if ($user->is_confirmed) {
+                    // Connexion réussie, enregistrer l'utilisateur dans la session
+                    $this->session->set_userdata('user_id', $user->id);
+                    // Définir un cookie pour indiquer que l'utilisateur est connecté
+                    $cookie = array(
+                        'name'   => 'user_logged_in',
+                        'value'  => '1',
+                        'expire' => '86500', // durée de vie du cookie (1 jour)
+                        'secure' => TRUE
+                    );
+                    $this->input->set_cookie($cookie);
+                    redirect('utilisateur/dashboard');
+                } else {
+                    $data['error'] = 'Votre compte n\'a pas encore été confirmé. Veuillez nous contacter pour vérifier votre identitée. <a href="' . base_url('index.php/contact/index') . '">Cliquez ici pour nous contacter</a>.';
+                    
+                    $data['title'] = "Connexion";
+                    $data['css'] = "assets/css/inscription";
+                    
+                    $this->load->view('layout/header_dark', $data);
+                    $this->load->view('connexion', $data);
+                    $this->load->view('layout/footer_dark');
+                }
             } else {
                 $data['error'] = 'Email ou mot de passe incorrect.';
                 
-                $data['title']="Connexion";
-                $data['css']="assets/css/inscription";
+                $data['title'] = "Connexion";
+                $data['css'] = "assets/css/inscription";
                 
-                $this->load->view('layout/header_dark',$data);
+                $this->load->view('layout/header_dark', $data);
                 $this->load->view('connexion', $data);
                 $this->load->view('layout/footer_dark');
             }
         }
-    }
+    }    
 
     public function deconnexion(){
         // Détruire la session de l'utilisateur

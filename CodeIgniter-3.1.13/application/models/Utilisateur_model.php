@@ -12,15 +12,19 @@ class Utilisateur_model extends CI_Model {
         return $this->db->insert('utilisateur', $data);
     }
 
-    public function get_user($email) {
-        $query = $this->db->get_where('utilisateur', array('email' => $email));
-        return $query->row();
+    public function confirm_user($email){
+        $this->db->where('email', $email);
+        return $this->db->update('utilisateur', array('is_confirmed' => 1, 'confirmation_code' => NULL, 'code_sent_at' => NULL));
     }
 
-    public function get_user_by_email($email) {
+    public function get_user($email) {
         $this->db->where('email', $email);
-        $query = $this->db->get('utilisateur'); // Assurez-vous que 'utilisateurs' est le nom de votre table d'utilisateurs
-        return $query->row(); // Retourne le premier résultat
+        $query = $this->db->get('utilisateur');
+        return $query->row();
+    }    
+
+    public function get_user_by_email($email){
+        return $this->db->get_where('utilisateur', array('email' => $email))->row_array();
     }
 
     public function get_user_by_id($id) {
@@ -65,6 +69,11 @@ class Utilisateur_model extends CI_Model {
     public function supprimer_avis($avis_id) {
         return $this->db->delete('avis', array('id' => $avis_id));
     } 
+
+    public function mettre_a_jour_code_confirmation($email, $nouveau_code) {
+        $this->db->where('email', $email);
+        return $this->db->update('utilisateur', array('confirmation_code' => $nouveau_code));
+    }
     
 }
 ?>
