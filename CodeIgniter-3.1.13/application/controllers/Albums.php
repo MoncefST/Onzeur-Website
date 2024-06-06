@@ -24,12 +24,20 @@ class Albums extends CI_Controller {
         $albums = $this->model_music->getAlbums($limit, $offset, $order_by, $genre_id, $artist_id);
         $total_albums = $this->model_music->get_total_albums($genre_id, $artist_id);
 
+        $total_pages = ceil($total_albums / $limit);
+
+        // Vérifier si la page demandée est valide
+        if ($page < 1 || $page > $total_pages) {
+            redirect('errors/error_404');
+            return;
+        }
+
         if ($this->session->userdata('user_id')) {
             $user_id = $this->session->userdata('user_id');
             $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
         }
         
-        $data['total_pages'] = ceil($total_albums / $limit);
+        $data['total_pages'] = $total_pages;
         $data['current_page'] = $page;
         $data['albums'] = $albums;
         $data['order_by'] = $order_by;

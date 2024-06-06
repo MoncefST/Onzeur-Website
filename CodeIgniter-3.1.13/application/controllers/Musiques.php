@@ -29,6 +29,12 @@ class Musiques extends CI_Controller {
         $total_musiques = $this->Model_music->get_total_musiques();
         $total_pages = ceil($total_musiques / $limit); 
 
+        // Vérifier si la page demandée est valide
+        if ($page < 1 || $page > $total_pages) {
+            redirect('errors/error_404');
+            return;
+        }
+
         $current_page = $page; 
         $genres = $this->Model_music->getGenres();
         $artists = $this->Model_music->getArtists();
