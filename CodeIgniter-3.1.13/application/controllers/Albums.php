@@ -48,16 +48,19 @@ class Albums extends CI_Controller {
     }
 
     public function view($id){
-        $album = $this->model_music->get_album_by_id($id);
+        [$album,$tracks] = $this->model_music->get_album_by_id($id);
         $data['album'] = $album;
-        
         $data['title'] = $album->name." - Details";
         $data['css']='assets/css/album_view';
+        $data['tracks'] = $tracks;
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
+        }
 
         $this->load->view('layout/header_dark', $data);
         $this->load->view('album_view');
         $this->load->view('layout/footer_dark');
     }
-
 }
 ?>

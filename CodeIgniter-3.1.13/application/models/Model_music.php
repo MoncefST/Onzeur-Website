@@ -95,10 +95,10 @@ class Model_music extends CI_Model {
                  WHERE track.albumid = ?
                  ORDER BY track.diskNumber, track.number", array($id)
             );
-            $album->tracks = $query->result();
+            $tracks = $query->result();
         }
     
-        return $album;
+        return [$album,$tracks];
     }    
 
     public function getMusiques($limit, $offset, $order_by = 'name', $order_direction = 'ASC', $genre_id = null, $artist_id = null) {
