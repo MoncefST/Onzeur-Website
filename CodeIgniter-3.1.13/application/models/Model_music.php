@@ -157,10 +157,6 @@ class Model_music extends CI_Model {
     public function get_all_albums() {
         return $this->db->get('album')->result();
     }
-
-    public function get_all_artists() {
-        return $this->db->get('artist')->result();
-    }    
     
     public function get_songs_by_album($album_id) {
         $this->db->select('song.*');
@@ -170,13 +166,42 @@ class Model_music extends CI_Model {
         return $this->db->get()->result();
     }    
 
-    public function get_random_songs($limit) {
+    public function get_random_songs($limit, $genre = null, $artist = null) {
+        $this->db->select('song.id, song.name');
+        $this->db->from('song');
+        $this->db->join('track', 'track.songId = song.id');
+        $this->db->join('album', 'album.id = track.albumId');
+        $this->db->join('artist', 'artist.id = album.artistId', 'left');
+        $this->db->join('genre', 'genre.id = album.genreId', 'left');
+
+        if ($genre) {
+            $this->db->where('genre.name', $genre);
+        }
+        if ($artist) {
+            $this->db->where('artist.name', $artist);
+        }
+
         $this->db->order_by('RAND()');
         $this->db->limit($limit);
-        return $this->db->get('song')->result();
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_all_genres() {
+        $this->db->distinct();
+        $this->db->select('name');
+        $query = $this->db->get('genre');
+        return array_column($query->result_array(), 'name');
+    }
+
+    public function get_all_artists() {
+        $this->db->distinct();
+        $this->db->select('name');
+        $query = $this->db->get('artist');
+        return array_column($query->result_array(), 'name');
     }
     
-
     public function get_total_musiques(){
         $query = $this->db->query("SELECT COUNT(*) as total_musiques FROM song");
         $result = $query->row();

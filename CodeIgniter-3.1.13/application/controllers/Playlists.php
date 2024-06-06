@@ -33,8 +33,7 @@ class Playlists extends CI_Controller {
         } else {
             redirect('utilisateur/connexion');
         }
-    }
-    
+    } 
     
     public function verify_playlist_ownership($playlist_id) {
         // Vérifier si l'utilisateur est connecté
@@ -120,7 +119,6 @@ class Playlists extends CI_Controller {
     
     public function add_song($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
-
         if ($this->input->post()) {
             $data = array(
                 'playlist_id' => $playlist_id,
@@ -134,10 +132,8 @@ class Playlists extends CI_Controller {
             }
             redirect('playlists/view/' . $playlist_id);
         } else {
-            // Récupérer toutes les musiques disponibles
             $data['songs'] = $this->Model_music->get_all_songs();
             $data['playlist_id'] = $playlist_id;
-
             $data['title']="Ajouter une Chanson à la Playlist";
             $data['css']="assets/css/playlist_add_song";
 
@@ -149,7 +145,6 @@ class Playlists extends CI_Controller {
      
     public function delete($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
-
         $this->Model_playlist->delete_playlist($playlist_id);
         redirect('playlists');
     }
@@ -163,7 +158,6 @@ class Playlists extends CI_Controller {
 
     public function duplicate($playlist_id) {
     $this->verify_playlist_ownership($playlist_id);
-
         $playlist = $this->Model_playlist->get_playlist_by_id($playlist_id);
         $songs = $this->Model_playlist->get_songs_by_playlist($playlist_id);
 
@@ -191,27 +185,43 @@ class Playlists extends CI_Controller {
         if (!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
         }
-
-        $nbrMusiqueAleatoire = 10;
-        $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire); // 10 chansons aléatoires
-        $new_playlist = array(
-            'name' => 'Playlist aléatoire du ' . date('Y-m-d H:i:s'),
-            'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires.',
-            'utilisateur_id' => $this->session->userdata('user_id')
-        );
-
-        $this->Model_playlist->create_playlist($new_playlist);
-        $new_playlist_id = $this->db->insert_id();
-
-        foreach ($songs as $song) {
-            $data = array(
-                'playlist_id' => $new_playlist_id,
-                'song_id' => $song->id
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $genre = $this->input->post('genre');
+            $artist = $this->input->post('artist');
+            $nbrMusiqueAleatoire = $this->input->post('nbrMusiqueAleatoire');
+            $nbrMusiqueAleatoire = is_numeric($nbrMusiqueAleatoire) ? intval($nbrMusiqueAleatoire) : 10;
+            $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire, $genre, $artist);
+    
+            $new_playlist = array(
+                'name' => 'Playlist aléatoire du ' . date('Y-m-d H:i:s'),
+                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires.',
+                'utilisateur_id' => $this->session->userdata('user_id')
             );
-            $this->Model_playlist->add_song_to_playlist($data);
-        }
+    
+            $this->Model_playlist->create_playlist($new_playlist);
+            $new_playlist_id = $this->db->insert_id();
+    
+            foreach ($songs as $song) {
+                $data = array(
+                    'playlist_id' => $new_playlist_id,
+                    'song_id' => $song->id
+                );
+                $this->Model_playlist->add_song_to_playlist($data);
+            }
+    
+            redirect('playlists');
+        } else {
+            $data['genres'] = $this->Model_music->get_all_genres();
+            $data['artists'] = $this->Model_music->get_all_artists();
+            $data['title']="Générer une playlist - Onzeur";
+            $data['css']="assets/css/generate_playlist";
 
-        redirect('playlists');
+
+            $this->load->view('layout/header_dark',$data);
+            $this->load->view('generate_playlist', $data);
+            $this->load->view('layout/footer_dark');
+        }
     }
 
     public function add_album($playlist_id) {
