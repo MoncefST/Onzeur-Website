@@ -22,4 +22,3 @@
 
         <input type="submit" value="Générer la playlist">
     </form>
-</body>

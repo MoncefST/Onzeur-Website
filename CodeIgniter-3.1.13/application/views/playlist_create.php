@@ -12,5 +12,5 @@
             <button type="submit" class="btn btn-primary">Créer</button>
         <?php echo form_close(); ?>
     </div>
-</body>
+
 

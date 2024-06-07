@@ -86,4 +86,3 @@
             <p>Vous n'avez écrit aucun avis.</p>
         <?php endif; ?>
     </div>
-</body>

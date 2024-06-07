@@ -80,7 +80,6 @@
             <a class="fleche" href="<?php echo base_url('index.php/musiques/index/'.($current_page+1).((isset($sort)) ? '?sort='.$sort : '')); ?>">></a>
         <?php endif; ?>
     </div>
-</body>
 <script>
     function addToPlaylistMusic(musiqueId) {
         // Récupérer l'ID de la playlist sélectionnée

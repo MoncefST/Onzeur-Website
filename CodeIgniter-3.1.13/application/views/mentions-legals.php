@@ -29,4 +29,4 @@
     <footer>
         <p>Cette page de mentions légales est conforme aux exigences légales en vigueur. Dernière mise à jour : 22 mai 2024.</p>
     </footer>
-</body>
+

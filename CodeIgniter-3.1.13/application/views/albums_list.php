@@ -71,7 +71,6 @@
         <a class="fleche" href="<?php echo base_url('index.php/albums/index/'.($current_page+1).'?order_by='.$order_by.'&genre_id='.$genre_id.'&artist_id='.$artist_id); ?>">></a>
     <?php endif; ?>
 </div>
-</body>
 <script>
     function addToPlaylist(albumId) {
         // Récupérer l'ID de la playlist sélectionnée

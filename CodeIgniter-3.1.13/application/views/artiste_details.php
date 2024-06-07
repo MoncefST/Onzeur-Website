@@ -45,7 +45,6 @@
         </ul>
         
     </div>
-</body>
 <script>
     function addToPlaylist(albumId) {
         // Récupérer l'ID de la playlist sélectionnée

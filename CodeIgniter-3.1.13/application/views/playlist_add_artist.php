@@ -12,4 +12,4 @@
             <button type="submit" class="btn btn-primary">Ajouter les musiques de l'artiste</button>
         <?php echo form_close(); ?>
     </div>
-</body>
+

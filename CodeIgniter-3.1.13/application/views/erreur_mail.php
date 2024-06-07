@@ -10,5 +10,5 @@
             <a href="<?php echo site_url('home'); ?>"><button>Retour à l'accueil</button></a>
         </div>
     </div>
-</body>
+
 

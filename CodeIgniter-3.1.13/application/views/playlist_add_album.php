@@ -12,4 +12,4 @@
             <button type="submit" class="btn btn-primary">Ajouter</button>
         <?php echo form_close(); ?>
     </div>
-</body>
+

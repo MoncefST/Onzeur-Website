@@ -151,5 +151,5 @@
             startGame(); // Commencer le compte à rebours et le jeu après 3 secondes
         };
     </script>
-</body>
+
 

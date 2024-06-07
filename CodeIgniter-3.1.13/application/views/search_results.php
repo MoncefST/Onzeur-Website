@@ -102,7 +102,7 @@
     <p class="no-results">Aucun résultat trouvé.</p>
 <?php endif; ?>
 
-</body>
+
 <script>
 function addToMusicPlaylist(musicId) {
     var playlistId = document.getElementById('playlist_' + musicId).value;
