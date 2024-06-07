@@ -41,11 +41,11 @@ class Artiste extends CI_Controller {
             
         } else {
             // Gérer le cas où l'artiste n'est pas trouvé == afficher un error 404
-            show_404();
+            redirect('errors/error_404');
+            return;
         }
     }
     
-
     public function list_artists(){
         // Récupérer le paramètre de tri (croissant ou decroissant)
         $order = $this->input->get('order') ? $this->input->get('order') : 'ASC';
@@ -56,7 +56,7 @@ class Artiste extends CI_Controller {
         // Charger la vue avec la liste des artistes
         $data['artists'] = $artists;
         $data['current_order'] = $order;
-        $data['title']="Détails de l'artiste - Onzeur ";
+        $data['title']="Artistes - Onzeur ";
         $data['css'] = 'assets/css/artists_list.css';
         
         if ($this->session->userdata('user_id')) {

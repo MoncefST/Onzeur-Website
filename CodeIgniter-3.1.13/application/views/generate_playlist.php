@@ -2,7 +2,7 @@
     <h1>Générer une playlist</h1>
     <form action="<?php echo site_url('playlists/generate_random'); ?>" method="post" class="formulaire">
         <label for="nbrMusiqueAleatoire">Nombre de musiques :</label>
-        <input type="number" name="nbrMusiqueAleatoire" id="nbrMusiqueAleatoire" value="5" min="1" max="50"><br><br>
+        <input type="number" name="nbrMusiqueAleatoire" id="nbrMusiqueAleatoire" value="5" min="1" max="10"><br><br>
 
         <label for="genre">Genre :</label>
         <select name="genre" id="genre">
