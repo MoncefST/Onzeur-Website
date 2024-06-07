@@ -20,17 +20,11 @@ class Musiques extends CI_Controller {
         $genre_id = $this->input->get('genre_id');
         $artist_id = $this->input->get('artist_id');
     
-        $musiques = $this->Model_music->getMusiques($limit, $offset, $sort, 'ASC', $genre_id, $artist_id);
-        $total_musiques = $this->Model_music->get_total_musiques_filtered($genre_id, $artist_id); // Utiliser la nouvelle méthode ici
-        $total_pages = ceil($total_musiques / $limit);
-    
-        // Vérifier si la page demandée est valide
-        if ($page < 1 || $page > $total_pages) {
-            redirect('errors/error_404');
-            return;
-        }
+        $total_musiques = $this->Model_music->get_total_musiques_filtered($genre_id, $artist_id);
+        $total_pages = ceil($total_musiques / $limit);      
     
         $current_page = $page; 
+        $musiques = $this->Model_music->getMusiques($limit, $offset, $sort, 'ASC', $genre_id, $artist_id);
         $genres = $this->Model_music->getGenres();
         $artists = $this->Model_music->getArtists();
     
@@ -50,10 +44,21 @@ class Musiques extends CI_Controller {
     
         $data['title'] = "Musiques - Onzeur";
         $data['css'] = "assets/css/musiques_list";
+
+        // Vérifier si la page demandée est valide
+        if ($page > $total_pages || $page < 1) {
+            // Définir le message d'erreur
+            $data['error_message'] = "Aucun résultat n'a été trouvé...";
+            // Charger la vue des musiques avec le message d'erreur
+            $this->load->view('layout/header_dark', $data);
+            $this->load->view('musiques_list', $data);
+            $this->load->view('layout/footer_dark');
+            return;
+        }  
     
         $this->load->view('layout/header_dark', $data);
         $this->load->view('musiques_list', $data);
         $this->load->view('layout/footer_dark');
-    }      
+    }     
     
 }

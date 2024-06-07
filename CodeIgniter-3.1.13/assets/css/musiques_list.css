@@ -223,3 +223,18 @@ footer.short-text {
 .btn-add-to-playlist:hover {
     background-color: #461860; /* Couleur de fond au survol */
 }
+
+#error-message {
+    color: red;
+    background-color: #ffd6d6; /* Fond rouge pour les messages d'erreur */
+    margin-top: 10px; /* Ajout de marge en haut des messages */
+    padding: 10px; /* Ajout de rembourrage aux messages */
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex; /* Utilise Flexbox */
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+}
+
+
+

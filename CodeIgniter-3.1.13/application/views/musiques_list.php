@@ -28,6 +28,12 @@
         </form>
     </div>
 
+    <?php if (isset($error_message)): ?>
+        <div id="error-message" class="error-message">
+            <?php echo $error_message; ?>
+        </div>
+    <?php endif; ?>
+
     <section class="list">
         <?php foreach($musiques as $musique): ?>
             <div>
