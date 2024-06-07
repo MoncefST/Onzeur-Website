@@ -28,9 +28,16 @@
     </form>
 </div>
 
+<?php if (empty($albums)): ?>
+        <div id="error-message" class="error-message">
+            <p>Aucun album trouvé pour cette sélection.</p>
+        </div>
+<?php endif; ?>
+
+
 <section class="list">
     <?php if (empty($albums)): ?>
-        <p>Aucun album trouvé pour cette sélection.</p>
+
     <?php else: ?>
         <?php foreach($albums as $album): ?>
             <div>
