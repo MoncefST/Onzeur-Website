@@ -26,10 +26,16 @@ class Model_playlist extends CI_Model {
 
     // Récupérer toutes les playlists d'un utilisateur spécifique
     public function get_user_playlists($user_id) {
+        if ($user_id === NULL) {
+            return;
+        } else{
+
+        
         $this->db->where('utilisateur_id', $user_id);
         // Ne récupérer que les playlists publiques ou celles appartenant à l'utilisateur
         $this->db->where('(public = 1 OR utilisateur_id = ' . $user_id . ')');
         return $this->db->get('playlist')->result();
+        }
     }
 
     // Mettre à jour une playlist
