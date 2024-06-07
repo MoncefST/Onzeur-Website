@@ -14,11 +14,6 @@ class Musiques extends CI_Controller {
     }
 
     public function index($page = 1){
-        $this->load->model('Model_music');
-        $this->load->library('pagination');
-        $this->load->helper('url');
-        $this->load->helper('html');
-    
         $limit = 30;
         $offset = ($page - 1) * $limit;
         $sort = $this->input->get('sort');
@@ -26,24 +21,24 @@ class Musiques extends CI_Controller {
         $artist_id = $this->input->get('artist_id');
     
         $musiques = $this->Model_music->getMusiques($limit, $offset, $sort, 'ASC', $genre_id, $artist_id);
-        $total_musiques = $this->Model_music->get_total_musiques();
-        $total_pages = ceil($total_musiques / $limit); 
-
+        $total_musiques = $this->Model_music->get_total_musiques_filtered($genre_id, $artist_id); // Utiliser la nouvelle méthode ici
+        $total_pages = ceil($total_musiques / $limit);
+    
         // Vérifier si la page demandée est valide
         if ($page < 1 || $page > $total_pages) {
             redirect('errors/error_404');
             return;
         }
-
+    
         $current_page = $page; 
         $genres = $this->Model_music->getGenres();
         $artists = $this->Model_music->getArtists();
-
+    
         if ($this->session->userdata('user_id')) {
             $user_id = $this->session->userdata('user_id');
             $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
         }
-
+    
         $data['musiques'] = $musiques;
         $data['total_pages'] = $total_pages;
         $data['current_page'] = $current_page;
@@ -59,6 +54,6 @@ class Musiques extends CI_Controller {
         $this->load->view('layout/header_dark', $data);
         $this->load->view('musiques_list', $data);
         $this->load->view('layout/footer_dark');
-    }    
+    }      
     
 }

@@ -166,6 +166,32 @@ class Model_music extends CI_Model {
         return $this->db->get()->result();
     }    
 
+    public function get_total_musiques_filtered($genre_id = null, $artist_id = null) {
+        $where_clause = '';
+        $params = array();
+        if ($genre_id) {
+            $where_clause .= " WHERE genre.id = ?";
+            $params[] = $genre_id;
+        }
+        if ($artist_id) {
+            $where_clause .= ($where_clause == '') ? ' WHERE' : ' AND';
+            $where_clause .= " artist.id = ?";
+            $params[] = $artist_id;
+        }
+    
+        $query = $this->db->query("
+            SELECT COUNT(*) as total
+            FROM song
+            JOIN track ON song.id = track.songid
+            JOIN album ON track.albumid = album.id
+            JOIN artist ON album.artistid = artist.id
+            JOIN genre ON album.genreid = genre.id
+            $where_clause
+        ", $params);
+    
+        return $query->row()->total;
+    }    
+
     public function get_random_songs($limit, $genre = null, $artist = null) {
         $this->db->select('song.id, song.name');
         $this->db->from('song');
