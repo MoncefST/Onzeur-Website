@@ -617,7 +617,7 @@ class Utilisateur extends CI_Controller {
     
             // Vérifie si l'email est déjà utilisé par un autre utilisateur
             $existing_user = $this->Utilisateur_model->get_user_by_email($new_email);
-            if ($existing_user && $existing_user->id != $user_id) {
+            if ($existing_user && isset($existing_user['id']) && $existing_user['id'] != $user_id) {
                 $data['error'] = 'Cet email est déjà utilisé par un autre utilisateur.';
                 $data['user'] = $this->Utilisateur_model->get_user_by_id($user_id);
                 $data['avis'] = $this->Utilisateur_model->get_avis_by_user($user_id);
@@ -654,8 +654,7 @@ class Utilisateur extends CI_Controller {
             $this->load->view('dashboard', $data);
             $this->load->view('layout/footer_dark');
         }
-    }
-             
+    }            
     
     public function modifier_mot_de_passe() {
         if (!$this->session->userdata('user_id')) {
