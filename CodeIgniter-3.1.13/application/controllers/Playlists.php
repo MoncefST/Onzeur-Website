@@ -341,6 +341,24 @@ class Playlists extends CI_Controller {
     
         redirect('playlists/view/' . $playlist_id);
     }
+
+    public function add_track_to_playlist($track_id, $playlist_id) {
+        // Vérifier si l'utilisateur est connecté
+        if (!$this->session->userdata('user_id')) {
+            redirect('utilisateur/connexion');
+        }
+    
+        // Récupérer le song_id à partir du track_id
+        $song_id = $this->Model_playlist->get_song_id_by_track_id($track_id);
+    
+        $data = array(
+            'playlist_id' => $playlist_id,
+            'song_id' => $song_id
+        );
+        $this->Model_playlist->add_song_to_playlist($data);
+    
+        redirect('playlists/view/' . $playlist_id);
+    }    
     
     
     public function add_artist($playlist_id) {

@@ -121,6 +121,15 @@ class Model_playlist extends CI_Model {
         return $this->db->get()->result();
     }    
 
+    public function get_song_id_by_track_id($track_id) {
+        $this->db->select('songId');
+        $this->db->from('track');
+        $this->db->where('id', $track_id);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return $result['songId'];
+    }    
+
     public function add_album_to_playlist($data) {
         return $this->db->insert('playlist_album', $data);
     }
