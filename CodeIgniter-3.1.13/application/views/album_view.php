@@ -14,7 +14,7 @@
                     <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                 <?php endforeach; ?>
             </select>
-            <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter à la playlist</button>
+            <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
         <?php else: ?>
             <p>Vous n'avez pas encore de playlist. Créez-en une pour ajouter cet album !</p>
         <?php endif; ?>
@@ -24,12 +24,16 @@
         <h2>Musiques</h2>
         <ul>
         <?php foreach ($tracks as $track): ?>
-            <li>
-                <strong><?php echo $track->diskNumber . '.' . $track->number; ?>:</strong> 
-                <a href="<?php echo site_url('musiques/view/' . $track->song_id); ?>"><?php echo $track->songName; ?></a> 
-                (<?php echo gmdate("i:s", $track->duration); ?>)
+            <li class="track-details">
+                <div class="track-info">
+                    <strong><?php echo $track->diskNumber . '.' . $track->number; ?>:</strong> 
+                    <a href="<?php echo site_url('musiques/view/' . $track->song_id); ?>"><?php echo $track->songName; ?></a> 
+                    (<?php echo gmdate("i:s", $track->duration); ?>)
+                </div>
                 <?php if ($this->session->userdata('user_id')): ?>
-                    <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
+                    <div>
+                        <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
+                    </div>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

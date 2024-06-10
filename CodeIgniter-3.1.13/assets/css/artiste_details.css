@@ -76,14 +76,16 @@
 }
 
 .btn-add-music-to-playlist {
-    font-size: 12px; /* Taille de la police */
-    padding: 5px 10px; /* Espacement interne du bouton */
-    margin-left: 10px; /* Marge à gauche pour séparer le bouton du titre de la musique */
-    background-color: #45087a; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    border: none; /* Supprimer la bordure */
-    border-radius: 5px; /* Bordure arrondie */
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #45087a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    float: right; /* Alignement à droite */
+    margin-left: 10px; /* Laissez une marge entre le bouton et le texte */
 }
+
 
 .btn-add-music-to-playlist:hover {
     background-color: #45087a;
