@@ -26,7 +26,7 @@ class Artiste extends CI_Controller {
                 $user_id = $this->session->userdata('user_id');
                 $data['user_playlists'] = $this->Model_playlist->get_user_playlists($user_id);
             }
-            
+
             // Charger la vue avec les détails de l'artiste et ses albums
             $data['artiste'] = $artiste;
             $data['albums'] = $albums;
@@ -34,6 +34,7 @@ class Artiste extends CI_Controller {
             $data['mostUsedGenre'] = $mostUsedGenre; // Passer $mostUsedGenre à la vue
             $data['title']="Détails de l'artiste - Onzeur ".$artiste->name;
             $data['css'] = 'assets/css/artiste_details';
+            
             
             $this->load->view('layout/header_dark', $data);
             $this->load->view('artiste_details', $data);

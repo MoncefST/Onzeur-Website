@@ -39,7 +39,9 @@
             <div>
                 <article>
                     <header class="short-text">
-                        <?php echo $musique->name; ?>
+                        <a href="<?php echo base_url('index.php/musiques/view/'.$musique->id); ?>" class="artist-name">
+                            <?php echo $musique->name; ?>
+                        </a>
                     </header>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($musique->cover); ?>" alt="Couverture de l'album">
                     <footer class="short-text">

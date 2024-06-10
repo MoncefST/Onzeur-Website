@@ -10,7 +10,9 @@
         <ul class="music-list">
         <?php foreach ($musiques as $musique): ?>
             <li>
-                <?php echo htmlspecialchars($musique->name, ENT_QUOTES, 'UTF-8'); ?> - 
+                <a href="<?php echo site_url('musiques/view/' . htmlspecialchars($musique->id, ENT_QUOTES, 'UTF-8')); ?>">
+                    <?php echo htmlspecialchars($musique->name, ENT_QUOTES, 'UTF-8'); ?>
+                </a> - 
                 <a href="<?php echo site_url('artiste/' . htmlspecialchars($musique->artist_id, ENT_QUOTES, 'UTF-8')); ?>">
                     <?php echo htmlspecialchars($musique->artistName, ENT_QUOTES, 'UTF-8'); ?>
                 </a>

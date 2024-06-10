@@ -237,7 +237,7 @@ class Model_music extends CI_Model {
     public function getAlbumsByArtiste($artiste_id){
         $query = $this->db->query("
             SELECT album.id, album.name, album.year, artist.name as artistName, genre.name as genreName, cover.jpeg,
-                   track.id as track_id, track.diskNumber, track.number, track.duration, song.name as songName
+                   track.id as track_id, track.diskNumber, track.number, track.duration, song.id as song_id, song.name as songName
             FROM album
             JOIN artist ON album.artistid = artist.id
             JOIN genre ON album.genreid = genre.id
@@ -270,13 +270,13 @@ class Model_music extends CI_Model {
                 'diskNumber' => $row->diskNumber,
                 'number' => $row->number,
                 'duration' => $row->duration,
+                'song_id' => $row->song_id, // Ajouter l'ID de la chanson
                 'songName' => $row->songName
             );
         }
     
         return array_values($albums); // Réorganiser les albums en utilisant des index numériques
-    }   
-    
+    }     
 
     public function getMostUsedGenreByArtist($artist_id) {
         $query = $this->db->query("
@@ -293,7 +293,7 @@ class Model_music extends CI_Model {
     }
 
     public function get_songs_by_artist($artist_id) {
-        $this->db->select('song.*');
+        $this->db->select('song.id as song_id');
         $this->db->from('track');
         $this->db->join('song', 'track.songid = song.id');
         $this->db->join('album', 'track.albumid = album.id');

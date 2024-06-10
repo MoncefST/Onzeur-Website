@@ -6,7 +6,7 @@
         <?php if (!empty($song->cover_base64)) : ?>
             <img src="data:image/jpeg;base64,<?php echo base64_encode($song->cover_base64); ?>" alt="Couverture de l'album">
         <?php endif; ?>
-        <p><strong>Durée :</strong> <?php echo gmdate("i:s", $song->duration); ?></p>
+        <p><strong>Durée :</strong> <?php echo gmdate("i:s", $song->duration); ?></p><br>
 
         <?php if ($this->session->userdata('user_id')): ?>
             <?php if (!empty($user_playlists)): ?>

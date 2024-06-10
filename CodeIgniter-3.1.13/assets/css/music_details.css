@@ -87,3 +87,13 @@ img {
 .titre{
     margin-right: 10px;
 }
+
+.recommended-song .titre,
+.recommended-song .artist,
+.recommended-song .album {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 90px); /* Subtract the image width and some padding */
+}

@@ -30,13 +30,11 @@
                         <?php endif; ?>
                     <?php endif; ?>
 
-                    <!-- Boutons pour chaque chanson de l'album -->
-                    <h3>Ajouter une chanson à la playlist :</h3>
-                    <ul class="songs-list">
-                        <?php foreach($album->tracks as $track): ?>
+                    <br><ul class="songs-list">
+                        <?php foreach ($album->tracks as $track): ?>
                             <li>
                                 <span><strong><?php echo $track->number . '.' . $track->diskNumber; ?></strong></span>
-                                <span><?php echo $track->songName; ?></span>
+                                <span><a href="<?php echo site_url('musiques/view/' . $track->song_id); ?>"><?php echo $track->songName; ?></a></span>
                                 <span><strong><?php echo gmdate("i:s", $track->duration); ?></strong></span>
                                 <?php if ($this->session->userdata('user_id')): ?>
                                     <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
@@ -49,7 +47,6 @@
         <?php endforeach; ?>
     </ul>
 </div>
-
 
 <script>
     function addAlbumToPlaylist(albumId) {

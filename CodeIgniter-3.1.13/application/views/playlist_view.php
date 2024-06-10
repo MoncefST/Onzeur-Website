@@ -55,7 +55,7 @@
             <?php if (!empty($songs)) : ?>
                 <?php foreach ($songs as $song) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($song->name, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><a href="<?php echo site_url('musiques/view/' . $song->id); ?>"><?php echo htmlspecialchars($song->name, ENT_QUOTES, 'UTF-8'); ?></a></td>
                         <td><a href="<?php echo site_url('artiste/index/' . $song->artistId); ?>"><?php echo htmlspecialchars($song->artist_name, ENT_QUOTES, 'UTF-8'); ?></a></td>
                         <td><a href="<?php echo site_url('albums/view/' . $song->album_id); ?>"><?php echo htmlspecialchars($song->album_name, ENT_QUOTES, 'UTF-8'); ?></a></td>
                         <td>
