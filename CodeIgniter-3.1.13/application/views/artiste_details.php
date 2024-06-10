@@ -24,7 +24,7 @@
                                     <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <button onclick="addAlbumToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter à la playlist</button>
+                            <button onclick="addAlbumToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
                         <?php else: ?>
                             <p class="no-playlist">Vous n'avez pas encore de playlist. Créez-en une pour ajouter cet album !</p>
                         <?php endif; ?>

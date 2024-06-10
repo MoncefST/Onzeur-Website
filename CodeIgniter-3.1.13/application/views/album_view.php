@@ -26,6 +26,9 @@
             <?php foreach ($tracks as $track): ?>
                 <li>
                     <strong><?php echo $track->diskNumber . '.' . $track->number; ?>:</strong> <?php echo $track->songName; ?> (<?php echo gmdate("i:s", $track->duration); ?>)
+                    <?php if ($this->session->userdata('user_id')): ?>
+                        <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
+                    <?php endif; ?>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -40,5 +43,13 @@
 
         // Redirection vers la méthode du contrôleur Playlists pour ajouter la chanson à la playlist spécifiée
         window.location.href = "<?php echo base_url('index.php/playlists/add_album_to_playlist/'); ?>" + albumId + "/" + playlistId;
+    }
+
+    function addSongToPlaylist(trackId, albumId) {
+        // Récupérer l'ID de la playlist sélectionnée pour cet album
+        var playlistId = document.getElementById('playlist_' + albumId).value;
+
+        // Redirection vers la méthode du contrôleur Playlists pour ajouter la chanson à la playlist spécifiée
+        window.location.href = "<?php echo base_url('index.php/playlists/add_track_to_playlist/'); ?>" + trackId + "/" + playlistId;
     }
 </script>
