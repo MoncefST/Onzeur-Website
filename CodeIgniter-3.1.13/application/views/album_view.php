@@ -23,14 +23,16 @@
     <?php if (!empty($tracks)): ?>
         <h2>Musiques</h2>
         <ul>
-            <?php foreach ($tracks as $track): ?>
-                <li>
-                    <strong><?php echo $track->diskNumber . '.' . $track->number; ?>:</strong> <?php echo $track->songName; ?> (<?php echo gmdate("i:s", $track->duration); ?>)
-                    <?php if ($this->session->userdata('user_id')): ?>
-                        <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
+        <?php foreach ($tracks as $track): ?>
+            <li>
+                <strong><?php echo $track->diskNumber . '.' . $track->number; ?>:</strong> 
+                <a href="<?php echo site_url('musiques/view/' . $track->song_id); ?>"><?php echo $track->songName; ?></a> 
+                (<?php echo gmdate("i:s", $track->duration); ?>)
+                <?php if ($this->session->userdata('user_id')): ?>
+                    <button onclick="addSongToPlaylist(<?php echo $track->id; ?>, <?php echo $album->id; ?>)" class="btn-add-music-to-playlist">Ajouter la musique à la playlist</button>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
         </ul>
     <?php else: ?>
         <p>Aucune musique n'est disponible dans cet album...</p>

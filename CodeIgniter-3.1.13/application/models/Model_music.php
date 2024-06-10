@@ -87,9 +87,11 @@ class Model_music extends CI_Model {
         );
         $album = $query->row();
     
+        $tracks = []; // Initialiser le tableau des pistes
+    
         if ($album) {
             $query = $this->db->query(
-                "SELECT track.id, track.diskNumber, track.number, track.duration, song.name as songName
+                "SELECT track.id, track.diskNumber, track.number, track.duration, song.id as song_id, song.name as songName
                  FROM track
                  JOIN song ON track.songid = song.id
                  WHERE track.albumid = ?
@@ -98,8 +100,8 @@ class Model_music extends CI_Model {
             $tracks = $query->result();
         }
     
-        return [$album,$tracks];
-    }    
+        return [$album, $tracks];
+    }     
 
     public function getMusiques($limit, $offset, $order_by = 'name', $order_direction = 'ASC', $genre_id = null, $artist_id = null) {
         // Préparer la colonne de tri en fonction du paramètre $order_by
