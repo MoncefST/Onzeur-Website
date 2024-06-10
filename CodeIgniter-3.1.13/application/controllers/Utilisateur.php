@@ -136,7 +136,7 @@ class Utilisateur extends CI_Controller {
                         <h1>Bonjour, '.$prenom.' '.$nom.' !</h1>
                         <p>Merci de vous être inscrit sur Onzeur. Pour finaliser votre inscription, veuillez utiliser le code de confirmation suivant :</p>
                         <p><strong>Code de confirmation : '.$code.'</strong></p>
-                        <p>Ce code est valable pendant 1 minute.</p>
+                        <p>Ce code est valable pendant 24 heures.</p>
                         <p>Si vous n\'avez pas demandé cette inscription, veuillez ignorer cet email.</p>
                         <p>Cordialement,<br>L\'équipe Onzeur</p>
                     </div>
@@ -273,7 +273,7 @@ class Utilisateur extends CI_Controller {
             $code = $this->input->post('code');
     
             $user = $this->Utilisateur_model->get_user_by_email($email);
-            if ($user && $user['confirmation_code'] == $code && strtotime($user['code_sent_at']) > strtotime('-1 minute')) {
+            if ($user && $user['confirmation_code'] == $code && strtotime($user['code_sent_at']) > strtotime('-24 hours')) {
                 // Mettre à jour le statut de l'utilisateur pour confirmer l'inscription
                 $this->Utilisateur_model->confirm_user($email);
                 $this->session->set_flashdata('success', 'Votre inscription a été confirmée. Vous pouvez maintenant vous connecter.');
