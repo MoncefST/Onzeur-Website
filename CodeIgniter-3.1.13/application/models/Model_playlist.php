@@ -113,13 +113,15 @@ class Model_playlist extends CI_Model {
     }
 
     public function get_songs_by_playlist($playlist_id) {
-        $this->db->select('song.*, artist.name as artist_name');
+        $this->db->select('song.*, artist.name as artist_name, album.id as album_id, album.name as album_name'); // Ajoutez album.id à la sélection
         $this->db->from('playlist_song');
         $this->db->join('song', 'song.id = playlist_song.song_id');
         $this->db->join('artist', 'artist.id = song.artistId');
+        $this->db->join('track', 'track.songId = song.id');
+        $this->db->join('album', 'album.id = track.albumId');
         $this->db->where('playlist_song.playlist_id', $playlist_id);
         return $this->db->get()->result();
-    }    
+    }         
 
     public function get_song_id_by_track_id($track_id) {
         $this->db->select('songId');

@@ -45,6 +45,7 @@
         <tr>
             <th>Titre</th>
             <th>Artiste</th>
+            <th>Album</th>
             <th>Écouter sur</th> 
             <?php if ($this->session->userdata('user_id') === $playlist->utilisateur_id): ?>
                 <th>Actions</th>
@@ -56,6 +57,7 @@
                     <tr>
                         <td><?php echo htmlspecialchars($song->name, ENT_QUOTES, 'UTF-8'); ?></td>
                         <td><a href="<?php echo site_url('artiste/index/' . $song->artistId); ?>"><?php echo htmlspecialchars($song->artist_name, ENT_QUOTES, 'UTF-8'); ?></a></td>
+                        <td><a href="<?php echo site_url('albums/view/' . $song->album_id); ?>"><?php echo htmlspecialchars($song->album_name, ENT_QUOTES, 'UTF-8'); ?></a></td>
                         <td>
                             <a href="https://open.spotify.com/search/<?php echo urlencode($song->artist_name . ' ' . $song->name); ?>" class="spotify" target="_blank">Spotify</a> |
                             <a href="https://www.deezer.com/search/<?php echo urlencode($song->artist_name . ' ' . $song->name); ?>" class="deezer" target="_blank">Deezer</a> |
