@@ -15,15 +15,6 @@
                         <?php else: ?>
                             <span class="no-cover">Aucune couverture disponible</span>
                         <?php endif; ?>
-                        <ul class="songs-list">
-                        <?php foreach($album->tracks as $track): ?>
-                            <li>
-                                <span><strong><?php echo $track->number . '.' . $track->diskNumber; ?></strong></span>
-                                <span><?php echo $track->songName; ?></span>
-                                <span><strong><?php echo gmdate("i:s", $track->duration); ?></strong></span>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
 
                         <?php if ($this->session->userdata('user_id')): ?>
                         <!-- Si l'utilisateur est connecté -->
@@ -34,11 +25,21 @@
                                     <option value="<?php echo $playlist->id; ?>"><?php echo $playlist->name; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter à la playlist</button>
+                            <button onclick="addToPlaylist(<?php echo $album->id; ?>)" class="btn-add-to-playlist">Ajouter l'album à la playlist</button>
                         <?php else: ?>
                             <p class="no-playlist">Vous n'avez pas encore de playlist. Créez-en une pour ajouter cet album !</p>
                         <?php endif; ?>
                     <?php endif; ?>
+                    <br>
+                        <ul class="songs-list">
+                        <?php foreach($album->tracks as $track): ?>
+                            <li>
+                                <span><strong><?php echo $track->number . '.' . $track->diskNumber; ?></strong></span>
+                                <span><?php echo $track->songName; ?></span>
+                                <span><strong><?php echo gmdate("i:s", $track->duration); ?></strong></span>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
                     </div>
                 </li>
             <?php endforeach; ?>
