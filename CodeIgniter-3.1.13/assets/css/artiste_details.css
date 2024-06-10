@@ -74,3 +74,17 @@
 .no-playlist {
     color: red;
 }
+
+.btn-add-music-to-playlist {
+    font-size: 12px; /* Taille de la police */
+    padding: 5px 10px; /* Espacement interne du bouton */
+    margin-left: 10px; /* Marge à gauche pour séparer le bouton du titre de la musique */
+    background-color: #45087a; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Supprimer la bordure */
+    border-radius: 5px; /* Bordure arrondie */
+}
+
+.btn-add-music-to-playlist:hover {
+    background-color: #45087a;
+}
