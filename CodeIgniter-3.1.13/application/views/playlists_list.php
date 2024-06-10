@@ -1,5 +1,10 @@
 <div class="container">
     <h1>Liste des Playlists</h1>
+    <?php if ($this->session->flashdata('message')): ?>
+        <div class="flash-message">
+            <?php echo $this->session->flashdata('message'); ?>
+        </div>
+    <?php endif; ?>
     <a href="<?php echo site_url('playlists/create'); ?>" class="btn btn-primary">Créer une Nouvelle Playlist</a>
     <a href="<?php echo site_url('playlists/generate_random'); ?>" class="btn btn-primary">Générer une playlist aléatoire</a>
     <h1><br>Mes Playlists</h1>

@@ -183,7 +183,7 @@ class Playlists extends CI_Controller {
 
     public function generate_random() {
         date_default_timezone_set('Europe/Paris');
-
+    
         if (!$this->session->userdata('user_id')) {
             redirect('utilisateur/connexion');
         }
@@ -194,10 +194,17 @@ class Playlists extends CI_Controller {
             $nbrMusiqueAleatoire = $this->input->post('nbrMusiqueAleatoire');
             $nbrMusiqueAleatoire = is_numeric($nbrMusiqueAleatoire) ? intval($nbrMusiqueAleatoire) : 10;
             $songs = $this->Model_music->get_random_songs($nbrMusiqueAleatoire, $genre, $artist);
-    
+            
+            $nbrChansonsObtenues = count($songs); // Nombre de chansons réellement obtenues
+
+            if ($nbrChansonsObtenues < $nbrMusiqueAleatoire) {
+                $message = "La playlist a été créée avec seulement $nbrChansonsObtenues musiques, car il n'y en avait pas assez dans la base de données.";
+                $this->session->set_flashdata('message', $message);
+            }
+            
             $new_playlist = array(
                 'name' => 'Playlist aléatoire',
-                'description' => 'Une playlist avec ' . $nbrMusiqueAleatoire . ' musiques aléatoires du ' . date('d/m/Y H:i:s'),
+                'description' => 'Une playlist avec ' . $nbrChansonsObtenues . ' musiques aléatoires du ' . date('d/m/Y H:i:s'),
                 'utilisateur_id' => $this->session->userdata('user_id')
             );
     
@@ -212,19 +219,24 @@ class Playlists extends CI_Controller {
                 $this->Model_playlist->add_song_to_playlist($data);
             }
     
+            if ($nbrChansonsObtenues < $nbrMusiqueAleatoire) {
+                $message = "La playlist a été créée avec seulement $nbrChansonsObtenues musiques, car il n'y en avait pas assez dans la base de données.";
+                $this->session->set_flashdata('message', $message);
+            }
+    
             redirect('playlists');
         } else {
             $data['genres'] = $this->Model_music->get_all_genres();
             $data['artists'] = $this->Model_music->get_all_artists();
             $data['title']="Générer une playlist - Onzeur";
             $data['css']="assets/css/generate_playlist";
-
-
+    
             $this->load->view('layout/header_dark',$data);
             $this->load->view('generate_playlist', $data);
             $this->load->view('layout/footer_dark');
         }
     }
+    
 
     public function add_album($playlist_id) {
         $this->verify_playlist_ownership($playlist_id);
