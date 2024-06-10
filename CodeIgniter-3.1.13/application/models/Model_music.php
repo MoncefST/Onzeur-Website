@@ -299,5 +299,53 @@ class Model_music extends CI_Model {
         $this->db->join('album', 'track.albumid = album.id');
         $this->db->where('album.artistid', $artist_id);
         return $this->db->get()->result();
+    }            
+
+    public function get_music_details($song_id) {
+        // Requête pour récupérer les détails de la chanson
+        $query = $this->db->query("
+            SELECT song.id, song.name, artist.id as artist_id, artist.name as artistName, album.name as album_name, track.albumid as album_id, cover.jpeg as cover_base64, track.duration
+            FROM song
+            JOIN track ON song.id = track.songid
+            JOIN album ON track.albumid = album.id
+            JOIN artist ON album.artistid = artist.id
+            JOIN cover ON album.coverid = cover.id
+            WHERE song.id = ?", array($song_id)
+        );
+    
+        return $query->row(); // Renvoie le résultat unique sous forme d'objet
+    } 
+    
+    public function get_recommended_songs($genre_id, $artist_id, $limit = 3) {
+        $where_clause = '';
+        $params = array();
+    
+        if ($genre_id) {
+            $where_clause .= " WHERE genre.id = ?";
+            $params[] = $genre_id;
+        } elseif ($artist_id) {
+            $where_clause .= " WHERE artist.id = ?";
+            $params[] = $artist_id;
+        }
+    
+        // Requête pour récupérer des musiques recommandées en fonction du genre ou de l'artiste
+        $query = $this->db->query("
+                SELECT song.id, song.name, artist.id as artist_id, artist.name as artistName, album.id as album_id, album.name as album_name, cover.jpeg as cover_base64
+                FROM song
+                JOIN track ON song.id = track.songid
+                JOIN album ON track.albumid = album.id
+                JOIN artist ON album.artistid = artist.id
+                JOIN cover ON album.coverid = cover.id
+                JOIN genre ON album.genreid = genre.id
+                $where_clause
+                ORDER BY RAND()
+                LIMIT $limit
+            ", $params);
+
+    
+        return $query->result();
     }
+    
+    
+    
 }

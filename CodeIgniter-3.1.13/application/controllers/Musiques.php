@@ -59,6 +59,38 @@ class Musiques extends CI_Controller {
         $this->load->view('layout/header_dark', $data);
         $this->load->view('musiques_list', $data);
         $this->load->view('layout/footer_dark');
-    }     
+    }
     
+    public function view($song_id) {
+        // Récupérer les détails de la musique
+        $song = $this->Model_music->get_music_details($song_id);
+        if (empty($song)) {
+            show_404(); // Afficher une erreur 404 si la musique n'est pas trouvée
+            return;
+        }
+    
+        // Récupérer les playlists de l'utilisateur s'il est connecté
+        $user_playlists = array();
+        if ($this->session->userdata('user_id')) {
+            $user_id = $this->session->userdata('user_id');
+            $user_playlists = $this->Model_playlist->get_user_playlists($user_id);
+        }
+    
+        // Assurez-vous que $song contient l'ID du genre avant de le passer à la vue
+        $genre_id = isset($song->genre_id) ? $song->genre_id : null;
+    
+        // Récupérer des musiques recommandées du même genre ou du même artiste
+        $recommended_songs = $this->Model_music->get_recommended_songs($genre_id, $song->artist_id);
+    
+        // Charger la vue avec les données récupérées
+        $data['song'] = $song;
+        $data['user_playlists'] = $user_playlists;
+        $data['recommended_songs'] = $recommended_songs;
+        $data['title'] = "Détails de la musique - Onzeur";
+        $data['css'] = "assets/css/music_details.css";
+    
+        $this->load->view('layout/header_dark', $data);
+        $this->load->view('music_details', $data);
+        $this->load->view('layout/footer_dark');
+    }    
 }

@@ -1,0 +1,89 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.music-details {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+h1, h3 {
+    margin: 0;
+    color: #4a154b; /* Violet foncé */
+}
+
+strong {
+    color: #6a336a; /* Violet moyen */
+}
+
+a {
+    color: #880088; /* Violet */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin: 5px 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.select-playlist, .btn-add-to-playlist {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #880088; /* Violet */
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.select-playlist {
+    margin-right: 10px;
+}
+
+.btn-add-to-playlist {
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-to-playlist:hover {
+    background-color: #660066; /* Violet foncé au survol */
+}
+
+/* Section recommandée */
+.recommended-songs {
+    margin-top: 20px;
+}
+
+.recommended-song {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.recommended-song img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.titre{
+    margin-right: 10px;
+}
