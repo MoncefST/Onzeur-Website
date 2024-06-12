@@ -65,7 +65,7 @@ class Musiques extends CI_Controller {
         // Récupérer les détails de la musique
         $song = $this->Model_music->get_music_details($song_id);
         if (empty($song)) {
-            show_404(); // Afficher une erreur 404 si la musique n'est pas trouvée
+            redirect('errors/error_404'); // Afficher une erreur 404 si la musique n'est pas trouvée
             return;
         }
     

@@ -57,6 +57,12 @@ class Albums extends CI_Controller {
 
     public function view($id){
         [$album,$tracks] = $this->model_music->get_album_by_id($id);
+
+        if (!$album) {
+            redirect('errors/error_404');
+            return;
+        }
+
         $data['album'] = $album;
         $data['title'] = $album->name . " - Details";
         $data['css'] = 'assets/css/album_view';
