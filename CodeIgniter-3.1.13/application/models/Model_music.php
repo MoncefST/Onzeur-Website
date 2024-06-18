@@ -295,7 +295,7 @@ class Model_music extends CI_Model {
     }
 
     public function get_songs_by_artist($artist_id) {
-        $this->db->select('song.id as song_id');
+        $this->db->select('song.*');
         $this->db->from('track');
         $this->db->join('song', 'track.songid = song.id');
         $this->db->join('album', 'track.albumid = album.id');
