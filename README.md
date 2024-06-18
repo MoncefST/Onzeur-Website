@@ -36,3 +36,7 @@ La date maximale est le 17 juin 2024.
 
 ## Contact
 Pour toute question ou commentaire, veuillez contacter Moncef STITI à cette adresse mail : [moncef.stiti@etu.u-pec.fr](moncef.stiti@etu.u-pec.fr).
+
+
+## Note obtenue : 
+- 18/20
