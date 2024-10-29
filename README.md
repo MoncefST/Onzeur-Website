@@ -1,7 +1,7 @@
 # Application de Musique 🎶
 
 ## URL du site
-Voici l'URL d'accès au site : https://dwarves.iut-fbleau.fr/~stiti/SAE_2.02/CodeIgniter-3.1.13/
+Voici l'URL d'accès au site : [Onzeur](https://dwarves.iut-fbleau.fr/~stiti/BUT1/SAE/Onzeur/SAE_2.02/CodeIgniter-3.1.13/)
 
 ## Description
 Ce projet est une application web permettant aux utilisateurs de consulter une base de données de morceaux de musique et de gérer leurs propres playlists. L'application est développée en utilisant le framework PHP MVC CodeIgniter Version 3.
